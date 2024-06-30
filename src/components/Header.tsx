@@ -9,18 +9,29 @@ const Header = () => {
         <Link href="/">
           <Logo />
         </Link>
+        <Link href="/" className={s.text__link}>
+          Твій старт в <span className={s.text__link__chip}>ІТ</span>
+        </Link>
+
         <nav className={`${s.nav}  `}>
-          <Link href="/" className={s.text__link}>
-            Твій старт в <span className={s.text__link__chip}>ІТ</span>
+          {/* умова якщо є токен тоді показуємо box__input */}
+          <div className={s.box__input}>
+            <input type="text" className={s.input} placeholder="Пошук" />
+            <button type="button" className={s.btn}>
+              <svg width="18" height="18" className={s.chip}>
+                <use href="/symbol-defs.svg#serch"></use>
+              </svg>
+            </button>
+          </div>
+          {/* <Link href="/register">register</Link> */}
+          <Link className={s.link} href="/sign_in">
+            <svg width="27" height="33" className={s.chip}>
+              <use href="/symbol-defs.svg#user"></use>
+            </svg>
+            {/* Мій кабінет */}
+            Увійти
           </Link>
         </nav>
-        {/* <Link href="/register">register</Link> */}
-        <Link className={s.link} href="/sign_in">
-          <svg width="27" height="33">
-            <use href="/symbol-defs.svg#user"></use>
-          </svg>
-          Увійти
-        </Link>
       </div>
     </header>
   );

@@ -3,7 +3,7 @@
 
 .hero {
   height: 100vh;
-  //   background-color: #fff;
+  background-color: #fff;
   background: url("/hero.png");
 
   background-position: center;
@@ -27,6 +27,7 @@
 }
 
 .role__img {
+  width: 100%;
 }
 .list__item__title {
   text-align: center;
@@ -45,7 +46,8 @@
   border-radius: 12px;
   background-color: #8ef569;
   @include font(14px, 2vw, 16px, 600, 20px);
-  color: #000000;
+  color: var(--text-color);
   margin: 0 auto;
   margin-top: auto;
+  text-transform: uppercase;
 }

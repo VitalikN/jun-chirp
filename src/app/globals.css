@@ -4,6 +4,7 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --border: #000000;
+  --text-color: #000000;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
@@ -84,7 +85,7 @@ body {
 }
 
 body {
-  /* color: rgb(var(--foreground-rgb)); */
+  color: var(--text-color);
   /* background: linear-gradient(
       to bottom,
       transparent,

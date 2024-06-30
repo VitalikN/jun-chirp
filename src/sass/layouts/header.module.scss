@@ -8,13 +8,54 @@
   display: flex;
   align-items: center;
 }
-.nav {
+.text__link {
   margin: 0 auto;
   padding: 48px 0;
-}
-.text__link {
+
   @include font(20px, 2vw, 40px, 400, 30px);
 }
+
+.nav {
+  display: flex;
+  gap: 16px;
+}
+.box__input {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  max-width: 295px;
+  @include mediaQuery(1280px) {
+    width: 295px;
+  }
+}
+.input {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 8px 20px 8px 20px;
+
+  @include font(14px, 2vw, 16px, 400, 19px);
+  &::placeholder {
+    color: var(--text-color);
+  }
+}
+.btn {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.chip {
+  transition: all 0.5s;
+  &:focus,
+  &:hover {
+    scale: 1.15;
+  }
+}
+
 .text__link__chip {
   @include font(20px, 2vw, 40px, 600, 30px);
 }
