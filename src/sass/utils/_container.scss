@@ -4,14 +4,14 @@
   width: 100%;
   margin: 0 auto;
   @include mediaQuery(320px) {
-    // padding-left: 15px;
-    // padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   @include mediaQuery(768px) {
-    // padding-left: 25px;
-    // padding-right: 25px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
-  @include mediaQuery(1440px) {
-    width: 1440px;
+  @include mediaQuery(1280px) {
+    width: 1280px;
   }
 }

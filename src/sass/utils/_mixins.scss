@@ -21,7 +21,7 @@
 ) {
   font-size: clamp($fsMin, $fsPreferred, $fsMax);
   font-weight: $fw;
-  line-height: $lh / (clamp($fsMin, $fsPreferred, $fsMax));
+  line-height: $lh;
 }
 // @include font(14px, 2vw, 24px, 400, 21px);
 

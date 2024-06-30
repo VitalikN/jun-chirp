@@ -1,2 +1,51 @@
 @import "../utils/container.scss";
 @import "../utils/mixins";
+
+.hero {
+  height: 100vh;
+  //   background-color: #fff;
+  background: url("/hero.png");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.list {
+  display: flex;
+  gap: 16px;
+  padding-top: 120px;
+}
+.list__item {
+  max-width: 400px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.role__img {
+}
+.list__item__title {
+  text-align: center;
+  @include font(16px, 2vw, 20px, 400, 24px);
+}
+.list__item__text {
+  @include font(14px, 2vw, 18px, 400, 22px);
+}
+.hero__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  padding: 8px 20px 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: #8ef569;
+  @include font(14px, 2vw, 16px, 600, 20px);
+  color: #000000;
+  margin: 0 auto;
+  margin-top: auto;
+}

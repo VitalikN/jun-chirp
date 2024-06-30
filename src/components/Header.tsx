@@ -4,16 +4,23 @@ import Logo from "./Logo";
 
 const Header = () => {
   return (
-    <header>
+    <header className={s.header}>
       <div className={`${s.container} ${s.container__header} `}>
         <Link href="/">
           <Logo />
         </Link>
         <nav className={`${s.nav}  `}>
-          <Link href="/">Головна</Link>
-          <Link href="/register">register</Link>
-          <Link href="/sign_in">sign_in</Link>
+          <Link href="/" className={s.text__link}>
+            Твій старт в <span className={s.text__link__chip}>ІТ</span>
+          </Link>
         </nav>
+        {/* <Link href="/register">register</Link> */}
+        <Link className={s.link} href="/sign_in">
+          <svg width="27" height="33">
+            <use href="/symbol-defs.svg#user"></use>
+          </svg>
+          Увійти
+        </Link>
       </div>
     </header>
   );

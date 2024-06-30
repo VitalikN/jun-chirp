@@ -1,2 +1,29 @@
 @import "../utils/container.scss";
 @import "../utils/mixins";
+
+.header {
+  background: linear-gradient(to bottom, #01cc01, #ffffff);
+}
+.container__header {
+  display: flex;
+  align-items: center;
+}
+.nav {
+  margin: 0 auto;
+  padding: 48px 0;
+}
+.text__link {
+  @include font(20px, 2vw, 40px, 400, 30px);
+}
+.text__link__chip {
+  @include font(20px, 2vw, 40px, 600, 30px);
+}
+.link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 192px;
+  padding: 8px 20px 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
