@@ -1,0 +1,32 @@
+// mixin media query
+@mixin mediaQuery($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// mixin centr
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin font(
+  $fsMin: 14px,
+  $fsPreferred: 2vw,
+  $fsMax: 24px,
+  $fw: 400,
+  $lh: 14px
+) {
+  font-size: clamp($fsMin, $fsPreferred, $fsMax);
+  font-weight: $fw;
+  line-height: $lh / (clamp($fsMin, $fsPreferred, $fsMax));
+}
+// @include font(14px, 2vw, 24px, 400, 21px);
+
+:export {
+  flexCenter: #{mixinStr(flexCenter)};
+  font: #{mixinStr(font)};
+  mediaQuery: #{mixinStr(mediaQuery)};
+}

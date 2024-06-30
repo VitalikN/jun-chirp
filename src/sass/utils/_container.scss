@@ -1,0 +1,17 @@
+@import "./mixins";
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  @include mediaQuery(320px) {
+    // padding-left: 15px;
+    // padding-right: 15px;
+  }
+  @include mediaQuery(768px) {
+    // padding-left: 25px;
+    // padding-right: 25px;
+  }
+  @include mediaQuery(1440px) {
+    width: 1440px;
+  }
+}
