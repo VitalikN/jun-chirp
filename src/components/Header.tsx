@@ -28,6 +28,7 @@ const Header = () => {
             <svg width="27" height="33" className={s.chip}>
               <use href="/symbol-defs.svg#user"></use>
             </svg>
+            {/* умова якщо є токен тоді показуємо Мій кабінет якщо нема Увійти  */}{" "}
             {/* Мій кабінет */}
             Увійти
           </Link>

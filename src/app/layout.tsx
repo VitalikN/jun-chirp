@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import { montserrat } from "@/utils/fonts";
+import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "JunChirp",
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Header />
-        <main className="main">{children}</main>
+        <ReduxProvider>
+          <Header />
+          <main className="main">{children}</main>
+        </ReduxProvider>
       </body>
     </html>
   );
