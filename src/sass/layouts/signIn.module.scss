@@ -1,2 +1,111 @@
 @import "../utils/container";
 @import "../utils/mixins";
+
+.section {
+  padding-top: 55px;
+}
+.box__link {
+  @include flexCenter();
+  gap: 8px;
+  @include font(20px, 2vw, 24px, 400, 29px);
+}
+
+.link__sign_in {
+  border-bottom: 1px solid var(--border);
+}
+.link__register {
+  border-bottom: 1px solid var(--border);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  //   gap: 16px;
+  //   justify-content: center;
+  padding-top: 24px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form__box {
+  position: relative;
+  &:nth-child(2) {
+    margin: 16px 0 8px;
+  }
+}
+.label {
+  position: absolute;
+
+  top: -11px;
+  left: 11px;
+  background: #fff;
+  padding: 0 4px;
+  @include font(12px, 2vw, 14px, 500, 15px); // дані не коректні
+}
+.input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px 25px 4px 16px;
+  outline: none;
+  background-color: transparent;
+  @include font(14px, 2vw, 16px, 600, 46px); // дані не коректні
+}
+.chip__eye {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  cursor: pointer;
+}
+.form__box__checkbox {
+  padding-bottom: 24px;
+}
+.checkboxLabel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+//
+.checkboxLabel {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @include font(14px, 2vw, 16px, 400, 19px);
+
+  .checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-right: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:checked + .chip__checkbox {
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 4px;
+    }
+  }
+
+  .chip__checkbox {
+    display: none;
+  }
+}
+.styledBtn {
+  padding: 10px 20px 10px 20px;
+  background-color: #616161;
+  color: #ffffff;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  width: 192px;
+  margin: 0 auto;
+}

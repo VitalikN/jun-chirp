@@ -11,7 +11,7 @@ type RootState = ReturnType<typeof store.getState>;
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.baseUrl,
+    baseUrl: process.env.BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;
       if (token) {
