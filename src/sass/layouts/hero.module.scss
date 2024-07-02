@@ -22,7 +22,7 @@
   flex-direction: column;
   gap: 16px;
   background-color: #ffffff;
-  border: 1px solid var(--border);
+  border: var(--border);
   border-radius: 12px;
 }
 
@@ -42,7 +42,7 @@
   justify-content: center;
   width: 192px;
   padding: 8px 20px 8px 20px;
-  border: 1px solid var(--border);
+  border: var(--border);
   border-radius: 12px;
   background-color: #8ef569;
   @include font(14px, 2vw, 16px, 600, 20px);

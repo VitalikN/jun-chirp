@@ -3,29 +3,8 @@
 import Link from "next/link";
 
 import { usePathname, useRouter } from "next/navigation";
-import { Field, Form, Formik } from "formik";
-import ErrorFeedback from "./ErrorFeedback";
-import * as Yup from "yup";
+import SignInFormik from "./SignInFormik";
 import s from "@/sass/layouts/signIn.module.scss";
-
-export const validationSchema = Yup.object().shape({
-  email: Yup.string().required(
-    "Введіть дійсну електронну адресу у форматі username@example.com"
-  ),
-
-  password: Yup.string()
-    .min(
-      8,
-      "Пароль повинен містити щонайменше 8 символів, включаючи великі і малі літери, цифри та спеціальні символи."
-    )
-    .required("Обов'язкове поле!"),
-});
-
-export interface FormValues {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-}
 
 const SignIn = () => {
   const pathname = usePathname();
@@ -34,14 +13,6 @@ const SignIn = () => {
   // useEffect(() => {
   //   token ? router.push("/personal_office") : "";
   // }, [token, router]);
-
-  const handleSubmit = async (
-    values: FormValues,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    console.log(values);
-    resetForm();
-  };
 
   return (
     <section className={`${s.section} `}>
@@ -65,69 +36,25 @@ const SignIn = () => {
             Зареєструватись
           </Link>
         </div>
-
-        <Formik
-          initialValues={{ email: "", password: "", rememberMe: false }}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
-        >
-          {({ errors, touched }) => (
-            <Form className={s.form}>
-              <div className={s.form__box}>
-                <label className={s.label}>
-                  Email
-                  <svg width="6" height="16" className={s.chip}>
-                    <use href="/symbol-defs.svg#icon"></use>
-                  </svg>
-                </label>
-                <Field
-                  className={s.input}
-                  type="email"
-                  name="email"
-                  error={touched.email && errors.email}
-                />
-                <ErrorFeedback name="email" />
-              </div>
-              <div className={s.form__box}>
-                <label className={s.label}>
-                  Пароль
-                  <svg width="6" height="16" className={s.chip}>
-                    <use href="/symbol-defs.svg#icon"></use>
-                  </svg>
-                </label>
-
-                <Field
-                  className={s.input}
-                  type="password"
-                  name="password"
-                  error={touched.password && errors.password}
-                />
-                <svg width="40" height="40" className={s.chip__eye}>
-                  <use href="/symbol-defs.svg#eye-close"></use>
-                </svg>
-
-                <ErrorFeedback name="password" />
-              </div>
-              <div className={s.form__box__checkbox}>
-                <label className={s.checkboxLabel}>
-                  <Field
-                    type="checkbox"
-                    name="rememberMe"
-                    className={s.checkbox}
-                  />
-                  <svg width="13" height="11" className={s.chip__checkbox}>
-                    <use href="/symbol-defs.svg#checkbox"></use>
-                  </svg>
-                  Запам`ятати мене
-                </label>
-              </div>
-              <button className={s.styledBtn} type="submit">
-                {/* {isLoading ? "Loading...." : "Увійти"} */}
-                Увійти
-              </button>
-            </Form>
-          )}
-        </Formik>
+        <SignInFormik />
+        <div className={s.box__link__group}>
+          <p className={s.text}>Увійти за допомогою</p>
+          <div className={s.link__group}>
+            <Link href="#" className={s.link__icons}>
+              <svg width="50" height="50" className={s.chip__google}>
+                <use href="/symbol-defs.svg#google"></use>
+              </svg>
+            </Link>
+            <Link href="#" className={s.link__icons}>
+              <svg width="50" height="50" className={s.chip__linkedin}>
+                <use href="/symbol-defs.svg#linkedin"></use>
+              </svg>
+            </Link>
+          </div>
+          <Link href="#" className={s.link__forgot__password}>
+            Забули пароль?
+          </Link>
+        </div>
       </div>
     </section>
   );
