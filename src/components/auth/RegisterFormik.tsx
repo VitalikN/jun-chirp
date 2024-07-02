@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import ErrorFeedback from "./ErrorFeedback";
 import * as Yup from "yup";
 import s from "@/sass/layouts/register.module.scss";
+import { useRegisterMutation } from "@/redux/auth/authApi";
 
 export const validationSchemaRegister = Yup.object().shape({
   userName: Yup.string()
@@ -89,13 +90,19 @@ export interface FormValuesRegister {
 }
 
 const RegisterFormik = () => {
+  const [register] = useRegisterMutation();
+
   const handleSubmit = async (
     values: FormValuesRegister,
     { resetForm }: { resetForm: () => void }
   ) => {
+    const { userName, email, password } = values;
+
+    await register({ user: { userName, email, password } });
     console.log(values);
-    resetForm();
+    // resetForm();
   };
+
   return (
     <Formik
       initialValues={{
