@@ -31,9 +31,9 @@
 
 .form__box {
   position: relative;
-  &:nth-child(2) {
-    margin: 25px 0 20px;
-  }
+}
+.nth__child {
+  margin: 25px 0 20px;
 }
 .label {
   position: absolute;
@@ -73,7 +73,7 @@
   bottom: -15px;
   left: 0;
   color: #b3261e;
-  @include font(10px, 2vw, 12px, 400, 14px);
+  @include font(9px, 2vw, 12px, 400, 12px);
 }
 
 .chip__eye {
@@ -97,6 +97,7 @@
   .checkbox {
     appearance: none;
     width: 16px;
+    min-width: 16px;
     height: 16px;
     border: var(--border);
     border-radius: 2px;
@@ -112,7 +113,7 @@
       cursor: pointer;
       display: block;
       position: absolute;
-      top: 2px;
+      top: 0;
       left: 4px;
     }
   }
@@ -130,6 +131,7 @@
   outline: none;
   width: 192px;
   margin: 0 auto;
+  @include font(14px, 2vw, 16px, 400, 19px);
 }
 // linkedin + google
 .box__link__group {

@@ -63,7 +63,7 @@ const SignInFormik = () => {
             />
             <ErrorFeedback name="email" />
           </div>
-          <div className={s.form__box}>
+          <div className={`${s.form__box} ${s.nth__child}`}>
             <label
               className={`${s.label}  ${
                 touched.password && errors.password ? s.invalid : ""
@@ -88,19 +88,20 @@ const SignInFormik = () => {
               name="password"
               error={touched.password && errors.password}
             />
-            {/* <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye-close"></use>
-            </svg> */}
             <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye"></use>
+              <use href="/symbol-defs.svg#eye-close"></use>
             </svg>
+            {/* <svg width="40" height="40" className={s.chip__eye}>
+              <use href="/symbol-defs.svg#eye"></use>
+            </svg> */}
 
             <ErrorFeedback name="password" />
           </div>
+
           <div className={s.form__box__checkbox}>
             <label className={s.checkboxLabel}>
               <Field type="checkbox" name="rememberMe" className={s.checkbox} />
-              <svg width="13" height="11" className={s.chip__checkbox}>
+              <svg width="14" height="12" className={s.chip__checkbox}>
                 <use href="/symbol-defs.svg#checkbox"></use>
               </svg>
               Запам`ятати мене
