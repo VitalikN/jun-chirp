@@ -11,16 +11,19 @@
 }
 
 .link__sign_in {
-  border-bottom: 1px solid var(--border);
+  text-decoration: underline;
+  text-decoration-color: #000000;
+  text-decoration-thickness: 1px;
 }
 .link__register {
-  border-bottom: 1px solid var(--border);
+  text-decoration: underline;
+  text-decoration-color: #000000;
+  text-decoration-thickness: 1px;
 }
 .form {
   display: flex;
   flex-direction: column;
-  //   gap: 16px;
-  //   justify-content: center;
+
   padding-top: 24px;
   max-width: 400px;
   margin: 0 auto;
@@ -29,7 +32,7 @@
 .form__box {
   position: relative;
   &:nth-child(2) {
-    margin: 16px 0 8px;
+    margin: 25px 0 20px;
   }
 }
 .label {
@@ -39,17 +42,40 @@
   left: 11px;
   background: #fff;
   padding: 0 4px;
-  @include font(12px, 2vw, 14px, 500, 15px); // дані не коректні
+  @include font(12px, 2vw, 13px, 400, 15px);
+  &.invalid {
+    color: #b3261e;
+  }
 }
 .input {
   width: 100%;
-  border: 1px solid var(--border);
+  border: var(--border);
   border-radius: 12px;
   padding: 4px 25px 4px 16px;
   outline: none;
   background-color: transparent;
-  @include font(14px, 2vw, 16px, 600, 46px); // дані не коректні
+  @include font(14px, 2vw, 16px, 400, 46px);
+  &:focus {
+    border-color: #0033ff;
+  }
+
+  &.valid {
+    border-color: #33cc00;
+  }
+
+  &.invalid {
+    border-color: #b3261e;
+  }
 }
+
+.error {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  color: #b3261e;
+  @include font(10px, 2vw, 12px, 400, 14px);
+}
+
 .chip__eye {
   position: absolute;
   right: 0;
@@ -59,12 +85,7 @@
 .form__box__checkbox {
   padding-bottom: 24px;
 }
-.checkboxLabel {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-//
+
 .checkboxLabel {
   position: relative;
 
@@ -77,7 +98,7 @@
     appearance: none;
     width: 16px;
     height: 16px;
-    border: 1px solid var(--border);
+    border: var(--border);
     border-radius: 2px;
     margin-right: 16px;
     position: relative;
@@ -88,6 +109,7 @@
     }
 
     &:checked + .chip__checkbox {
+      cursor: pointer;
       display: block;
       position: absolute;
       top: 2px;
@@ -108,4 +130,33 @@
   outline: none;
   width: 192px;
   margin: 0 auto;
+}
+// linkedin + google
+.box__link__group {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.text {
+  @include font(14px, 2vw, 16px, 400, 19px);
+}
+.link__group {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+// .link__icons {
+// }
+// .chip__google {
+// }
+// .chip__linkedin {
+// }
+.link__forgot__password {
+  @include font(14px, 2vw, 16px, 400, 19px);
+
+  text-decoration: underline;
+  text-decoration-color: #000000;
+  text-decoration-thickness: 1px;
 }

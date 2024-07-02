@@ -24,7 +24,7 @@
   gap: 16px;
 }
 .box__input {
-  border: 1px solid var(--border);
+  border: var(--border);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -69,6 +69,6 @@
   align-items: center;
   width: 192px;
   padding: 8px 20px 8px 20px;
-  border: 1px solid var(--border);
+  border: var(--border);
   border-radius: 12px;
 }
