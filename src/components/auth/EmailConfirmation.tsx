@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useConfirmEmailMutation } from "@/redux/auth/authApi";
+// import { useConfirmEmailMutation } from "@/redux/auth/";
 import { Field, Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
 import s from "@/sass/layouts/emailConfirmation.module.scss";
@@ -24,7 +24,7 @@ const EmailConfirmation = () => {
   const router = useRouter();
   const email = useSelector(authSelector.getEmail);
   const token = useSelector(authSelector.selectToken);
-  const [confirm] = useConfirmEmailMutation();
+  // const [confirm] = useConfirmEmailMutation();
 
   const [timeLeft, setTimeLeft] = useState(180);
 
@@ -56,11 +56,12 @@ const EmailConfirmation = () => {
       .padStart(2, "0")}`;
   };
   const handleSubmit = async (values: FormikValues) => {
-    console.log(values);
     console.log(values.code);
 
     try {
-      await confirm({ email, code: values.code });
+      console.log(values);
+
+      // await confirm({ email, code: values.code });
     } catch (error) {
       console.error("Confirmation failed", error);
     }
