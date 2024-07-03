@@ -2,13 +2,20 @@
 import Link from "next/link";
 import s from "@/sass/layouts/header.module.scss";
 import Logo from "./Logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
+  const router = useRouter();
+  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
+
+  useEffect(() => {
+    isConfirmed ? "" : router.push("/confirm");
+  }, [isConfirmed, router]);
 
   return (
     <header className={s.header}>

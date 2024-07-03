@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Field, Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
 import s from "@/sass/layouts/emailConfirmation.module.scss";
+import { useConfirmEmailMutation } from "@/redux/auth/authApi";
 
 const validationSchemaConfirm = Yup.object().shape({
   code: Yup.string()
@@ -24,19 +25,18 @@ const EmailConfirmation = () => {
   const router = useRouter();
   const email = useSelector(authSelector.getEmail);
   const token = useSelector(authSelector.selectToken);
+  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
+  const [confirm, { isLoading }] = useConfirmEmailMutation();
+
   // const [confirm] = useConfirmEmailMutation();
+  console.log(isConfirmed);
 
   const [timeLeft, setTimeLeft] = useState(180);
 
-  // useEffect(() => {
-  //   if (!token && !email) {
-  //     router.push("/register");
-  //   }
-  // }, [token, email, router]);
-
   useEffect(() => {
-    token && email ? router.push("/register") : "";
-  }, [token, email, router]);
+    token && email ? "" : router.push("/register");
+    isConfirmed ? router.push("/") : "";
+  }, [token, email, router, isConfirmed]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,12 +56,8 @@ const EmailConfirmation = () => {
       .padStart(2, "0")}`;
   };
   const handleSubmit = async (values: FormikValues) => {
-    console.log(values.code);
-
     try {
-      console.log(values);
-
-      // await confirm({ email, code: values.code });
+      await confirm({ email, code: values.code });
     } catch (error) {
       console.error("Confirmation failed", error);
     }

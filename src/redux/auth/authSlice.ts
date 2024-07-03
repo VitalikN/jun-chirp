@@ -8,6 +8,7 @@ export interface IUser {
   email: string | null;
   id: number | null;
   token?: string | null;
+  isConfirmed: boolean;
 }
 
 export interface IAuthState {
@@ -29,6 +30,7 @@ const initialState: IAuthState = {
     userName: null,
     email: null,
     id: null,
+    isConfirmed: true,
   },
   token: null,
   isLoggedIn: false,
@@ -40,25 +42,41 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    clearToken: (state) => {
-      state.token = null;
-      state.user = initialState.user;
-      state.isLoggedIn = false;
-    },
-    setIsLoading: (state, { payload }) => {
-      state.isLoading = payload;
+    clearToken: () => {
+      return { ...initialState };
     },
   },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      authApi.endpoints.register.matchFulfilled,
-      (state, { payload }) => {
-        state.user = payload.user;
 
-        state.token = payload.user.accessToken;
-        state.isLoggedIn = true;
-      }
-    );
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(authApi.endpoints.register.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      .addMatcher(
+        authApi.endpoints.register.matchFulfilled,
+        (state, { payload }) => {
+          state.user = payload.user;
+          state.token = payload.user.accessToken;
+          state.isLoggedIn = true;
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(authApi.endpoints.confirmEmail.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      .addMatcher(
+        authApi.endpoints.confirmEmail.matchFulfilled,
+        (state, { payload }) => {
+          state.user = payload.user;
+          state.user.isConfirmed = payload.isConfirmed;
+          state.isLoggedIn = true;
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(authApi.endpoints.confirmEmail.matchRejected, (state) => {
+        state.isLoading = false;
+      });
+
     // .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
     //   state.isLoading = true;
     // })

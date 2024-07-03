@@ -19,7 +19,7 @@ import { authApi } from "./auth/authApi";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "token", "user"],
 };
 
 const rootReducer = combineReducers({
