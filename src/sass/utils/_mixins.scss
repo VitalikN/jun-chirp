@@ -4,6 +4,11 @@
     @content;
   }
 }
+@mixin mediaMaxQuery($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
 
 // mixin centr
 @mixin flexCenter() {
@@ -29,4 +34,6 @@
   flexCenter: #{mixinStr(flexCenter)};
   font: #{mixinStr(font)};
   mediaQuery: #{mixinStr(mediaQuery)};
+
+  mediaMaxQuery: #{mixinStr(mediaMaxQuery)};
 }

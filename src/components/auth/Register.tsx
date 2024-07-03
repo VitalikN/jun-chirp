@@ -4,14 +4,18 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import s from "@/sass/layouts/register.module.scss";
 import RegisterFormik from "./RegisterFormik";
+import { useEffect } from "react";
+import authSelector from "@/redux/auth/authSelector";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const token = useSelector(authSelector.selectToken);
 
-  // useEffect(() => {
-  //   token ? router.push("/personal_office") : "";
-  // }, [token, router]);
+  useEffect(() => {
+    token ? router.push("/confirm") : "";
+  }, [token, router]);
 
   return (
     <section className={`${s.section} `}>

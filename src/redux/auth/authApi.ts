@@ -11,7 +11,8 @@ type RootState = ReturnType<typeof store.getState>;
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.BASE_URL,
+    // baseUrl: process.env.BASE_URL,
+    baseUrl: "https://junchirp.onrender.com/",
 
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;
@@ -31,35 +32,46 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
-    signIn: builder.mutation({
-      query: (credentials) => ({
-        url: "users/login",
-        method: "POST",
-        body: credentials,
-      }),
-      invalidatesTags: ["auth"],
-    }),
-    current: builder.query({
-      query: () => "/user",
+    // confirmEmail: builder.mutation({
+    //   query: (data) => ({
+    //     url: "users/confirm",
+    //     method: "POST",
+    //     body: data,
+    //   }),
+    //   invalidatesTags: ["auth"],
+    // }),
+    //   signIn: builder.mutation({
+    //     query: (credentials) => ({
+    //       url: "users/login",
+    //       method: "POST",
+    //       body: credentials,
+    //     }),
+    //     invalidatesTags: ["auth"],
+    //   }),
+    //   current: builder.query({
+    //     query: () => "/user",
 
-      onQueryStarted: (_, { dispatch, getState }) => {
-        const token = (getState() as RootState).auth.token;
-        if (!token) {
-          dispatch(clearToken());
-        }
-      },
-      providesTags: ["auth"],
-    }),
-    update: builder.mutation({
-      query: (updates) => ({
-        url: "/user",
-        method: "PUT",
-        body: updates,
-      }),
-      invalidatesTags: ["auth"],
-    }),
+    //     onQueryStarted: (_, { dispatch, getState }) => {
+    //       const token = (getState() as RootState).auth.token;
+    //       if (!token) {
+    //         dispatch(clearToken());
+    //       }
+    //     },
+    //     providesTags: ["auth"],
+    //   }),
+    //   update: builder.mutation({
+    //     query: (updates) => ({
+    //       url: "/user",
+    //       method: "PUT",
+    //       body: updates,
+    //     }),
+    //     invalidatesTags: ["auth"],
+    //   }),
   }),
 });
 
-export const { useRegisterMutation, useSignInMutation, useUpdateMutation } =
-  authApi;
+export const {
+  useRegisterMutation,
+  // useConfirmEmailMutation,
+  // useSignInMutation, useUpdateMutation
+} = authApi;

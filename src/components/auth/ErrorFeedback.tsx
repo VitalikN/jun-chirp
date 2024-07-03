@@ -1,6 +1,6 @@
-import s from "@/sass/layouts/signIn.module.scss";
 import { roboto } from "@/utils/fonts";
 import { ErrorMessage } from "formik";
+import s from "@/sass/layouts/signIn.module.scss";
 
 export interface ErrorFeedbackProps {
   name: string;

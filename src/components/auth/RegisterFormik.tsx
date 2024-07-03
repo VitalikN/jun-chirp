@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik";
 import ErrorFeedback from "./ErrorFeedback";
 import s from "@/sass/layouts/register.module.scss";
 import { useRegisterMutation } from "@/redux/auth/authApi";
-import { validationSchemaRegister } from "@/utils/schema";
+import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
 
 const RegisterFormik = () => {
@@ -14,9 +14,10 @@ const RegisterFormik = () => {
   ) => {
     const { userName, email, password } = values;
 
-    await register({ user: { userName, email, password } });
-    console.log(values);
-    // resetForm();
+    const data = await register({ user: { userName, email, password } });
+    if (data) {
+      // resetForm();
+    }
   };
 
   return (
