@@ -3,7 +3,15 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { authApi } from "./authApi";
 
+export interface IUser {
+  userName: string | null;
+  email: string | null;
+  id: number | null;
+  token?: string | null;
+}
+
 export interface IAuthState {
+  user: IUser;
   token: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
@@ -17,6 +25,11 @@ const authPersistConfig = {
 };
 
 const initialState: IAuthState = {
+  user: {
+    userName: null,
+    email: null,
+    id: null,
+  },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -29,56 +42,55 @@ const authSlice = createSlice({
   reducers: {
     clearToken: (state) => {
       state.token = null;
+      state.user = initialState.user;
+      state.isLoggedIn = false;
     },
-    setIsloading: (state, { payload }) => {
+    setIsLoading: (state, { payload }) => {
       state.isLoading = payload;
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addMatcher(authApi.endpoints.register.matchPending, (state) => {
-        state.isLoading = true;
-      })
-      .addMatcher(
-        authApi.endpoints.register.matchFulfilled,
-        (state, { payload }) => {
-          state.token = payload.token;
-          state.isLoggedIn = true;
-          state.isLoading = false;
-        }
-      )
-      .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
-        state.isLoading = true;
-      })
-      .addMatcher(
-        authApi.endpoints.signIn.matchFulfilled,
-        (state, { payload }) => {
-          state.token = payload.token;
-          state.isLoggedIn = true;
-          state.isLoading = false;
-        }
-      )
-      .addMatcher(
-        (action) => action.type === "auth/clearToken",
-        (state) => {
-          state.token = null;
-          state.isLoggedIn = false;
-        }
-      )
-      .addMatcher(authApi.endpoints.current.matchPending, (state) => {
-        state.isRefreshing = true;
-      })
-      .addMatcher(
-        authApi.endpoints.current.matchFulfilled,
-        (state, { payload }) => {
-          state.token = payload.token;
-          state.isLoggedIn = true;
-          state.isRefreshing = false;
-        }
-      )
-      .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
-        state.isRefreshing = false;
-      });
+    builder.addMatcher(
+      authApi.endpoints.register.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+
+        state.token = payload.user.accessToken;
+        state.isLoggedIn = true;
+      }
+    );
+    // .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addMatcher(
+    //   authApi.endpoints.signIn.matchFulfilled,
+    //   (state, { payload }) => {
+    //     state.token = payload.token;
+    //     state.isLoggedIn = true;
+    //     state.isLoading = false;
+    //   }
+    // )
+    // .addMatcher(
+    //   (action) => action.type === "auth/clearToken",
+    //   (state) => {
+    //     state.token = null;
+    //     state.isLoggedIn = false;
+    //   }
+    // )
+    // .addMatcher(authApi.endpoints.current.matchPending, (state) => {
+    //   state.isRefreshing = true;
+    // })
+    // .addMatcher(
+    //   authApi.endpoints.current.matchFulfilled,
+    //   (state, { payload }) => {
+    //     state.token = payload.token;
+    //     state.isLoggedIn = true;
+    //     state.isRefreshing = false;
+    //   }
+    // )
+    // .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
+    //   state.isRefreshing = false;
+    // });
     // .addMatcher(authApi.endpoints.oAuth.matchPending, (state) => {
     //   state.isLoading = true;
     // })

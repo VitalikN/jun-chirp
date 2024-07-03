@@ -19,7 +19,7 @@ import { authApi } from "./auth/authApi";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["auth"],
 };
 
 const rootReducer = combineReducers({
@@ -47,4 +47,4 @@ export type AppStore = typeof store;
 
 export type RootState = ReturnType<AppStore["getState"]>;
 
-export type AppDispatch = AppStore["dispatch"];
+// export type AppDispatch = AppStore["dispatch"];
