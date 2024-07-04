@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import ErrorFeedback from "./ErrorFeedback";
 import * as Yup from "yup";
 import s from "@/sass/layouts/signIn.module.scss";
+import { useLoginMutation } from "@/redux/auth/authApi";
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,10 +24,15 @@ export interface FormValues {
 }
 
 const SignInFormik = () => {
+  const [login] = useLoginMutation();
+
   const handleSubmit = async (
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
+    const { email, password } = values;
+
+    await login({ user: { email, password } });
     console.log(values);
     resetForm();
   };

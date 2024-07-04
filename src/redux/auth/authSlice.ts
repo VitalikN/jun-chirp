@@ -82,7 +82,7 @@ const authSlice = createSlice({
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.token = payload.token;
+          state.token = payload.user.accessToken;
           state.isLoggedIn = true;
           state.isLoading = false;
         }

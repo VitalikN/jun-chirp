@@ -14,10 +14,8 @@ const RegisterFormik = () => {
   ) => {
     const { userName, email, password } = values;
 
-    const data = await register({ user: { userName, email, password } });
-    if (data) {
-      // resetForm();
-    }
+    await register({ user: { userName, email, password } });
+    resetForm();
   };
 
   return (
