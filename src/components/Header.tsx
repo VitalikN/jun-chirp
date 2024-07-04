@@ -10,12 +10,12 @@ import { useEffect } from "react";
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
-  const router = useRouter();
+  // const router = useRouter();
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
 
-  useEffect(() => {
-    isConfirmed ? "" : router.push("/confirm");
-  }, [isConfirmed, router]);
+  // useEffect(() => {
+  //   isConfirmed ? "" : router.push("/confirm");
+  // }, [isConfirmed, router]);
 
   return (
     <header className={s.header}>
@@ -50,10 +50,12 @@ const Header = () => {
                   </button>
                 </div>
               )}
-
-              {/* <Link href="/register">register</Link> */}
-
-              <Link className={s.link} href={token ? "/my_office" : "/sign_in"}>
+              <Link
+                className={s.link}
+                href={
+                  token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
+                }
+              >
                 <svg width="27" height="33" className={s.chip}>
                   <use href="/symbol-defs.svg#user"></use>
                 </svg>

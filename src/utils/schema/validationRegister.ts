@@ -54,14 +54,10 @@ export const validationSchemaRegister = Yup.object().shape({
       ],
       "Уникайте очевидних паролів, таких як 'password123'."
     )
-    .test(
-      "no-name",
-      "Пароль не повинен містити ваше ім'я або прізвище.",
-      function (value) {
-        const { userName } = this.parent;
-        return !value || !new RegExp(userName, "i").test(value);
-      }
-    )
+    .test("no-name", "Пароль не повинен містити ваше ім'я.", function (value) {
+      const { userName } = this.parent;
+      return !value || !new RegExp(userName, "i").test(value);
+    })
     .required("Обов'язкове поле!"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), undefined], "Паролі повинні збігатися")

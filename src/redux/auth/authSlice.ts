@@ -30,7 +30,7 @@ const initialState: IAuthState = {
     userName: null,
     email: null,
     id: null,
-    isConfirmed: true,
+    isConfirmed: false,
   },
   token: null,
   isLoggedIn: false,
@@ -68,69 +68,83 @@ const authSlice = createSlice({
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.user.isConfirmed = payload.isConfirmed;
           state.isLoggedIn = true;
           state.isLoading = false;
         }
       )
       .addMatcher(authApi.endpoints.confirmEmail.matchRejected, (state) => {
         state.isLoading = false;
+      })
+      .addMatcher(authApi.endpoints.login.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      .addMatcher(
+        authApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          state.user = payload.user;
+          state.token = payload.token;
+          state.isLoggedIn = true;
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(authApi.endpoints.login.matchRejected, (state) => {
+        state.isLoading = false;
       });
-
-    // .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addMatcher(
-    //   authApi.endpoints.signIn.matchFulfilled,
-    //   (state, { payload }) => {
-    //     state.token = payload.token;
-    //     state.isLoggedIn = true;
-    //     state.isLoading = false;
-    //   }
-    // )
-    // .addMatcher(
-    //   (action) => action.type === "auth/clearToken",
-    //   (state) => {
-    //     state.token = null;
-    //     state.isLoggedIn = false;
-    //   }
-    // )
-    // .addMatcher(authApi.endpoints.current.matchPending, (state) => {
-    //   state.isRefreshing = true;
-    // })
-    // .addMatcher(
-    //   authApi.endpoints.current.matchFulfilled,
-    //   (state, { payload }) => {
-    //     state.token = payload.token;
-    //     state.isLoggedIn = true;
-    //     state.isRefreshing = false;
-    //   }
-    // )
-    // .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
-    //   state.isRefreshing = false;
-    // });
-    // .addMatcher(authApi.endpoints.oAuth.matchPending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addMatcher(
-    //   authApi.endpoints.oAuth.matchFulfilled,
-    //   (state, { payload }) => {
-    //     state.token = payload.token;
-    //     // toasterService.sucsess("Вітаємо! Вхід Успішно виконаний");
-    //     state.isLoading = false;
-    //   }
-    // );
-    // .addMatcher(authApi.endpoints.deleteUser.matchFulfilled, (state) => {
-    //   state.name = null;
-    //   state.email = null;
-    //   state.lastName = null;
-    //   state.phone = null;
-    //   state.id = null;
-    //   state.token = null;
-    //   state.isLoggedIn = false;
-    // });
   },
 });
+
+// .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
+//   state.isLoading = true;
+// })
+// .addMatcher(
+//   authApi.endpoints.signIn.matchFulfilled,
+//   (state, { payload }) => {
+//     state.token = payload.token;
+//     state.isLoggedIn = true;
+//     state.isLoading = false;
+//   }
+// )
+// .addMatcher(
+//   (action) => action.type === "auth/clearToken",
+//   (state) => {
+//     state.token = null;
+//     state.isLoggedIn = false;
+//   }
+// )
+// .addMatcher(authApi.endpoints.current.matchPending, (state) => {
+//   state.isRefreshing = true;
+// })
+// .addMatcher(
+//   authApi.endpoints.current.matchFulfilled,
+//   (state, { payload }) => {
+//     state.token = payload.token;
+//     state.isLoggedIn = true;
+//     state.isRefreshing = false;
+//   }
+// )
+// .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
+//   state.isRefreshing = false;
+// });
+// .addMatcher(authApi.endpoints.oAuth.matchPending, (state) => {
+//   state.isLoading = true;
+// })
+// .addMatcher(
+//   authApi.endpoints.oAuth.matchFulfilled,
+//   (state, { payload }) => {
+//     state.token = payload.token;
+//     // toasterService.sucsess("Вітаємо! Вхід Успішно виконаний");
+//     state.isLoading = false;
+//   }
+// );
+// .addMatcher(authApi.endpoints.deleteUser.matchFulfilled, (state) => {
+//   state.name = null;
+//   state.email = null;
+//   state.lastName = null;
+//   state.phone = null;
+//   state.id = null;
+//   state.token = null;
+//   state.isLoggedIn = false;
+// });
 
 const persisteAuthReducer = persistReducer(
   authPersistConfig,
