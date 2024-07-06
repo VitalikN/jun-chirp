@@ -1,21 +1,8 @@
 import { Field, Form, Formik } from "formik";
 import ErrorFeedback from "./ErrorFeedback";
-import * as Yup from "yup";
 import s from "@/sass/layouts/signIn.module.scss";
 import { useLoginMutation } from "@/redux/auth/authApi";
-
-export const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Введіть дійсну електронну адресу у форматі username@example.com")
-    .required("Обов'язкове поле!"),
-
-  password: Yup.string()
-    .min(
-      8,
-      "Пароль повинен містити щонайменше 8 символів, включаючи великі і малі літери, цифри та спеціальні символи."
-    )
-    .required("Обов'язкове поле!"),
-});
+import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 
 export interface FormValues {
   email: string;
@@ -24,7 +11,7 @@ export interface FormValues {
 }
 
 const SignInFormik = () => {
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (
     values: FormValues,
@@ -40,9 +27,9 @@ const SignInFormik = () => {
     <Formik
       initialValues={{ email: "", password: "", rememberMe: false }}
       onSubmit={handleSubmit}
-      validationSchema={validationSchema}
+      validationSchema={validationSchemaSignIn}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, isValid }) => (
         <Form className={s.form}>
           <div className={s.form__box}>
             <label
@@ -67,6 +54,15 @@ const SignInFormik = () => {
               name="email"
               error={touched.email && errors.email}
             />
+            {touched.email && errors.email ? (
+              <span className={s.warning}>!</span>
+            ) : touched.email && !errors.email ? (
+              <p className={s.chip__checkbox__valid}>
+                <svg width="12" height="10">
+                  <use href="/symbol-defs.svg#checkbox"></use>
+                </svg>
+              </p>
+            ) : null}
             <ErrorFeedback name="email" />
           </div>
           <div className={`${s.form__box} ${s.nth__child}`}>
@@ -89,17 +85,22 @@ const SignInFormik = () => {
                   ? s.valid
                   : ""
               }`}
-              //   className={s.input}
               type="password"
               name="password"
               error={touched.password && errors.password}
             />
-            <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye-close"></use>
-            </svg>
-            {/* <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye"></use>
-            </svg> */}
+
+            {
+              touched.password && errors.password ? (
+                <span className={s.warning}>!</span>
+              ) : (
+                <svg width="40" height="40" className={s.chip__eye}>
+                  <use href="/symbol-defs.svg#eye-close"></use>
+                </svg>
+              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
+              //   <use href="/symbol-defs.svg#eye"></use>
+              // </svg> */}
+            }
 
             <ErrorFeedback name="password" />
           </div>
@@ -113,9 +114,25 @@ const SignInFormik = () => {
               Запам`ятати мене
             </label>
           </div>
-          <button className={s.styledBtn} type="submit">
-            {/* {isLoading ? "Loading...." : "Увійти"} */}
-            Увійти
+          <button
+            className={`${s.styledBtn} ${
+              (touched.password && errors.password) ||
+              (touched.email && errors.email)
+                ? s.invalid
+                : (touched.password && !errors.password) ||
+                  (touched.email && errors.email)
+                ? s.valid
+                : ""
+            }`}
+            type="submit"
+          >
+            {isLoading ? "Loading...." : "Увійти"}
+            {(touched.password && errors.password) ||
+            (touched.email && errors.email) ? (
+              <span className={s.warning}>!</span>
+            ) : (
+              ""
+            )}
           </button>
         </Form>
       )}

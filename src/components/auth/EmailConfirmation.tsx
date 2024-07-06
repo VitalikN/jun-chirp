@@ -9,7 +9,10 @@ import { useRouter } from "next/navigation";
 import { Field, Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
 import s from "@/sass/layouts/emailConfirmation.module.scss";
-import { useConfirmEmailMutation } from "@/redux/auth/authApi";
+import {
+  useConfirmEmailMutation,
+  useResendConfirmationCodeMutation,
+} from "@/redux/auth/authApi";
 
 const validationSchemaConfirm = Yup.object().shape({
   code: Yup.string()
@@ -27,9 +30,7 @@ const EmailConfirmation = () => {
   const token = useSelector(authSelector.selectToken);
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
   const [confirm, { isLoading }] = useConfirmEmailMutation();
-
-  // const [confirm] = useConfirmEmailMutation();
-  console.log(isConfirmed);
+  const [resendCode] = useResendConfirmationCodeMutation();
 
   const [timeLeft, setTimeLeft] = useState(180);
 
@@ -48,6 +49,15 @@ const EmailConfirmation = () => {
     return () => clearTimeout(timer);
   }, [timeLeft]);
 
+  const handleResendCode = async (email: string) => {
+    try {
+      await resendCode({ email });
+      console.log("New confirmation code sent successfully");
+    } catch (error) {
+      console.error("Failed to resend confirmation code", error);
+    }
+  };
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -64,7 +74,7 @@ const EmailConfirmation = () => {
   };
   return (
     <section className={s.section}>
-      <div className={s.container}>
+      <div className={`${s.container}    ${s.container__resend}`}>
         <h2 className={s.title}>Підтвердження електронної пошти</h2>
         <p className={s.text}>
           Введіть 6-значний код, який ми надіслали на вашу пошту -
@@ -109,13 +119,18 @@ const EmailConfirmation = () => {
                 }`}
                 type="submit"
               >
-                {/* {isLoading ? "Loading...." : "підтвердити"} */}
-                підтвердити
+                {isLoading ? "Loading...." : "підтвердити"}
+                {/* підтвердити */}
               </button>
             </Form>
           )}
         </Formik>
-        <p>Відправити новий код повторно</p>
+        <button
+          onClick={() => email && handleResendCode(email)}
+          className={s.btn__resend}
+        >
+          {isLoading ? "Sending..." : "Відправити новий код повторно"}
+        </button>
       </div>
     </section>
   );

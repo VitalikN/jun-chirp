@@ -6,7 +6,7 @@ import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
 
 const RegisterFormik = () => {
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const handleSubmit = async (
     values: FormValuesRegister,
@@ -55,6 +55,15 @@ const RegisterFormik = () => {
               name="userName"
               error={touched.userName && errors.userName}
             />
+            {touched.userName && errors.userName ? (
+              <span className={s.warning}>!</span>
+            ) : touched.userName && !errors.userName ? (
+              <p className={s.chip__checkbox__valid}>
+                <svg width="12" height="10">
+                  <use href="/symbol-defs.svg#checkbox"></use>
+                </svg>
+              </p>
+            ) : null}
             <ErrorFeedback name="userName" />
           </div>
 
@@ -82,6 +91,15 @@ const RegisterFormik = () => {
               name="email"
               error={touched.email && errors.email}
             />
+            {touched.email && errors.email ? (
+              <span className={s.warning}>!</span>
+            ) : touched.email && !errors.email ? (
+              <p className={s.chip__checkbox__valid}>
+                <svg width="12" height="10">
+                  <use href="/symbol-defs.svg#checkbox"></use>
+                </svg>
+              </p>
+            ) : null}
             <ErrorFeedback name="email" />
           </div>
           <div className={s.form__box}>
@@ -109,12 +127,17 @@ const RegisterFormik = () => {
               name="password"
               error={touched.password && errors.password}
             />
-            <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye-close"></use>
-            </svg>
-            {/* <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye"></use>
-            </svg> */}
+            {
+              touched.password && errors.password ? (
+                <span className={s.warning}>!</span>
+              ) : (
+                <svg width="40" height="40" className={s.chip__eye}>
+                  <use href="/symbol-defs.svg#eye-close"></use>
+                </svg>
+              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
+              //   <use href="/symbol-defs.svg#eye"></use>
+              // </svg> */}
+            }
 
             <ErrorFeedback name="password" />
           </div>
@@ -147,12 +170,17 @@ const RegisterFormik = () => {
               name="confirmPassword"
               error={touched.confirmPassword && errors.confirmPassword}
             />
-            <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye-close"></use>
-            </svg>
-            {/* <svg width="40" height="40" className={s.chip__eye}>
-              <use href="/symbol-defs.svg#eye"></use>
-            </svg> */}
+            {
+              touched.confirmPassword && errors.confirmPassword ? (
+                <span className={s.warning}>!</span>
+              ) : (
+                <svg width="40" height="40" className={s.chip__eye}>
+                  <use href="/symbol-defs.svg#eye-close"></use>
+                </svg>
+              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
+              //   <use href="/symbol-defs.svg#eye"></use>
+              // </svg> */}
+            }
 
             <ErrorFeedback name="confirmPassword" />
           </div>
@@ -188,13 +216,41 @@ const RegisterFormik = () => {
 
           <div className={s.box__btn}>
             <button className={s.resetBtn} type="reset">
-              {/* {isLoading ? "Loading...." : "ВІДМІНИТИ"} */}
               ВІДМІНИТИ
             </button>
-            <button className={s.styledBtn} type="submit">
-              {/* {isLoading ? "Loading...." : "Зареєструватись"} */}
-              Зареєструватись
+
+            {/*  */}
+
+            <button
+              className={`${s.styledBtn} ${
+                (touched.userName && errors.userName) ||
+                (touched.email && errors.email) ||
+                (touched.password && errors.password) ||
+                (touched.confirmPassword && errors.confirmPassword) ||
+                (touched.rememberMe && errors.rememberMe)
+                  ? s.invalid
+                  : (touched.userName && errors.userName) ||
+                    (touched.email && errors.email) ||
+                    (touched.password && errors.password) ||
+                    (touched.confirmPassword && errors.confirmPassword) ||
+                    (touched.rememberMe && !errors.rememberMe)
+                  ? s.valid
+                  : ""
+              }`}
+              type="submit"
+            >
+              {isLoading ? "Loading...." : "Зареєструватись"}
+              {(touched.userName && errors.userName) ||
+              (touched.email && errors.email) ||
+              (touched.password && errors.password) ||
+              (touched.confirmPassword && errors.confirmPassword) ||
+              (touched.rememberMe && errors.rememberMe) ? (
+                <span className={s.warning}>!</span>
+              ) : (
+                ""
+              )}
             </button>
+            {/*  */}
           </div>
         </Form>
       )}

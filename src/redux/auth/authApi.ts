@@ -46,11 +46,21 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
+    resendConfirmationCode: builder.mutation({
+      query: ({ email }) => ({
+        url: "users/resend-confirmation-code",
+        method: "POST",
+        body: { email },
+      }),
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
+// users/resend-confirmation-code;
 
 export const {
   useRegisterMutation,
   useConfirmEmailMutation,
   useLoginMutation,
+  useResendConfirmationCodeMutation,
 } = authApi;
