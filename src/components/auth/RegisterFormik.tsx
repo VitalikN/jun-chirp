@@ -4,9 +4,13 @@ import s from "@/sass/layouts/register.module.scss";
 import { useRegisterMutation } from "@/redux/auth/authApi";
 import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
+import { useRef, useState } from "react";
 
 const RegisterFormik = () => {
   const [register, { isLoading }] = useRegisterMutation();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
   const handleSubmit = async (
     values: FormValuesRegister,
@@ -18,6 +22,13 @@ const RegisterFormik = () => {
     resetForm();
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   return (
     <Formik
       initialValues={{
@@ -67,7 +78,6 @@ const RegisterFormik = () => {
             <ErrorFeedback name="userName" />
           </div>
 
-          {/*  */}
           <div className={s.form__box}>
             <label
               className={`${s.label} ${
@@ -122,22 +132,26 @@ const RegisterFormik = () => {
                   ? s.valid
                   : ""
               }`}
-              //   className={s.input}
-              type="password"
               name="password"
+              type={showPassword ? "text" : "password"}
               error={touched.password && errors.password}
             />
-            {
-              touched.password && errors.password ? (
-                <span className={s.warning}>!</span>
-              ) : (
-                <svg width="40" height="40" className={s.chip__eye}>
-                  <use href="/symbol-defs.svg#eye-close"></use>
-                </svg>
-              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
-              //   <use href="/symbol-defs.svg#eye"></use>
-              // </svg> */}
-            }
+            {touched.password && errors.password ? (
+              <span className={s.warning}>!</span>
+            ) : (
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={togglePasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
+            )}
 
             <ErrorFeedback name="password" />
           </div>
@@ -165,22 +179,26 @@ const RegisterFormik = () => {
                   ? s.valid
                   : ""
               }`}
-              //   className={s.input}
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               error={touched.confirmPassword && errors.confirmPassword}
             />
-            {
-              touched.confirmPassword && errors.confirmPassword ? (
-                <span className={s.warning}>!</span>
-              ) : (
-                <svg width="40" height="40" className={s.chip__eye}>
-                  <use href="/symbol-defs.svg#eye-close"></use>
-                </svg>
-              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
-              //   <use href="/symbol-defs.svg#eye"></use>
-              // </svg> */}
-            }
+            {touched.confirmPassword && errors.confirmPassword ? (
+              <span className={s.warning}>!</span>
+            ) : (
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showConfirmPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
+            )}
 
             <ErrorFeedback name="confirmPassword" />
           </div>

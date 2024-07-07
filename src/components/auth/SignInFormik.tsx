@@ -3,6 +3,7 @@ import ErrorFeedback from "./ErrorFeedback";
 import s from "@/sass/layouts/signIn.module.scss";
 import { useLoginMutation } from "@/redux/auth/authApi";
 import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
+import { useState } from "react";
 
 export interface FormValues {
   email: string;
@@ -12,6 +13,7 @@ export interface FormValues {
 
 const SignInFormik = () => {
   const [login, { isLoading }] = useLoginMutation();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (
     values: FormValues,
@@ -20,16 +22,20 @@ const SignInFormik = () => {
     const { email, password } = values;
 
     await login({ user: { email, password } });
-    console.log(values);
     resetForm();
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Formik
       initialValues={{ email: "", password: "", rememberMe: false }}
       onSubmit={handleSubmit}
       validationSchema={validationSchemaSignIn}
     >
-      {({ errors, touched, isValid }) => (
+      {({ errors, touched }) => (
         <Form className={s.form}>
           <div className={s.form__box}>
             <label
@@ -85,22 +91,27 @@ const SignInFormik = () => {
                   ? s.valid
                   : ""
               }`}
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               error={touched.password && errors.password}
             />
 
-            {
-              touched.password && errors.password ? (
-                <span className={s.warning}>!</span>
-              ) : (
-                <svg width="40" height="40" className={s.chip__eye}>
-                  <use href="/symbol-defs.svg#eye-close"></use>
-                </svg>
-              ) // {/* <svg width="40" height="40" className={s.chip__eye}>
-              //   <use href="/symbol-defs.svg#eye"></use>
-              // </svg> */}
-            }
+            {touched.password && errors.password ? (
+              <span className={s.warning}>!</span>
+            ) : (
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={togglePasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
+            )}
 
             <ErrorFeedback name="password" />
           </div>
