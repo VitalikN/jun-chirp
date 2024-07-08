@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
-  // const isConfirmed = useSelector(authSelector.selectIsConfirmed);
+  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
 
   return (
     <header className={s.header}>
@@ -47,8 +47,8 @@ const Header = () => {
               <Link
                 className={s.link}
                 href={
-                  "/sign_in"
-                  // token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
+                  // "/sign_in"
+                  token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
                 }
               >
                 <svg width="27" height="33" className={s.chip}>

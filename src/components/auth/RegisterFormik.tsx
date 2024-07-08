@@ -4,15 +4,27 @@ import s from "@/sass/layouts/register.module.scss";
 import { useRegisterMutation } from "@/redux/auth/authApi";
 import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useRouterPush from "@/hooks.ts/useRouter";
+import authSelector from "@/redux/auth/authSelector";
+import { useSelector } from "react-redux";
+
+interface customError {
+  status?: number;
+  data?: any;
+}
 
 const RegisterFormik = () => {
-  const [register, { isLoading, error }] = useRegisterMutation();
+  const [register, { isLoading, error, isSuccess }] = useRegisterMutation();
+  const { pushRouter } = useRouterPush();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+
+  const customError = error as customError;
 
   const handleSubmit = async (
     values: FormValuesRegister,
@@ -21,24 +33,31 @@ const RegisterFormik = () => {
     try {
       const { userName, email, password } = values;
 
-      const response = await register({
+      const res = await register({
         user: { userName, email, password },
       }).unwrap();
-      console.log(response.data);
+      console.log("res.statusCode", isSuccess);
 
-      resetForm();
-      toast.success(" Registration successful!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (res.statusCode === 200) {
+        toast.success(
+          "Email already exists but is not confirmed. A new confirmation code has been sent.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+        resetForm();
+
+        pushRouter("/confirm");
+        return;
+      }
     } catch (error) {
       console.log(error);
-
       const errorMessage =
         (error as { data?: { message?: string } })?.data?.message ||
         "Облікові дані недійсні";
@@ -54,6 +73,21 @@ const RegisterFormik = () => {
     }
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Registration successful!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      pushRouter("/confirm");
+    }
+  }, [isSuccess, pushRouter]);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -63,6 +97,9 @@ const RegisterFormik = () => {
   };
   return (
     <>
+      {customError?.status}
+      {JSON.stringify(customError?.data)}
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

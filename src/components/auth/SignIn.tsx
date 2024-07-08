@@ -2,21 +2,12 @@
 
 import Link from "next/link";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
 import s from "@/sass/layouts/signIn.module.scss";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import authSelector from "@/redux/auth/authSelector";
 
 const SignIn = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const token = useSelector(authSelector.selectToken);
-
-  useEffect(() => {
-    token ? router.push("/") : "";
-  }, [token, router]);
 
   return (
     <section className={`${s.section} `}>

@@ -13,6 +13,7 @@ import {
   useConfirmEmailMutation,
   useResendConfirmationCodeMutation,
 } from "@/redux/auth/authApi";
+import useRouterPush from "@/hooks.ts/useRouter";
 
 const validationSchemaConfirm = Yup.object().shape({
   code: Yup.string()
@@ -25,29 +26,22 @@ const validationSchemaConfirm = Yup.object().shape({
 // Ви вичерпали всі спроби отримання нового коду підтвердження. Будь ласка, зачекайте 15 хвилин перед наступною спробою отримання нового коду
 
 const EmailConfirmation = () => {
-  const router = useRouter();
   const email = useSelector(authSelector.getEmail);
-  const token = useSelector(authSelector.selectToken);
-  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
   const [confirm, { isLoading }] = useConfirmEmailMutation();
   const [resendCode] = useResendConfirmationCodeMutation();
 
-  const [timeLeft, setTimeLeft] = useState(180);
+  const [timeLeft, setTimeLeft] = useState(600);
+  const { pushRouter } = useRouterPush();
 
-  useEffect(() => {
-    token && email ? "" : router.push("/register");
-    isConfirmed ? router.push("/") : "";
-  }, [token, email, router, isConfirmed]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (timeLeft > 0) {
+  //       setTimeLeft(timeLeft - 1);
+  //     }
+  //   }, 1000);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (timeLeft > 0) {
-        setTimeLeft(timeLeft - 1);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [timeLeft]);
+  //   return () => clearTimeout(timer);
+  // }, [timeLeft]);
 
   const handleResendCode = async (email: string) => {
     try {
@@ -67,7 +61,11 @@ const EmailConfirmation = () => {
   };
   const handleSubmit = async (values: FormikValues) => {
     try {
-      await confirm({ email, code: values.code });
+      const res = await confirm({ email, code: values.code });
+
+      console.log(res);
+
+      // pushRouter("/");
     } catch (error) {
       console.error("Confirmation failed", error);
     }
@@ -77,7 +75,7 @@ const EmailConfirmation = () => {
       <div className={`${s.container}    ${s.container__resend}`}>
         <h2 className={s.title}>Підтвердження електронної пошти</h2>
         <p className={s.text}>
-          Введіть 6-значний код, який ми надіслали на вашу пошту -
+          Введіть 6 - значний код, який ми надіслали на вашу пошту
           <span className={s.email__text}>{email}</span>
         </p>
         <p className={s.timer}> {formatTime(timeLeft)}</p>

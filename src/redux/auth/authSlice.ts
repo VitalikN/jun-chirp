@@ -7,7 +7,7 @@ export interface IUser {
   userName: string | null;
   email: string | null;
   id: number | null;
-  token?: string | null;
+  accessToken?: string | null;
   isConfirmed: boolean;
 }
 
@@ -49,61 +49,35 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.register.matchPending, (state) => {
-        state.isLoading = true;
-      })
+
       .addMatcher(
         authApi.endpoints.register.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.token = payload.user.accessToken;
+          state.token = payload.user?.accessToken;
           state.isLoggedIn = true;
-          state.isLoading = false;
         }
       )
-      .addMatcher(authApi.endpoints.confirmEmail.matchPending, (state) => {
-        state.isLoading = true;
-      })
+
       .addMatcher(
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
           state.isLoggedIn = true;
-          state.isLoading = false;
         }
       )
-      .addMatcher(authApi.endpoints.confirmEmail.matchRejected, (state) => {
-        state.isLoading = false;
-      })
-      .addMatcher(authApi.endpoints.login.matchPending, (state) => {
-        state.isLoading = true;
-      })
+
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.token = payload.user.accessToken;
+          state.token = payload.user?.accessToken;
           state.isLoggedIn = true;
-          state.isLoading = false;
         }
-      )
-      .addMatcher(authApi.endpoints.login.matchRejected, (state) => {
-        state.isLoading = false;
-      });
+      );
   },
 });
 
-// .addMatcher(authApi.endpoints.signIn.matchPending, (state) => {
-//   state.isLoading = true;
-// })
-// .addMatcher(
-//   authApi.endpoints.signIn.matchFulfilled,
-//   (state, { payload }) => {
-//     state.token = payload.token;
-//     state.isLoggedIn = true;
-//     state.isLoading = false;
-//   }
-// )
 // .addMatcher(
 //   (action) => action.type === "auth/clearToken",
 //   (state) => {

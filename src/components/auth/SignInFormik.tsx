@@ -6,6 +6,7 @@ import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import ToastContainer from "../ToastContainer";
+import useRouterPush from "@/hooks.ts/useRouter";
 
 export interface FormValues {
   email: string;
@@ -16,6 +17,7 @@ export interface FormValues {
 const SignInFormik = () => {
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const { pushRouter } = useRouterPush();
 
   const handleSubmit = async (
     values: FormValues,
@@ -24,9 +26,11 @@ const SignInFormik = () => {
     try {
       const { email, password } = values;
 
-      const data = await login({ user: { email, password } }).unwrap();
-      if (data) {
+      const res = await login({ user: { email, password } }).unwrap();
+      if (res) {
         resetForm();
+
+        pushRouter("/");
 
         toast.success("🦄 Wow so easy!", {
           position: "top-right",
