@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useRouterPush from "@/hooks.ts/useRouter";
-import authSelector from "@/redux/auth/authSelector";
-import { useSelector } from "react-redux";
+
+const sessionStorage = window.sessionStorage;
 
 interface customError {
   status?: number;
@@ -26,6 +26,9 @@ const RegisterFormik = () => {
 
   const customError = error as customError;
 
+  const initialFormValues: FormValuesRegister = JSON.parse(
+    sessionStorage.getItem("registrationFormData") || "{}"
+  );
   const handleSubmit = async (
     values: FormValuesRegister,
     { resetForm }: { resetForm: () => void }
@@ -33,10 +36,11 @@ const RegisterFormik = () => {
     try {
       const { userName, email, password } = values;
 
+      sessionStorage.setItem("registrationFormData", JSON.stringify({ email }));
+
       const res = await register({
         user: { userName, email, password },
       }).unwrap();
-      console.log("res.statusCode", isSuccess);
 
       if (res.statusCode === 200) {
         toast.success(

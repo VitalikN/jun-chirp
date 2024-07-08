@@ -20,28 +20,42 @@ const validationSchemaConfirm = Yup.object().shape({
     .length(6, "Код має містити 6 цифр")
     .required("Код не може бути порожнім"),
 });
-// ;Неправильний код.Будь ласка, перевірте і спробуйте ще раз
+// Неправильний код.Будь ласка, перевірте і спробуйте ще раз
 // Термін дії коду закінчився. Будь ласка, запросіть новий код для підтвердження
 
 // Ви вичерпали всі спроби отримання нового коду підтвердження. Будь ласка, зачекайте 15 хвилин перед наступною спробою отримання нового коду
 
 const EmailConfirmation = () => {
-  const email = useSelector(authSelector.getEmail);
   const [confirm, { isLoading }] = useConfirmEmailMutation();
   const [resendCode] = useResendConfirmationCodeMutation();
+  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
 
+  const emailSelector = useSelector(authSelector.getEmail);
+  const [email, setEmail] = useState<string | null>(emailSelector);
   const [timeLeft, setTimeLeft] = useState(600);
   const { pushRouter } = useRouterPush();
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     if (timeLeft > 0) {
-  //       setTimeLeft(timeLeft - 1);
-  //     }
-  //   }, 1000);
+  useEffect(() => {
+    const storedEmail = sessionStorage.getItem("registrationFormData");
+    if (storedEmail) {
+      const { email } = JSON.parse(storedEmail);
+      setEmail(email);
+    }
 
-  //   return () => clearTimeout(timer);
-  // }, [timeLeft]);
+    if (email === null || undefined) {
+      pushRouter("/register");
+    }
+  }, [email, pushRouter]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (timeLeft > 0) {
+        setTimeLeft(timeLeft - 1);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
 
   const handleResendCode = async (email: string) => {
     try {
@@ -61,11 +75,12 @@ const EmailConfirmation = () => {
   };
   const handleSubmit = async (values: FormikValues) => {
     try {
-      const res = await confirm({ email, code: values.code });
+      const res = await confirm({ email, code: values.code }).unwrap();
 
-      console.log(res);
-
-      // pushRouter("/");
+      console.log("!email!email", res.accessToken);
+      if (res.accessToken) {
+        pushRouter("/");
+      }
     } catch (error) {
       console.error("Confirmation failed", error);
     }
