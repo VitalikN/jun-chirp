@@ -8,7 +8,7 @@ export const validationSchemaRegister = Yup.object().shape({
       /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' -]+$/,
       "Ім’я може містити тільки букви, пробіли, апострофи і дефіси"
     )
-    .required("Ім’я не може бути порожнім"),
+    .required("Обов'язкове поле!"),
 
   email: Yup.string()
     .email("Некоректний формат електронної пошти")
