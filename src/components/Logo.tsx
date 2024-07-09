@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import s from "@/sass/layouts/logo.module.scss";
+
 const Logo = () => {
   return (
     <>

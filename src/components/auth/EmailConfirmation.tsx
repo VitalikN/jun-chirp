@@ -1,99 +1,38 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import authSelector from "@/redux/auth/authSelector";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
-// import { useConfirmEmailMutation } from "@/redux/auth/";
-import { Field, Form, Formik, FormikValues } from "formik";
-import * as Yup from "yup";
+import { Field, Form, Formik } from "formik";
+
+import useEmailConfirmation from "@/hooks/useEmailConfirmation";
+import { validationSchemaConfirm } from "@/utils/schema/validationSchemaConfirm";
+import ToastContainer from "../ToastContainer";
+
 import s from "@/sass/layouts/emailConfirmation.module.scss";
-import {
-  useConfirmEmailMutation,
-  useResendConfirmationCodeMutation,
-} from "@/redux/auth/authApi";
-import useRouterPush from "@/hooks.ts/useRouter";
-
-const validationSchemaConfirm = Yup.object().shape({
-  code: Yup.string()
-    .length(6, "Код має містити 6 цифр")
-    .required("Код не може бути порожнім"),
-});
-// Неправильний код.Будь ласка, перевірте і спробуйте ще раз
-// Термін дії коду закінчився. Будь ласка, запросіть новий код для підтвердження
-
-// Ви вичерпали всі спроби отримання нового коду підтвердження. Будь ласка, зачекайте 15 хвилин перед наступною спробою отримання нового коду
 
 const EmailConfirmation = () => {
-  const [confirm, { isLoading }] = useConfirmEmailMutation();
-  const [resendCode] = useResendConfirmationCodeMutation();
-  const isConfirmed = useSelector(authSelector.selectIsConfirmed);
+  const {
+    cooldown,
+    email,
+    timeLeft,
+    isLoading,
+    handleSubmit,
+    handleResendCode,
+    formatTime,
+  } = useEmailConfirmation();
 
-  const emailSelector = useSelector(authSelector.getEmail);
-  const [email, setEmail] = useState<string | null>(emailSelector);
-  const [timeLeft, setTimeLeft] = useState(600);
-  const { pushRouter } = useRouterPush();
-
-  useEffect(() => {
-    const storedEmail = sessionStorage.getItem("registrationFormData");
-    if (storedEmail) {
-      const { email } = JSON.parse(storedEmail);
-      setEmail(email);
-    }
-
-    if (email === null || undefined) {
-      pushRouter("/register");
-    }
-  }, [email, pushRouter]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (timeLeft > 0) {
-        setTimeLeft(timeLeft - 1);
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [timeLeft]);
-
-  const handleResendCode = async (email: string) => {
-    try {
-      await resendCode({ email });
-      console.log("New confirmation code sent successfully");
-    } catch (error) {
-      console.error("Failed to resend confirmation code", error);
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
-  const handleSubmit = async (values: FormikValues) => {
-    try {
-      const res = await confirm({ email, code: values.code }).unwrap();
-
-      console.log("!email!email", res.accessToken);
-      if (res.accessToken) {
-        pushRouter("/");
-      }
-    } catch (error) {
-      console.error("Confirmation failed", error);
-    }
-  };
   return (
     <section className={s.section}>
+      <ToastContainer />
       <div className={`${s.container}    ${s.container__resend}`}>
         <h2 className={s.title}>Підтвердження електронної пошти</h2>
         <p className={s.text}>
           Введіть 6 - значний код, який ми надіслали на вашу пошту
           <span className={s.email__text}>{email}</span>
         </p>
-        <p className={s.timer}> {formatTime(timeLeft)}</p>
+        <p className={s.timer}>
+          {cooldown !== null ? formatTime(cooldown) : formatTime(timeLeft)}
+        </p>
         <Formik
           initialValues={{ code: "" }}
           onSubmit={handleSubmit}
@@ -133,7 +72,6 @@ const EmailConfirmation = () => {
                 type="submit"
               >
                 {isLoading ? "Loading...." : "підтвердити"}
-                {/* підтвердити */}
               </button>
             </Form>
           )}

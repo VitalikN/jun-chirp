@@ -1,69 +1,19 @@
 import { Field, Form, Formik } from "formik";
-import ErrorFeedback from "./ErrorFeedback";
-import s from "@/sass/layouts/signIn.module.scss";
-import { useLoginMutation } from "@/redux/auth/authApi";
-import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import ToastContainer from "../ToastContainer";
-import useRouterPush from "@/hooks.ts/useRouter";
 
-export interface FormValues {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-}
+import useSignInFormik from "@/hooks/useSignInFormik";
+import ErrorFeedback from "./ErrorFeedback";
+import ToastContainer from "../ToastContainer";
+
+import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
+import s from "@/sass/layouts/signIn.module.scss";
 
 const SignInFormik = () => {
-  const [login, { isLoading }] = useLoginMutation();
-  const [showPassword, setShowPassword] = useState(false);
-  const { pushRouter } = useRouterPush();
-
-  const handleSubmit = async (
-    values: FormValues,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    try {
-      const { email, password } = values;
-
-      const res = await login({ user: { email, password } }).unwrap();
-      if (res) {
-        resetForm();
-
-        pushRouter("/");
-
-        toast.success("🦄 Wow so easy!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    } catch (error) {
-      const errorMessage =
-        (error as { data?: { message?: string } })?.data?.message ||
-        "Облікові дані недійсні";
-      toast.error(`${errorMessage}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const { handleSubmit, togglePasswordVisibility, isLoading, showPassword } =
+    useSignInFormik();
 
   return (
     <>
+      <ToastContainer />
       <Formik
         initialValues={{ email: "", password: "", rememberMe: false }}
         onSubmit={handleSubmit}

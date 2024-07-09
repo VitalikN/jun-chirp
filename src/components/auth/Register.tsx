@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import s from "@/sass/layouts/register.module.scss";
 import RegisterFormik from "./RegisterFormik";
 

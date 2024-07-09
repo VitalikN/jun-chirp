@@ -1,122 +1,23 @@
 import { Field, Form, Formik } from "formik";
-import ErrorFeedback from "./ErrorFeedback";
-import s from "@/sass/layouts/register.module.scss";
-import { useRegisterMutation } from "@/redux/auth/authApi";
+import useRegisterFormik from "@/hooks/useRegisterFormik";
 import { validationSchemaRegister } from "@/utils/schema/validationRegister";
-import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
-import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import useRouterPush from "@/hooks.ts/useRouter";
-
-const sessionStorage = window.sessionStorage;
-
-interface customError {
-  status?: number;
-  data?: any;
-}
+import ErrorFeedback from "./ErrorFeedback";
+import ToastContainer from "../ToastContainer";
+import s from "@/sass/layouts/register.module.scss";
 
 const RegisterFormik = () => {
-  const [register, { isLoading, error, isSuccess }] = useRegisterMutation();
-  const { pushRouter } = useRouterPush();
+  const {
+    handleSubmit,
+    togglePasswordVisibility,
+    toggleConfirmPasswordVisibility,
+    showPassword,
+    showConfirmPassword,
+    isLoading,
+  } = useRegisterFormik();
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-
-  const customError = error as customError;
-
-  const initialFormValues: FormValuesRegister = JSON.parse(
-    sessionStorage.getItem("registrationFormData") || "{}"
-  );
-  const handleSubmit = async (
-    values: FormValuesRegister,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    try {
-      const { userName, email, password } = values;
-
-      sessionStorage.setItem("registrationFormData", JSON.stringify({ email }));
-
-      const res = await register({
-        user: { userName, email, password },
-      }).unwrap();
-
-      if (res.statusCode === 200) {
-        toast.success(
-          "Email already exists but is not confirmed. A new confirmation code has been sent.",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        resetForm();
-
-        pushRouter("/confirm");
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-      const errorMessage =
-        (error as { data?: { message?: string } })?.data?.message ||
-        "Облікові дані недійсні";
-      toast.error(`${errorMessage}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Registration successful!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      pushRouter("/confirm");
-    }
-  }, [isSuccess, pushRouter]);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
   return (
     <>
-      {customError?.status}
-      {JSON.stringify(customError?.data)}
-
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        // transition: Bounce,
-      />
+      <ToastContainer />
       <Formik
         initialValues={{
           userName: "",
@@ -243,7 +144,6 @@ const RegisterFormik = () => {
               <ErrorFeedback name="password" />
             </div>
 
-            {/*  */}
             <div className={`${s.form__box} `}>
               <label
                 className={`${s.label}  ${
@@ -289,7 +189,6 @@ const RegisterFormik = () => {
 
               <ErrorFeedback name="confirmPassword" />
             </div>
-            {/*  */}
 
             <div className={s.form__box__checkbox}>
               <label className={`${s.checkboxLabel} `}>
@@ -317,8 +216,6 @@ const RegisterFormik = () => {
               <button className={s.resetBtn} type="reset">
                 ВІДМІНИТИ
               </button>
-
-              {/*  */}
 
               <button
                 className={`${s.styledBtn} ${
