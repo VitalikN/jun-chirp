@@ -67,7 +67,11 @@ const EmailConfirmation = () => {
               </div>
               <button
                 className={`${s.styledBtn} ${
-                  touched.code && errors.code ? s.invalid__styledBtn : ""
+                  touched.code && errors.code
+                    ? s.invalid
+                    : touched.code && !errors.code
+                    ? s.valid
+                    : ""
                 }`}
                 type="submit"
               >

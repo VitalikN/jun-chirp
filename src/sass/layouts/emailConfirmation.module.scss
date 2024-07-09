@@ -12,12 +12,10 @@
 
 .title {
   @include font(18px, 2vw, 26px, 500, 32px);
-  // text-align: center;
 }
 
 .text {
   padding-top: 24px;
-  // text-align: center;
   @include font(14px, 2vw, 18px, 500, 22px);
 }
 .email__text {
@@ -25,7 +23,6 @@
   margin-left: 10px;
 }
 .timer {
-  // text-align: center;
   padding: 24px 0;
   @include font(14px, 2vw, 18px, 500, 22px);
 }
@@ -88,10 +85,16 @@
   width: 192px;
   margin: 0 auto;
   @include font(14px, 2vw, 16px, 400, 19px);
+  &.invalid {
+    background-color: #b3261e;
+    margin-top: 24px;
+  }
+
+  &.valid {
+    background-color: green;
+  }
 }
-.invalid__styledBtn {
-  margin-top: 24px;
-}
+
 .btn__resend {
   margin-top: 24px;
   cursor: pointer;
