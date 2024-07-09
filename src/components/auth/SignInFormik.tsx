@@ -80,22 +80,22 @@ const SignInFormik = () => {
                 error={touched.password && errors.password}
               />
 
-              {touched.password && errors.password ? (
+              {touched.password && errors.password && (
                 <span className={s.warning}>!</span>
-              ) : (
-                <svg
-                  width="40"
-                  height="40"
-                  className={s.chip__eye}
-                  onClick={togglePasswordVisibility}
-                >
-                  <use
-                    href={`/symbol-defs.svg#${
-                      showPassword ? "eye-close" : "eye"
-                    }`}
-                  ></use>
-                </svg>
               )}
+
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={togglePasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
 
               <ErrorFeedback name="password" />
             </div>

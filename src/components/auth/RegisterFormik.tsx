@@ -124,22 +124,21 @@ const RegisterFormik = () => {
                 type={showPassword ? "text" : "password"}
                 error={touched.password && errors.password}
               />
-              {touched.password && errors.password ? (
+              {touched.password && errors.password && (
                 <span className={s.warning}>!</span>
-              ) : (
-                <svg
-                  width="40"
-                  height="40"
-                  className={s.chip__eye}
-                  onClick={togglePasswordVisibility}
-                >
-                  <use
-                    href={`/symbol-defs.svg#${
-                      showPassword ? "eye-close" : "eye"
-                    }`}
-                  ></use>
-                </svg>
               )}
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={togglePasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
 
               <ErrorFeedback name="password" />
             </div>
@@ -157,7 +156,6 @@ const RegisterFormik = () => {
                   <use href="/symbol-defs.svg#icon"></use>
                 </svg>
               </label>
-
               <Field
                 className={`${s.input} ${
                   touched.confirmPassword && errors.confirmPassword
@@ -170,23 +168,21 @@ const RegisterFormik = () => {
                 name="confirmPassword"
                 error={touched.confirmPassword && errors.confirmPassword}
               />
-              {touched.confirmPassword && errors.confirmPassword ? (
+              {touched.confirmPassword && errors.confirmPassword && (
                 <span className={s.warning}>!</span>
-              ) : (
-                <svg
-                  width="40"
-                  height="40"
-                  className={s.chip__eye}
-                  onClick={toggleConfirmPasswordVisibility}
-                >
-                  <use
-                    href={`/symbol-defs.svg#${
-                      showConfirmPassword ? "eye-close" : "eye"
-                    }`}
-                  ></use>
-                </svg>
-              )}
-
+              )}{" "}
+              <svg
+                width="40"
+                height="40"
+                className={s.chip__eye}
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                <use
+                  href={`/symbol-defs.svg#${
+                    showConfirmPassword ? "eye-close" : "eye"
+                  }`}
+                ></use>
+              </svg>
               <ErrorFeedback name="confirmPassword" />
             </div>
 
