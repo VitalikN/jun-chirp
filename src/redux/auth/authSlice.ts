@@ -64,6 +64,7 @@ const authSlice = createSlice({
         (state, { payload }) => {
           state.user = payload.user;
           state.isLoggedIn = true;
+          state.token = payload.accessToken;
         }
       )
 

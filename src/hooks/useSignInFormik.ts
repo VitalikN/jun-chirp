@@ -7,8 +7,11 @@ import { FormValuesSignIn } from "@/utils/types/FormValuesSignIn";
 
 const useSignInFormik = () => {
   const [login, { isLoading, error }] = useLoginMutation();
-  const [showPassword, setShowPassword] = useState(false);
   const { pushRouter } = useRouterPush();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [backendError, setBackendError] = useState<string | null>(null);
+
   const customError = error as customError;
 
   const handleSubmit = async (
@@ -23,33 +26,14 @@ const useSignInFormik = () => {
         resetForm();
 
         pushRouter("/");
-
-        toast.success(" Wow so easy!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
       }
     } catch (error) {
-      const errorMessage =
-        customError?.status === 422
-          ? "Облікові дані недійсні"
-          : (error as { data?: { message?: string } })?.data?.message ||
-            "Облікові дані недійсні";
+      const status = customError?.status;
+      let errorMessage = "Неправильний логін або пароль";
 
-      toast.error(`${errorMessage}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (status === 422) errorMessage = "Облікові дані недійсні";
+
+      setBackendError(errorMessage);
     }
   };
 
@@ -62,6 +46,7 @@ const useSignInFormik = () => {
     togglePasswordVisibility,
     isLoading,
     showPassword,
+    backendError,
   };
 };
 

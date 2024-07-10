@@ -13,6 +13,7 @@ const RegisterFormik = () => {
     showPassword,
     showConfirmPassword,
     isLoading,
+    backendError,
   } = useRegisterFormik();
 
   return (
@@ -69,7 +70,9 @@ const RegisterFormik = () => {
             <div className={s.form__box}>
               <label
                 className={`${s.label} ${
-                  touched.email && errors.email ? s.invalid : ""
+                  (touched.email && errors.email) || backendError
+                    ? s.invalid
+                    : ""
                 } `}
               >
                 Email
@@ -79,7 +82,7 @@ const RegisterFormik = () => {
               </label>
               <Field
                 className={`${s.input} ${
-                  touched.email && errors.email
+                  (touched.email && errors.email) || backendError
                     ? s.invalid
                     : touched.email && !errors.email
                     ? s.valid
@@ -89,7 +92,7 @@ const RegisterFormik = () => {
                 name="email"
                 error={touched.email && errors.email}
               />
-              {touched.email && errors.email ? (
+              {(touched.email && errors.email) || backendError ? (
                 <span className={s.warning}>!</span>
               ) : touched.email && !errors.email ? (
                 <p className={s.chip__checkbox__valid}>
@@ -208,6 +211,9 @@ const RegisterFormik = () => {
               )}
             </div>
 
+            {backendError && (
+              <div className={s.error__backend}>{backendError}</div>
+            )}
             <div className={s.box__btn}>
               <button className={s.resetBtn} type="reset">
                 ВІДМІНИТИ
@@ -219,7 +225,8 @@ const RegisterFormik = () => {
                   (touched.email && errors.email) ||
                   (touched.password && errors.password) ||
                   (touched.confirmPassword && errors.confirmPassword) ||
-                  (touched.rememberMe && errors.rememberMe)
+                  (touched.rememberMe && errors.rememberMe) ||
+                  backendError
                     ? s.invalid
                     : (touched.userName && errors.userName) ||
                       (touched.email && errors.email) ||
@@ -230,13 +237,15 @@ const RegisterFormik = () => {
                     : ""
                 }`}
                 type="submit"
+                disabled={isLoading}
               >
                 {isLoading ? "Loading...." : "Зареєструватись"}
                 {(touched.userName && errors.userName) ||
                 (touched.email && errors.email) ||
                 (touched.password && errors.password) ||
                 (touched.confirmPassword && errors.confirmPassword) ||
-                (touched.rememberMe && errors.rememberMe) ? (
+                (touched.rememberMe && errors.rememberMe) ||
+                backendError ? (
                   <span className={s.warning}>!</span>
                 ) : (
                   ""

@@ -19,6 +19,7 @@ const EmailConfirmation = () => {
     handleSubmit,
     handleResendCode,
     formatTime,
+    backendError,
   } = useEmailConfirmation();
 
   return (
@@ -31,7 +32,11 @@ const EmailConfirmation = () => {
           <span className={s.email__text}>{email}</span>
         </p>
         <p className={s.timer}>
-          {cooldown !== null ? formatTime(cooldown) : formatTime(timeLeft)}
+          {/* {cooldown !== null ? formatTime(cooldown) : */}
+          {cooldown !== null
+            ? `Код активний ще ${formatTime(cooldown)}.`
+            : `Код активний ще ${formatTime(timeLeft)}.`}
+          {/* {formatTime(timeLeft)} */}
         </p>
         <Formik
           initialValues={{ code: "" }}
@@ -65,15 +70,20 @@ const EmailConfirmation = () => {
                   <div className={s.invalid__code__message}>{errors.code}</div>
                 )}
               </div>
+              {backendError && (
+                <div className={s.error__backend}>{backendError}</div>
+              )}
               <button
                 className={`${s.styledBtn} ${
-                  touched.code && errors.code
+                  (touched.code && errors.code) || backendError
                     ? s.invalid
                     : touched.code && !errors.code
                     ? s.valid
                     : ""
-                }`}
+                }
+              ${backendError ? s.invalid__backendError : ""}`}
                 type="submit"
+                disabled={isLoading}
               >
                 {isLoading ? "Loading...." : "підтвердити"}
               </button>
@@ -82,9 +92,10 @@ const EmailConfirmation = () => {
         </Formik>
         <button
           onClick={() => email && handleResendCode(email)}
-          className={s.btn__resend}
+          className={`${s.btn__resend} ${cooldown !== null ? s.disabled : ""}`}
+          disabled={cooldown !== null}
         >
-          {isLoading ? "Sending..." : "Відправити новий код повторно"}
+          Відправити новий код повторно
         </button>
       </div>
     </section>

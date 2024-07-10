@@ -23,6 +23,10 @@ const useEmailConfirmation = () => {
   const [attempts, setAttempts] = useState(0);
   const [cooldown, setCooldown] = useState<number | null>(null);
 
+  const [backendError, setBackendError] = useState<string | null>(null);
+
+  const customError = error as customError;
+
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("registrationFormData");
     if (storedEmail) {
@@ -75,7 +79,7 @@ const useEmailConfirmation = () => {
   const handleResendCode = async (email: string) => {
     if (cooldown !== null) {
       toast.error(
-        "Будь ласка, зачекайте 15 хвилин перед наступною спробою отримання нового коду",
+        `Код активний ще ${formatTime(cooldown)}. Будь ласка, зачекайте.`,
         {
           position: "top-right",
           autoClose: 5000,
@@ -90,10 +94,10 @@ const useEmailConfirmation = () => {
     }
 
     if (attempts >= 5) {
-      setCooldown(900);
-      localStorage.setItem("resendCooldown", "900");
+      // setCooldown(600);
+      // localStorage.setItem("resendCooldown", "600");
       toast.error(
-        "Ви вичерпали всі спроби отримання нового коду підтвердження. Будь ласка, зачекайте 15 хвилин перед наступною спробою отримання нового коду",
+        "Ви вичерпали всі спроби отримання нового коду підтвердження на сьогодні. Будь ласка, спробуйте завтра.",
         {
           position: "top-right",
           autoClose: 5000,
@@ -111,6 +115,8 @@ const useEmailConfirmation = () => {
 
       setAttempts(attempts + 1);
       localStorage.setItem("resendAttempts", (attempts + 1).toString());
+      setCooldown(600);
+      localStorage.setItem("resendCooldown", "600");
 
       toast.success(` Новий код підтвердження успішно надіслано  ${email}`, {
         position: "top-right",
@@ -134,22 +140,23 @@ const useEmailConfirmation = () => {
         pushRouter("/");
       }
     } catch (error) {
-      const customError = error as customError;
-      const errorMessage =
-        customError?.status === 400
-          ? "Неправильний код.Будь ласка, перевірте і спробуйте ще раз "
-          : (error as { data?: { message?: string } })?.data?.message ||
-            "Облікові дані недійсні";
+      if (error && (error as customError).data) {
+        const status = (error as customError).data.statusCode;
+        let errorMessage =
+          "Неправильний код. Будь ласка, перевірте і спробуйте ще раз ";
 
-      toast.error(`${errorMessage}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+        if (status === 400) {
+          errorMessage =
+            "Неправильний код. Будь ласка, перевірте і спробуйте ще раз";
+        } else if (status === 410) {
+          errorMessage =
+            "Термін дії коду закінчився. Будь ласка, запросіть новий код для підтвердження";
+        } else if (status === 429) {
+          errorMessage =
+            "Ви вичерпали всі спроби отримання нового коду підтвердження. Будь ласка, зачекайте 24 години перед наступною спробою отримання нового коду";
+        }
+        setBackendError(errorMessage);
+      }
     }
   };
 
@@ -162,6 +169,7 @@ const useEmailConfirmation = () => {
   };
 
   return {
+    backendError,
     email,
     timeLeft,
     isLoading,

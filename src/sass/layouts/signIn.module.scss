@@ -144,7 +144,12 @@
   width: 21px;
   height: 21px;
 }
-
+.error__backend {
+  color: #b3261e;
+  text-align: center;
+  margin-bottom: 24px;
+  @include font(14px, 2vw, 20px, 400, 19px);
+}
 .styledBtn {
   padding: 10px 20px 10px 20px;
   background: #616161;

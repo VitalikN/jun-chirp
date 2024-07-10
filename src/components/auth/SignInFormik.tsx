@@ -8,8 +8,13 @@ import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
 
 const SignInFormik = () => {
-  const { handleSubmit, togglePasswordVisibility, isLoading, showPassword } =
-    useSignInFormik();
+  const {
+    handleSubmit,
+    togglePasswordVisibility,
+    isLoading,
+    showPassword,
+    backendError,
+  } = useSignInFormik();
 
   return (
     <>
@@ -34,7 +39,7 @@ const SignInFormik = () => {
               </label>
               <Field
                 className={`${s.input} ${
-                  touched.email && errors.email
+                  (touched.email && errors.email) || backendError
                     ? s.invalid
                     : touched.email && !errors.email
                     ? s.valid
@@ -44,7 +49,7 @@ const SignInFormik = () => {
                 name="email"
                 error={touched.email && errors.email}
               />
-              {touched.email && errors.email ? (
+              {(touched.email && errors.email) || backendError ? (
                 <span className={s.warning}>!</span>
               ) : touched.email && !errors.email ? (
                 <p className={s.chip__checkbox__valid}>
@@ -69,7 +74,7 @@ const SignInFormik = () => {
 
               <Field
                 className={`${s.input} ${
-                  touched.password && errors.password
+                  (touched.password && errors.password) || backendError
                     ? s.invalid
                     : touched.password && !errors.password
                     ? s.valid
@@ -113,10 +118,15 @@ const SignInFormik = () => {
                 Запам`ятати мене
               </label>
             </div>
+            {backendError && (
+              <div className={s.error__backend}>{backendError}</div>
+            )}
+
             <button
               className={`${s.styledBtn} ${
                 (touched.password && errors.password) ||
-                (touched.email && errors.email)
+                (touched.email && errors.email) ||
+                backendError
                   ? s.invalid
                   : (touched.password && !errors.password) ||
                     (touched.email && errors.email)
@@ -124,6 +134,7 @@ const SignInFormik = () => {
                   : ""
               }`}
               type="submit"
+              disabled={isLoading}
             >
               {isLoading ? "Loading...." : "Увійти"}
               {(touched.password && errors.password) ||

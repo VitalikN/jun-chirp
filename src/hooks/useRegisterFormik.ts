@@ -12,6 +12,8 @@ const useRegisterFormik = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+  const [backendError, setBackendError] = useState<string | null>(null);
+
   const sessionStorage = window.sessionStorage;
 
   const customError = error as customError;
@@ -48,21 +50,12 @@ const useRegisterFormik = () => {
         return;
       }
     } catch (error) {
-      const errorMessage =
-        customError?.status === 422
-          ? "Електронна адреса вже існує."
-          : (error as { data?: { message?: string } })?.data?.message ||
-            "Облікові дані недійсні";
+      const status = customError?.status;
+      let errorMessage = "Електронна адреса вже існує.";
 
-      toast.error(`${errorMessage}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (status === 422) errorMessage = "Електронна адреса вже існує.";
+
+      setBackendError(errorMessage);
     }
   };
 
@@ -96,6 +89,7 @@ const useRegisterFormik = () => {
     showPassword,
     showConfirmPassword,
     isLoading,
+    backendError,
   };
 };
 
