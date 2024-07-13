@@ -1,14 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 
 import useEmailConfirmation from "@/hooks/useEmailConfirmation";
 import { validationSchemaConfirm } from "@/utils/schema/validationSchemaConfirm";
 import ToastContainer from "../ToastContainer";
 
 import s from "@/sass/layouts/emailConfirmation.module.scss";
+import Button from "../Button";
+import useCodeInput from "@/hooks/useCodeInput";
+
+interface FormValues {
+  code: string;
+}
 
 const EmailConfirmation = () => {
   const {
@@ -22,6 +28,8 @@ const EmailConfirmation = () => {
     backendError,
   } = useEmailConfirmation();
 
+  const { inputRefs, handleChange, handlePaste } = useCodeInput();
+
   return (
     <section className={s.section}>
       <ToastContainer />
@@ -32,20 +40,23 @@ const EmailConfirmation = () => {
           <span className={s.email__text}>{email}</span>
         </p>
         <p className={s.timer}>
-          {/* {cooldown !== null ? formatTime(cooldown) : */}
           {cooldown !== null
-            ? `Код активний ще ${formatTime(cooldown)}.`
+            ? `Кнопка стане доступною для нового запиту, а код залишиться активним ще   ${formatTime(
+                cooldown
+              )}.`
             : `Код активний ще ${formatTime(timeLeft)}.`}
-          {/* {formatTime(timeLeft)} */}
         </p>
         <Formik
           initialValues={{ code: "" }}
           onSubmit={handleSubmit}
           validationSchema={validationSchemaConfirm}
         >
-          {({ errors, touched, values, setFieldValue }) => (
+          {({ errors, touched, values, setFieldValue, dirty }) => (
             <Form className={s.form}>
-              <div className={s.form__box}>
+              <div
+                className={s.form__box}
+                onPaste={(e) => handlePaste(e, setFieldValue)}
+              >
                 {[...Array(6)].map((_, index) => (
                   <Field
                     key={index}
@@ -56,14 +67,12 @@ const EmailConfirmation = () => {
                     }`}
                     maxLength="1"
                     value={values.code[index] || ""}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const value = e.target.value;
-                      if (/^[0-9]$/.test(value) || value === "") {
-                        const newCode = values.code.split("");
-                        newCode[index] = value;
-                        setFieldValue("code", newCode.join(""));
-                      }
-                    }}
+                    innerRef={(ref: HTMLInputElement) =>
+                      (inputRefs.current[index] = ref)
+                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleChange(e, index, setFieldValue, values)
+                    }
                   />
                 ))}
                 {touched.code && errors.code && (
@@ -73,7 +82,8 @@ const EmailConfirmation = () => {
               {backendError && (
                 <div className={s.error__backend}>{backendError}</div>
               )}
-              <button
+              <Button
+                title={isLoading ? "Loading...." : "підтвердити"}
                 className={`${s.styledBtn} ${
                   (touched.code && errors.code) || backendError
                     ? s.invalid
@@ -83,20 +93,17 @@ const EmailConfirmation = () => {
                 }
               ${backendError ? s.invalid__backendError : ""}`}
                 type="submit"
-                disabled={isLoading}
-              >
-                {isLoading ? "Loading...." : "підтвердити"}
-              </button>
+                isDisabled={isLoading || !dirty}
+              />
             </Form>
           )}
         </Formik>
-        <button
+        <Button
+          title="Відправити новий код повторно"
           onClick={() => email && handleResendCode(email)}
           className={`${s.btn__resend} ${cooldown !== null ? s.disabled : ""}`}
-          disabled={cooldown !== null}
-        >
-          Відправити новий код повторно
-        </button>
+          isDisabled={cooldown !== null || isLoading}
+        />
       </div>
     </section>
   );

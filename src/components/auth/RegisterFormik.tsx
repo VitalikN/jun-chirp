@@ -4,6 +4,7 @@ import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import ErrorFeedback from "./ErrorFeedback";
 import ToastContainer from "../ToastContainer";
 import s from "@/sass/layouts/register.module.scss";
+import Button from "../Button";
 
 const RegisterFormik = () => {
   const {
@@ -30,7 +31,7 @@ const RegisterFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaRegister}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, dirty, isValid }) => (
           <Form className={s.form}>
             <div className={s.form__box}>
               <label
@@ -215,42 +216,33 @@ const RegisterFormik = () => {
               <div className={s.error__backend}>{backendError}</div>
             )}
             <div className={s.box__btn}>
-              <button className={s.resetBtn} type="reset">
-                ВІДМІНИТИ
-              </button>
-
-              <button
+              <Button
+                title="ВІДМІНИТИ"
+                className={s.resetBtn}
+                type="reset"
+                isDisabled={!dirty || isLoading}
+              />
+              <Button
+                title={isLoading ? "Loading...." : "Зареєструватись"}
                 className={`${s.styledBtn} ${
-                  (touched.userName && errors.userName) ||
-                  (touched.email && errors.email) ||
-                  (touched.password && errors.password) ||
-                  (touched.confirmPassword && errors.confirmPassword) ||
-                  (touched.rememberMe && errors.rememberMe) ||
-                  backendError
+                  !touched.userName ||
+                  errors.userName ||
+                  !touched.email ||
+                  errors.email ||
+                  !touched.password ||
+                  errors.password ||
+                  !touched.confirmPassword ||
+                  errors.confirmPassword ||
+                  !touched.rememberMe ||
+                  errors.rememberMe
+                    ? " "
+                    : backendError
                     ? s.invalid
-                    : (touched.userName && errors.userName) ||
-                      (touched.email && errors.email) ||
-                      (touched.password && errors.password) ||
-                      (touched.confirmPassword && errors.confirmPassword) ||
-                      (touched.rememberMe && !errors.rememberMe)
-                    ? s.valid
-                    : ""
+                    : s.valid
                 }`}
                 type="submit"
-                disabled={isLoading}
-              >
-                {isLoading ? "Loading...." : "Зареєструватись"}
-                {(touched.userName && errors.userName) ||
-                (touched.email && errors.email) ||
-                (touched.password && errors.password) ||
-                (touched.confirmPassword && errors.confirmPassword) ||
-                (touched.rememberMe && errors.rememberMe) ||
-                backendError ? (
-                  <span className={s.warning}>!</span>
-                ) : (
-                  ""
-                )}
-              </button>
+                isDisabled={!dirty || !isValid || isLoading}
+              />
             </div>
           </Form>
         )}
@@ -259,3 +251,17 @@ const RegisterFormik = () => {
   );
 };
 export default RegisterFormik;
+//
+//  className={`${s.styledBtn} ${
+//                 (!dirty ||
+//                   !isValid ||
+//                   isLoading ||
+//                   touched.userName && errors.userName ||
+//                   touched.email && errors.email ||
+//                   touched.password && errors.password ||
+//                   touched.confirmPassword && errors.confirmPassword ||
+//                   touched.rememberMe && errors.rememberMe ||
+//                   backendError)
+//                   ? s.invalid
+//                   : s.valid
+//               }`}

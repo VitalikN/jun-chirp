@@ -53,7 +53,7 @@ const useRegisterFormik = () => {
       const status = customError?.status;
       let errorMessage = "Електронна адреса вже існує.";
 
-      if (status === 422) errorMessage = "Електронна адреса вже існує.";
+      if (status === 400) errorMessage = "Електронна адреса вже існує.";
 
       setBackendError(errorMessage);
     }

@@ -6,6 +6,7 @@ import ToastContainer from "../ToastContainer";
 
 import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
+import Button from "../Button";
 
 const SignInFormik = () => {
   const {
@@ -24,7 +25,7 @@ const SignInFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaSignIn}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, dirty, isValid }) => (
           <Form className={s.form}>
             <div className={s.form__box}>
               <label
@@ -122,7 +123,7 @@ const SignInFormik = () => {
               <div className={s.error__backend}>{backendError}</div>
             )}
 
-            <button
+            {/* <button
               className={`${s.styledBtn} ${
                 (touched.password && errors.password) ||
                 (touched.email && errors.email) ||
@@ -134,7 +135,7 @@ const SignInFormik = () => {
                   : ""
               }`}
               type="submit"
-              disabled={isLoading}
+              // isDisabled={!dirty || !isValid || isLoading}
             >
               {isLoading ? "Loading...." : "Увійти"}
               {(touched.password && errors.password) ||
@@ -143,7 +144,27 @@ const SignInFormik = () => {
               ) : (
                 ""
               )}
-            </button>
+            </button> */}
+
+            <Button
+              title={isLoading ? "Loading...." : "Увійти"}
+              className={`${s.styledBtn} ${
+                !touched.email ||
+                errors.email ||
+                !touched.password ||
+                errors.password
+                  ? ""
+                  : !touched.email ||
+                    errors.email ||
+                    !touched.password ||
+                    errors.password ||
+                    backendError
+                  ? s.invalid
+                  : s.valid
+              }`}
+              type="submit"
+              isDisabled={!dirty || !isValid || isLoading}
+            />
           </Form>
         )}
       </Formik>

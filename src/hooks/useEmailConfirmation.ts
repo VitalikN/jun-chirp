@@ -94,8 +94,6 @@ const useEmailConfirmation = () => {
     }
 
     if (attempts >= 5) {
-      // setCooldown(600);
-      // localStorage.setItem("resendCooldown", "600");
       toast.error(
         "Ви вичерпали всі спроби отримання нового коду підтвердження на сьогодні. Будь ласка, спробуйте завтра.",
         {
@@ -111,7 +109,7 @@ const useEmailConfirmation = () => {
       return;
     }
     try {
-      await resendCode({ email });
+      await resendCode({ email }).unwrap();
 
       setAttempts(attempts + 1);
       localStorage.setItem("resendAttempts", (attempts + 1).toString());
@@ -128,15 +126,31 @@ const useEmailConfirmation = () => {
         progress: undefined,
       });
     } catch (error) {
-      console.error("Failed to resend confirmation code", error);
+      const customError = error as customError;
+      const status = customError.data?.statusCode;
+      if (status === 400) {
+        toast.error("Користувача вже підтверджено", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   };
 
   const handleSubmit = async (values: FormikValues) => {
     try {
       const res = await confirm({ email, code: values.code }).unwrap();
+      console.log(res.accessToken);
 
       if (res.accessToken) {
+        setTimeLeft(0);
+        setCooldown(null);
+        localStorage.removeItem("resendCooldown");
         pushRouter("/");
       }
     } catch (error) {
