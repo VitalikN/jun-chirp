@@ -31,31 +31,31 @@ const useRegisterFormik = () => {
         user: { userName, email, password },
       }).unwrap();
 
-      if (res.statusCode === 200) {
-        toast.success(
-          "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        resetForm();
-
-        pushRouter("/confirm");
-        return;
-      }
+      // if (res.statusCode === 200) {
+      //   toast.success(
+      //     "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.",
+      //     {
+      //       position: "top-right",
+      //       autoClose: 5000,
+      //       hideProgressBar: false,
+      //       closeOnClick: true,
+      //       pauseOnHover: true,
+      //       draggable: true,
+      //       progress: undefined,
+      //     }
+      //   );
+      resetForm();
     } catch (error) {
       const status = customError?.status;
       let errorMessage = "Електронна адреса вже існує.";
 
-      if (status === 400) errorMessage = "Електронна адреса вже існує.";
-      console.log("Електронна адреса вже існує. /confirm");
-      pushRouter("/confirm");
+      if (status === 400) {
+        errorMessage =
+          "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.";
+        console.log(status);
+        pushRouter("/confirm");
+      }
+
       setBackendError(errorMessage);
     }
   };
