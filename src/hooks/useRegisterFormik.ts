@@ -16,50 +16,6 @@ const useRegisterFormik = () => {
 
   const sessionStorage = window.sessionStorage;
 
-  const customError = error as customError;
-
-  const handleSubmit = async (
-    values: FormValuesRegister,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    try {
-      const { userName, email, password } = values;
-
-      sessionStorage.setItem("registrationFormData", JSON.stringify({ email }));
-
-      const res = await register({
-        user: { userName, email, password },
-      }).unwrap();
-
-      // if (res.statusCode === 200) {
-      //   toast.success(
-      //     "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.",
-      //     {
-      //       position: "top-right",
-      //       autoClose: 5000,
-      //       hideProgressBar: false,
-      //       closeOnClick: true,
-      //       pauseOnHover: true,
-      //       draggable: true,
-      //       progress: undefined,
-      //     }
-      //   );
-      resetForm();
-    } catch (error) {
-      const status = customError?.status;
-      let errorMessage = "Електронна адреса вже існує.";
-
-      if (status === 400) {
-        errorMessage =
-          "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.";
-        console.log(status);
-        pushRouter("/confirm");
-      }
-
-      setBackendError(errorMessage);
-    }
-  };
-
   useEffect(() => {
     if (isSuccess) {
       toast.success("Реєстрація успішна!", {
@@ -74,6 +30,39 @@ const useRegisterFormik = () => {
       pushRouter("/confirm");
     }
   }, [isSuccess, pushRouter]);
+
+  const handleSubmit = async (
+    values: FormValuesRegister,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    try {
+      const { userName, email, password } = values;
+
+      sessionStorage.setItem("registrationFormData", JSON.stringify({ email }));
+
+      await register({
+        user: { userName, email, password },
+      }).unwrap();
+
+      resetForm();
+    } catch (error) {
+      const customError = error as customError;
+      console.log("Error:", customError);
+
+      const status = customError?.status;
+      let errorMessage = "Електронна адреса вже існує.";
+
+      if (status === 400) {
+        errorMessage =
+          "Електронна адреса вже існує, але не підтверджена. Надіслано новий код підтвердження.";
+        console.log("Status 400 detected, redirecting to /confirm");
+        pushRouter("/confirm");
+      }
+
+      setBackendError(errorMessage);
+      console.log("Backend Error:", backendError);
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
