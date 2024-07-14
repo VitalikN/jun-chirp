@@ -1,5 +1,5 @@
 // hooks/useEmailConfirmation.ts
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -17,7 +17,7 @@ const useEmailConfirmation = () => {
   const { pushRouter } = useRouterPush();
 
   const emailSelector = useSelector(authSelector.getEmail);
-  const [email, setEmail] = useState<string | null>(emailSelector);
+  const [email, setEmail] = useState<string | null>(emailSelector || "");
   const [timeLeft, setTimeLeft] = useState(600);
 
   const [attempts, setAttempts] = useState(0);
@@ -28,12 +28,16 @@ const useEmailConfirmation = () => {
   const customError = error as customError;
 
   useEffect(() => {
-    const storedEmail = sessionStorage.getItem("registrationFormData");
-    if (storedEmail) {
-      const { email } = JSON.parse(storedEmail);
+    const storedEmailData = sessionStorage.getItem("registrationFormData");
+
+    if (storedEmailData) {
+      const { email } = JSON.parse(storedEmailData);
       setEmail(email);
     }
-    if (email === null || undefined) {
+  }, []);
+
+  useEffect(() => {
+    if (email === null) {
       pushRouter("/register");
     }
   }, [email, pushRouter]);

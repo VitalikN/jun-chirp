@@ -54,7 +54,8 @@ const useRegisterFormik = () => {
       let errorMessage = "Електронна адреса вже існує.";
 
       if (status === 400) errorMessage = "Електронна адреса вже існує.";
-
+      console.log("Електронна адреса вже існує. /confirm");
+      pushRouter("/confirm");
       setBackendError(errorMessage);
     }
   };

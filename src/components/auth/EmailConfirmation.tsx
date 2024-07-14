@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
-import { Field, Form, Formik, FormikHelpers } from "formik";
+import { Field, Form, Formik } from "formik";
 
 import useEmailConfirmation from "@/hooks/useEmailConfirmation";
 import { validationSchemaConfirm } from "@/utils/schema/validationSchemaConfirm";
@@ -11,10 +11,6 @@ import ToastContainer from "../ToastContainer";
 import s from "@/sass/layouts/emailConfirmation.module.scss";
 import Button from "../Button";
 import useCodeInput from "@/hooks/useCodeInput";
-
-interface FormValues {
-  code: string;
-}
 
 const EmailConfirmation = () => {
   const {
