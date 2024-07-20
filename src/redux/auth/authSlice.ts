@@ -76,50 +76,15 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
         }
       );
+    // .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+    //   console.log("Logout fulfilled, resetting state");
+
+    //   state.token = null;
+    //   state.isLoggedIn = false;
+    //   state.user = initialState.user;
+    // });
   },
 });
-
-// .addMatcher(
-//   (action) => action.type === "auth/clearToken",
-//   (state) => {
-//     state.token = null;
-//     state.isLoggedIn = false;
-//   }
-// )
-// .addMatcher(authApi.endpoints.current.matchPending, (state) => {
-//   state.isRefreshing = true;
-// })
-// .addMatcher(
-//   authApi.endpoints.current.matchFulfilled,
-//   (state, { payload }) => {
-//     state.token = payload.token;
-//     state.isLoggedIn = true;
-//     state.isRefreshing = false;
-//   }
-// )
-// .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
-//   state.isRefreshing = false;
-// });
-// .addMatcher(authApi.endpoints.oAuth.matchPending, (state) => {
-//   state.isLoading = true;
-// })
-// .addMatcher(
-//   authApi.endpoints.oAuth.matchFulfilled,
-//   (state, { payload }) => {
-//     state.token = payload.token;
-//     // toasterService.sucsess("Вітаємо! Вхід Успішно виконаний");
-//     state.isLoading = false;
-//   }
-// );
-// .addMatcher(authApi.endpoints.deleteUser.matchFulfilled, (state) => {
-//   state.name = null;
-//   state.email = null;
-//   state.lastName = null;
-//   state.phone = null;
-//   state.id = null;
-//   state.token = null;
-//   state.isLoggedIn = false;
-// });
 
 const persisteAuthReducer = persistReducer(
   authPersistConfig,

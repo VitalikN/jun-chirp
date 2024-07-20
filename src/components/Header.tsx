@@ -5,11 +5,22 @@ import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
+// import { useLogoutMutation } from "@/redux/auth/authApi";
 
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
+  // const [logout] = useLogoutMutation();
+
+  // const handleLogout = async () => {
+  //   try {
+  //     const res = await logout({}).unwrap();
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.error("Failed to logout:", err);
+  //   }
+  // };
 
   return (
     <header className={s.header}>
@@ -56,6 +67,11 @@ const Header = () => {
                 </svg>
                 {token ? "Мій кабінет" : "Увійти"}
               </Link>
+              {/* {token && (
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
+              )} */}
             </nav>
           )}
       </div>
