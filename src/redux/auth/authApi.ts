@@ -19,6 +19,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
+
   tagTypes: ["auth"],
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -53,13 +54,21 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
+    // logout: builder.mutation({
+    //   query: () => ({
+    //     url: "logout",
+    //     method: "DELETE",
+    //   }),
+
+    //   invalidatesTags: ["auth"],
+    // }),
   }),
 });
-// users/resend-confirmation-code;
 
 export const {
   useRegisterMutation,
   useConfirmEmailMutation,
   useLoginMutation,
   useResendConfirmationCodeMutation,
+  // useLogoutMutation,
 } = authApi;
