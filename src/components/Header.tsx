@@ -45,6 +45,11 @@ const Header = () => {
           pathname !== "/confirm" && (
             <nav className={`${s.nav}  `}>
               {/* умова якщо є токен тоді показуємо box__input */}
+              {/* {token && (
+                <button type="button" onClick={handleLogout}>
+                  Logout
+                </button>
+              )} */}
               {token && (
                 <div className={s.box__input}>
                   <input type="text" className={s.input} placeholder="Пошук" />
@@ -67,11 +72,6 @@ const Header = () => {
                 </svg>
                 {token ? "Мій кабінет" : "Увійти"}
               </Link>
-              {/* {token && (
-                <button type="button" onClick={handleLogout}>
-                  Logout
-                </button>
-              )} */}
             </nav>
           )}
       </div>
