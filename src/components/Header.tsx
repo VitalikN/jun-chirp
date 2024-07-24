@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
+import SvgIcon from "./SvgIcon";
 
 const Header = () => {
   const pathname = usePathname();
@@ -50,16 +51,7 @@ const Header = () => {
                   Logout
                 </button>
               )}
-              {token && (
-                <div className={s.box__input}>
-                  <input type="text" className={s.input} placeholder="Пошук" />
-                  <button type="button" className={s.btn}>
-                    <svg width="18" height="18" className={s.chip}>
-                      <use href="/symbol-defs.svg#serch"></use>
-                    </svg>
-                  </button>
-                </div>
-              )}
+
               <Link
                 className={s.link}
                 href={
@@ -67,9 +59,7 @@ const Header = () => {
                   token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
                 }
               >
-                <svg width="27" height="33" className={s.chip}>
-                  <use href="/symbol-defs.svg#user"></use>
-                </svg>
+                <SvgIcon id="user" width={27} height={33} className={s.chip} />
                 {token ? "Мій кабінет" : "Увійти"}
               </Link>
             </nav>

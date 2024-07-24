@@ -7,6 +7,7 @@ import ToastContainer from "../ToastContainer";
 import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
 import Button from "../Button";
+import SvgIcon from "../SvgIcon";
 
 const SignInFormik = () => {
   const {
@@ -34,9 +35,7 @@ const SignInFormik = () => {
                 } `}
               >
                 Email
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
                 className={`${s.input} ${
@@ -54,9 +53,12 @@ const SignInFormik = () => {
                 <span className={s.warning}>!</span>
               ) : touched.email && !errors.email ? (
                 <p className={s.chip__checkbox__valid}>
-                  <svg width="12" height="10">
-                    <use href="/symbol-defs.svg#checkbox"></use>
-                  </svg>
+                  <SvgIcon
+                    id="checkbox"
+                    width={12}
+                    height={10}
+                    className={s.chip__checkbox__valid}
+                  />
                 </p>
               ) : null}
               <ErrorFeedback name="email" />
@@ -68,9 +70,7 @@ const SignInFormik = () => {
                 }`}
               >
                 Пароль
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
 
               <Field
@@ -90,18 +90,13 @@ const SignInFormik = () => {
                 <span className={s.warning}>!</span>
               )}
 
-              <svg
-                width="40"
-                height="40"
+              <SvgIcon
+                id={showPassword ? "eye-close" : "eye"}
+                width={40}
+                height={40}
                 className={s.chip__eye}
                 onClick={togglePasswordVisibility}
-              >
-                <use
-                  href={`/symbol-defs.svg#${
-                    showPassword ? "eye-close" : "eye"
-                  }`}
-                ></use>
-              </svg>
+              />
 
               <ErrorFeedback name="password" />
             </div>
@@ -113,9 +108,12 @@ const SignInFormik = () => {
                   name="rememberMe"
                   className={s.checkbox}
                 />
-                <svg width="14" height="12" className={s.chip__checkbox}>
-                  <use href="/symbol-defs.svg#checkbox"></use>
-                </svg>
+                <SvgIcon
+                  id="checkbox"
+                  width={14}
+                  height={12}
+                  className={s.chip__checkbox}
+                />
                 Запам`ятати мене
               </label>
             </div>
