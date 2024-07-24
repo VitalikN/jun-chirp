@@ -63,12 +63,12 @@ const authSlice = createSlice({
         (state, { payload }) => {
           state.user = payload.user;
         }
-      );
-    // .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-    //   console.log("Logout fulfilled, resetting state");
+      )
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        console.log("Logout fulfilled, resetting state");
 
-    //   state.user = initialState.user;
-    // });
+        state.user = initialState.user;
+      });
   },
 });
 

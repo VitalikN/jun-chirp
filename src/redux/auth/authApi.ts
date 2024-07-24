@@ -56,14 +56,14 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
-    // logout: builder.mutation({
-    //   query: () => ({
-    //     url: "auth/logout",
-    //     method: "DELETE",
-    //   }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "auth/logout",
+        method: "DELETE",
+      }),
 
-    //   invalidatesTags: ["auth"],
-    // }),
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
 
@@ -72,5 +72,5 @@ export const {
   useConfirmEmailMutation,
   useLoginMutation,
   useResendConfirmationCodeMutation,
-  // useLogoutMutation,
+  useLogoutMutation,
 } = authApi;
