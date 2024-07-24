@@ -37,9 +37,6 @@ const SignIn = () => {
           <p className={s.text}>Увійти за допомогою</p>
           <div className={s.link__group}>
             <Link href="#" className={s.link__icons}>
-              <svg width="50" height="50" className={s.chip__google}>
-                <use href="/symbol-defs.svg#google"></use>
-              </svg>
               <SvgIcon
                 id="google"
                 width={50}

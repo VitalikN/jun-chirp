@@ -47,22 +47,21 @@ const authSlice = createSlice({
         authApi.endpoints.register.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-        }
+        },
       )
 
       .addMatcher(
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.user.accessToken = payload.accessToken;
-        }
+        },
       )
 
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-        }
+        },
       )
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         console.log("Logout fulfilled, resetting state");
@@ -74,7 +73,7 @@ const authSlice = createSlice({
 
 const persisteAuthReducer = persistReducer(
   authPersistConfig,
-  authSlice.reducer
+  authSlice.reducer,
 );
 
 export const { clearToken } = authSlice.actions;
