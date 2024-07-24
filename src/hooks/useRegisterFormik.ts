@@ -45,6 +45,7 @@ const useRegisterFormik = () => {
       }).unwrap();
 
       resetForm();
+      setBackendError(null);
     } catch (error) {
       const customError = error as customError;
       console.log("Error:", customError);
@@ -64,18 +65,17 @@ const useRegisterFormik = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
+  const togglePasswordVisibility = (type: "password" | "confirmPassword") => {
+    if (type === "password") {
+      setShowPassword(!showPassword);
+    } else if (type === "confirmPassword") {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
   };
 
   return {
     handleSubmit,
     togglePasswordVisibility,
-    toggleConfirmPasswordVisibility,
     showPassword,
     showConfirmPassword,
     isLoading,
