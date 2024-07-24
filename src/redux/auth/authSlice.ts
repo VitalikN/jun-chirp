@@ -53,7 +53,7 @@ const authSlice = createSlice({
       .addMatcher(
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
-          state.user = payload.user;
+          state.user = payload;
         },
       )
 
