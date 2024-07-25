@@ -3,7 +3,7 @@
 .container {
   width: 100%;
   margin: 0 auto;
-  @include mediaQuery(320px) {
+  @include mediaQuery(375px) {
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -12,6 +12,16 @@
     padding-right: 24px;
   }
   @include mediaQuery(1280px) {
-    width: 1280px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @include mediaQuery(1536px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  @include mediaQuery(1920px) {
+    padding-left: 60px;
+    padding-right: 60px;
+    width: 1920px;
   }
 }

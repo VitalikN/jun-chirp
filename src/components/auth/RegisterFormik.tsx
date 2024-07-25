@@ -48,8 +48,8 @@ const RegisterFormik = () => {
                   touched.userName && errors.userName
                     ? s.invalid
                     : touched.userName && !errors.userName
-                    ? s.valid
-                    : ""
+                      ? s.valid
+                      : ""
                 }`}
                 type="text"
                 name="userName"
@@ -81,8 +81,8 @@ const RegisterFormik = () => {
                   (touched.email && errors.email) || backendError
                     ? s.invalid
                     : touched.email && !errors.email
-                    ? s.valid
-                    : ""
+                      ? s.valid
+                      : ""
                 }`}
                 type="email"
                 name="email"
@@ -112,8 +112,8 @@ const RegisterFormik = () => {
                   touched.password && errors.password
                     ? s.invalid
                     : touched.password && !errors.password
-                    ? s.valid
-                    : ""
+                      ? s.valid
+                      : ""
                 }`}
                 name="password"
                 type={showPassword ? "text" : "password"}
@@ -149,8 +149,8 @@ const RegisterFormik = () => {
                   touched.confirmPassword && errors.confirmPassword
                     ? s.invalid
                     : touched.confirmPassword && !errors.confirmPassword
-                    ? s.valid
-                    : ""
+                      ? s.valid
+                      : ""
                 }`}
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
@@ -184,8 +184,16 @@ const RegisterFormik = () => {
                   className={s.chip__checkbox}
                 />
                 <p className={s.text}>
-                  Я погоджуюсь з<span> Умовами використання </span> та
-                  <span> Політикою конфіденційності </span>
+                  Я погоджуюсь з
+                  <span className={s.text__chip__checkbox}>
+                    {" "}
+                    Умовами використання{" "}
+                  </span>{" "}
+                  та
+                  <span className={s.text__chip__checkbox}>
+                    {" "}
+                    Політикою конфіденційності{" "}
+                  </span>
                 </p>
               </label>
               {touched.rememberMe && errors.rememberMe && (
@@ -220,8 +228,8 @@ const RegisterFormik = () => {
                   errors.rememberMe
                     ? " "
                     : backendError
-                    ? s.invalid
-                    : s.valid
+                      ? s.invalid
+                      : s.valid
                 }`}
                 type="submit"
                 isDisabled={!dirty || !isValid || isLoading}

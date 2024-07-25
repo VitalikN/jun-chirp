@@ -12,12 +12,12 @@
 
 .link__sign_in {
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }
 .link__register {
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }
 .form {
@@ -37,11 +37,12 @@
 }
 .label {
   position: absolute;
-
+  color: var(--color);
   top: -11px;
   left: 11px;
-  background: #fff;
-  padding: 0 4px;
+  background: var(--background-color);
+  padding: 0 12px;
+  border-bottom-left-radius: 10px;
   @include font(12px, 2vw, 13px, 400, 15px);
   &.invalid {
     color: #b3261e;
@@ -50,20 +51,23 @@
 .input {
   width: 100%;
   border: var(--border);
-  border-radius: 12px;
-  padding: 4px 25px 4px 16px;
+  border-radius: var(--border-radius);
+  padding: 4px 40px 4px 16px;
   outline: none;
   background-color: transparent;
   @include font(14px, 2vw, 16px, 400, 46px);
-  &:focus {
-    border-color: #0033ff;
-  }
+  color: var(--color);
+  // &:focus {
+  // border-color: #0033ff;
+  // }
 
   &.valid {
     border-color: #33cc00;
   }
 
   &.invalid {
+    padding-right: 96px;
+    color: var(--text-color);
     border-color: #b3261e;
   }
 }
@@ -81,7 +85,12 @@
   right: 0;
   top: 8px;
   cursor: pointer;
+  fill: var(--text-color);
 }
+.warning + .chip__eye {
+  right: 49px;
+}
+
 .form__box__checkbox {
   padding-bottom: 24px;
 }
@@ -126,13 +135,13 @@
 .warning {
   position: absolute;
   top: 18px;
-  right: -30px;
+  right: 14px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #b3261e;
   @include flexCenter();
-  color: #fff;
+  color: var(--text-color);
 }
 .chip__checkbox__valid {
   position: absolute;
@@ -153,11 +162,11 @@
 .styledBtn {
   padding: 10px 20px 10px 20px;
   background: #616161;
-  color: #ffffff;
-  border-radius: 12px;
+  color: var(--text-color);
+  border-radius: var(--border-radius);
   border: none;
   outline: none;
-  width: 192px;
+  // width: 192px;
   margin: 0 auto;
   @include font(14px, 2vw, 16px, 400, 19px);
 
@@ -203,6 +212,6 @@
   @include font(14px, 2vw, 16px, 400, 19px);
 
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }

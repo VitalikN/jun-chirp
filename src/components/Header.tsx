@@ -39,7 +39,13 @@ const Header = () => {
           <Logo />
         </Link>
         <Link href="/" className={s.text__link}>
-          Твій старт в <span className={s.text__link__chip}>ІТ</span>
+          Твій старт в
+          <SvgIcon
+            id="it"
+            width={73}
+            height={64}
+            className={s.text__link__chip}
+          />
         </Link>
         {pathname !== "/sign_in" &&
           pathname !== "/register" &&
@@ -59,8 +65,8 @@ const Header = () => {
                   token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
                 }
               >
-                <SvgIcon id="user" width={27} height={33} className={s.chip} />
-                {token ? "Мій кабінет" : "Увійти"}
+                {/* <SvgIcon id="user" width={27} height={33} className={s.chip} /> */}
+                {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
               </Link>
             </nav>
           )}
