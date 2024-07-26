@@ -2,18 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { authApi } from "./authApi";
-
-export interface IUser {
-  userName: string | null;
-  email: string | null;
-  id: number | null;
-  accessToken: string | null;
-  isConfirmed: boolean;
-}
-
-export interface IAuthState {
-  user: IUser;
-}
+import { IAuthState } from "@/utils/types/IUser";
 
 const authPersistConfig = {
   key: "auth",
@@ -53,7 +42,7 @@ const authSlice = createSlice({
       .addMatcher(
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
-          state.user = payload;
+          state.user = payload.user;
         },
       )
 
