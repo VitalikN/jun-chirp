@@ -51,6 +51,7 @@
   outline: none;
   background-color: transparent;
   text-align: center;
+  color: var(--text-color);
   @include font(40px, 2vw, 61px, 400, 71px);
   &:focus {
     border-color: #0033ff;

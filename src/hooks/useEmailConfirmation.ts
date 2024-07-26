@@ -37,7 +37,7 @@ const useEmailConfirmation = () => {
   }, []);
 
   useEffect(() => {
-    if (email === null) {
+    if (!email) {
       pushRouter("/register");
     }
   }, [email, pushRouter]);
@@ -92,7 +92,7 @@ const useEmailConfirmation = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        }
+        },
       );
       return;
     }
@@ -108,7 +108,7 @@ const useEmailConfirmation = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        }
+        },
       );
       return;
     }
@@ -149,9 +149,9 @@ const useEmailConfirmation = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       const res = await confirm({ email, code: values.code }).unwrap();
-      console.log(res.accessToken);
+      console.log(res.user.accessToken);
 
-      if (res.accessToken) {
+      if (res.user.accessToken) {
         setTimeLeft(0);
         setCooldown(null);
         localStorage.removeItem("resendCooldown");
@@ -195,6 +195,7 @@ const useEmailConfirmation = () => {
     handleSubmit,
     handleResendCode,
     formatTime,
+    pushRouter,
   };
 };
 

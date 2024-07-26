@@ -22,9 +22,17 @@ const EmailConfirmation = () => {
     handleResendCode,
     formatTime,
     backendError,
+    // pushRouter,
   } = useEmailConfirmation();
 
   const { inputRefs, handleChange, handlePaste } = useCodeInput();
+  console.log(email);
+
+  // // useEffect(() => {
+  // if (email === null || " ") {
+  //   pushRouter("/register");
+  // }
+  // // }, [email, pushRouter]);
 
   return (
     <section className={s.section}>
@@ -38,7 +46,7 @@ const EmailConfirmation = () => {
         <p className={s.timer}>
           {cooldown !== null
             ? `Кнопка стане доступною для нового запиту, а код залишиться активним ще   ${formatTime(
-                cooldown
+                cooldown,
               )}.`
             : `Код активний ще ${formatTime(timeLeft)}.`}
         </p>
@@ -84,8 +92,8 @@ const EmailConfirmation = () => {
                   (touched.code && errors.code) || backendError
                     ? s.invalid
                     : touched.code && !errors.code
-                    ? s.valid
-                    : ""
+                      ? s.valid
+                      : ""
                 }
               ${backendError ? s.invalid__backendError : ""}`}
                 type="submit"

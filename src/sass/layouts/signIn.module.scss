@@ -57,9 +57,20 @@
   background-color: transparent;
   @include font(14px, 2vw, 16px, 400, 46px);
   color: var(--color);
+
   // &:focus {
   // border-color: #0033ff;
   // }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    transition:
+      background-color 600000s 0s,
+      color 600000s 0s;
+  }
+  &[data-autocompleted] {
+    background-color: transparent !important;
+  }
 
   &.valid {
     border-color: #33cc00;
