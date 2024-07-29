@@ -14,18 +14,16 @@ import {
 } from "redux-persist";
 
 import persisteAuthReducer from "./auth/authSlice";
-// import { authApi } from "./auth/authApi";
 import mainApi from "./mainApi";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "token", "user"],
+  whitelist: ["auth", "accessToken", "user"],
 };
 
 const rootReducer = combineReducers({
   auth: persisteAuthReducer,
-  // [authApi.reducerPath]: authApi.reducer,
   [mainApi.reducerPath]: mainApi.reducer,
 });
 

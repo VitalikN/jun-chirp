@@ -7,7 +7,7 @@ import { IAuthState } from "@/utils/types/IUser";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "user"],
+  whitelist: ["accessToken", "user"],
 };
 
 const initialState: IAuthState = {
