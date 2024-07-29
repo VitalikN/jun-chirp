@@ -27,6 +27,9 @@ const authSlice = createSlice({
     clearToken: () => {
       return { ...initialState };
     },
+    tokenReceived: (state, { payload }) => {
+      state.user.accessToken = payload.accessToken;
+    },
   },
 
   extraReducers: (builder) => {
@@ -36,21 +39,21 @@ const authSlice = createSlice({
         authApi.endpoints.register.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-        },
+        }
       )
 
       .addMatcher(
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-        },
+        }
       )
 
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-        },
+        }
       )
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         console.log("Logout fulfilled, resetting state");
@@ -62,8 +65,8 @@ const authSlice = createSlice({
 
 const persisteAuthReducer = persistReducer(
   authPersistConfig,
-  authSlice.reducer,
+  authSlice.reducer
 );
 
-export const { clearToken } = authSlice.actions;
+export const { clearToken, tokenReceived } = authSlice.actions;
 export default persisteAuthReducer;
