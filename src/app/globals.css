@@ -4,13 +4,24 @@
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --background-color: #141416;
+  --color: #fafafa;
 
-  --border-radius: 30px;
-  --border: 2px solid #228b22;
+  --border-radius: 40px;
+  --border: 1px solid #fafafa;
 
-  --text-color: #ffffff;
-  --color: #228b22;
+  --text-color: #fafafa;
+  --input-text-color-hover: #a7ef8d;
+
+  --text-color-valid: #228b22;
+  --text-color-dark: #141416;
+
+  --btn-text-color-hover: #141416;
+  --hover-background: #a7ef8d;
+
+  --invalid: #b3261e;
 }
+
+/* #B3261E */
 
 /* @media (prefers-color-scheme: dark) {
   :root {

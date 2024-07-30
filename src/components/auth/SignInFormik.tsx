@@ -42,8 +42,8 @@ const SignInFormik = () => {
                   (touched.email && errors.email) || backendError
                     ? s.invalid
                     : touched.email && !errors.email
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 type="email"
                 name="email"
@@ -51,13 +51,6 @@ const SignInFormik = () => {
               />
               {(touched.email && errors.email) || backendError ? (
                 <span className={s.warning}>!</span>
-              ) : touched.email && !errors.email ? (
-                <SvgIcon
-                  id="checkbox"
-                  width={12}
-                  height={10}
-                  className={s.chip__checkbox__valid}
-                />
               ) : null}
               <ErrorFeedback name="email" />
             </div>
@@ -76,8 +69,8 @@ const SignInFormik = () => {
                   (touched.password && errors.password) || backendError
                     ? s.invalid
                     : touched.password && !errors.password
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -151,12 +144,12 @@ const SignInFormik = () => {
                 errors.password
                   ? ""
                   : !touched.email ||
-                      errors.email ||
-                      !touched.password ||
-                      errors.password ||
-                      backendError
-                    ? s.invalid
-                    : s.valid
+                    errors.email ||
+                    !touched.password ||
+                    errors.password ||
+                    backendError
+                  ? s.invalid
+                  : s.valid
               }`}
               type="submit"
               isDisabled={!dirty || !isValid || isLoading}
