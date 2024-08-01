@@ -8,6 +8,7 @@ import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
 import Button from "../Button";
 import SvgIcon from "../SvgIcon";
+import Loader from "../Loader";
 
 const SignInFormik = () => {
   const {
@@ -112,36 +113,14 @@ const SignInFormik = () => {
               <div className={s.error__backend}>{backendError}</div>
             )}
 
-            {/* <button
-              className={`${s.styledBtn} ${
-                (touched.password && errors.password) ||
-                (touched.email && errors.email) ||
-                backendError
-                  ? s.invalid
-                  : (touched.password && !errors.password) ||
-                    (touched.email && errors.email)
-                  ? s.valid
-                  : ""
-              }`}
-              type="submit"
-              // isDisabled={!dirty || !isValid || isLoading}
-            >
-              {isLoading ? "Loading...." : "Увійти"}
-              {(touched.password && errors.password) ||
-              (touched.email && errors.email) ? (
-                <span className={s.warning}>!</span>
-              ) : (
-                ""
-              )}
-            </button> */}
-
             <Button
-              title={isLoading ? "Loading...." : "Увійти"}
               className={`${s.styledBtn} ${
-                !touched.email ||
-                errors.email ||
-                !touched.password ||
-                errors.password
+                isLoading
+                  ? s.styledBtn
+                  : !touched.email ||
+                    errors.email ||
+                    !touched.password ||
+                    errors.password
                   ? ""
                   : !touched.email ||
                     errors.email ||
@@ -150,10 +129,20 @@ const SignInFormik = () => {
                     backendError
                   ? s.invalid
                   : s.valid
-              }`}
+              }
+              `}
               type="submit"
               isDisabled={!dirty || !isValid || isLoading}
-            />
+            >
+              {isLoading ? (
+                <>
+                  Увійти
+                  <Loader />
+                </>
+              ) : (
+                "Увійти"
+              )}
+            </Button>
           </Form>
         )}
       </Formik>

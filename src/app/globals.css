@@ -10,13 +10,15 @@
   --border: 1px solid #fafafa;
 
   --text-color: #fafafa;
-  --input-text-color-hover: #a7ef8d;
+  --input-text-color-hover: #228b22;
 
   --text-color-valid: #228b22;
   --text-color-dark: #141416;
 
+  --btn-background: #228b22;
   --btn-text-color-hover: #141416;
-  --hover-background: #a7ef8d;
+  --hover-background: #228b22;
+  --hover-text-color: #228b22;
 
   --invalid: #b3261e;
 }

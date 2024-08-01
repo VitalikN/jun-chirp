@@ -6,6 +6,7 @@ import ToastContainer from "../ToastContainer";
 import s from "@/sass/layouts/register.module.scss";
 import Button from "../Button";
 import SvgIcon from "../SvgIcon";
+import Loader from "../Loader";
 
 const RegisterFormik = () => {
   const {
@@ -48,8 +49,8 @@ const RegisterFormik = () => {
                   touched.userName && errors.userName
                     ? s.invalid
                     : touched.userName && !errors.userName
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 type="text"
                 name="userName"
@@ -81,8 +82,8 @@ const RegisterFormik = () => {
                   (touched.email && errors.email) || backendError
                     ? s.invalid
                     : touched.email && !errors.email
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 type="email"
                 name="email"
@@ -112,8 +113,8 @@ const RegisterFormik = () => {
                   touched.password && errors.password
                     ? s.invalid
                     : touched.password && !errors.password
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 name="password"
                 type={showPassword ? "text" : "password"}
@@ -149,8 +150,8 @@ const RegisterFormik = () => {
                   touched.confirmPassword && errors.confirmPassword
                     ? s.invalid
                     : touched.confirmPassword && !errors.confirmPassword
-                      ? s.valid
-                      : ""
+                    ? s.valid
+                    : ""
                 }`}
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
@@ -214,7 +215,6 @@ const RegisterFormik = () => {
                 isDisabled={!dirty || isLoading}
               />
               <Button
-                title={isLoading ? "Loading...." : "Зареєструватись"}
                 className={`${s.styledBtn} ${
                   !touched.userName ||
                   errors.userName ||
@@ -228,12 +228,21 @@ const RegisterFormik = () => {
                   errors.rememberMe
                     ? " "
                     : backendError
-                      ? s.invalid
-                      : s.valid
+                    ? s.invalid
+                    : s.valid
                 }`}
                 type="submit"
                 isDisabled={!dirty || !isValid || isLoading}
-              />
+              >
+                {isLoading ? (
+                  <>
+                    Зареєструватись
+                    <Loader />
+                  </>
+                ) : (
+                  "Зареєструватись"
+                )}
+              </Button>
             </div>
           </Form>
         )}
