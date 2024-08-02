@@ -1,4 +1,4 @@
-import s from "../../sass/layouts/resetPassword.module.scss";
+import s from "@/sass/layouts/resetPassword.module.scss";
 
 const ResetPassword = () => {
   return (

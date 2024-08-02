@@ -1,4 +1,4 @@
-import s from "../sass/layouts/projectStatistics.module.scss";
+import s from "@/sass/layouts/projectStatistics.module.scss";
 
 const ProjectStatistics = () => {
   return (

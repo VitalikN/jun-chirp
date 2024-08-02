@@ -1,4 +1,4 @@
-import s from "../sass/layouts/whatWeOffer.module.scss";
+import s from "@/sass/layouts/whatWeOffer.module.scss";
 
 const WhatWeOffer = () => {
   return (

@@ -1,4 +1,4 @@
-import s from "../../sass/layouts/requestPasswordReset.module.scss";
+import s from "@/sass/layouts/requestPasswordReset.module.scss";
 
 const RequestPasswordReset = () => {
   return (

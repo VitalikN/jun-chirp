@@ -1,4 +1,4 @@
-import s from "../sass/layouts/loader.module.scss";
+import s from "@/sass/layouts/loader.module.scss";
 
 const Loader = () => {
   return <span className={s.loader}></span>;

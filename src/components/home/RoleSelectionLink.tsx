@@ -1,4 +1,4 @@
-import s from "../sass/layouts/roleSelectionLink.module.scss";
+import s from "@/sass/layouts/roleSelectionLink.module.scss";
 const RoleSelectionLink = () => {
   return (
     <section className={s.section}>
