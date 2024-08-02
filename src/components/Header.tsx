@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import s from "@/sass/layouts/header.module.scss";
-import Logo from "./Logo";
+import Logo from "./ui/Logo";
 import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
-import SvgIcon from "./SvgIcon";
+import SvgIcon from "./ui/SvgIcon";
 
 const Header = () => {
   const pathname = usePathname();

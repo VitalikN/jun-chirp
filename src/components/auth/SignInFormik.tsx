@@ -2,13 +2,13 @@ import { Field, Form, Formik } from "formik";
 
 import useSignInFormik from "@/hooks/useSignInFormik";
 import ErrorFeedback from "./ErrorFeedback";
-import ToastContainer from "../ToastContainer";
+import ToastContainer from "../ui/ToastContainer";
 
 import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
-import Button from "../Button";
-import SvgIcon from "../SvgIcon";
-import Loader from "../Loader";
+import Button from "../ui/Button";
+import SvgIcon from "../ui/SvgIcon";
+import Loader from "../ui/Loader";
 
 const SignInFormik = () => {
   const {

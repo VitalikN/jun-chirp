@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
 import s from "@/sass/layouts/signIn.module.scss";
-import SvgIcon from "../SvgIcon";
+import SvgIcon from "../ui/SvgIcon";
 
 const SignIn = () => {
   const pathname = usePathname();
