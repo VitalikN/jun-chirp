@@ -7,7 +7,9 @@
   --color: #fafafa;
 
   --border-radius: 40px;
+  --border-color: #228b22;
   --border: 1px solid #fafafa;
+  --border-btn: 2px solid #228b22;
 
   --text-color: #fafafa;
   --input-text-color-hover: #228b22;
