@@ -1,4 +1,4 @@
-import s from "../sass/layouts/testimonials.module.scss";
+import s from "@/sass/layouts/testimonials.module.scss";
 
 const Testimonials = () => {
   return (

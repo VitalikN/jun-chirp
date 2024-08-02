@@ -1,4 +1,4 @@
-import s from "../sass/layouts/faqs.module.scss";
+import s from "@/sass/layouts/faqs.module.scss";
 
 const Faqs = () => {
   return (
