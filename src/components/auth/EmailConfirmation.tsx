@@ -6,10 +6,10 @@ import { Field, Form, Formik } from "formik";
 
 import useEmailConfirmation from "@/hooks/useEmailConfirmation";
 import { validationSchemaConfirm } from "@/utils/schema/validationSchemaConfirm";
-import ToastContainer from "../ToastContainer";
+import ToastContainer from "../ui/ToastContainer";
 
 import s from "@/sass/layouts/emailConfirmation.module.scss";
-import Button from "../Button";
+import Button from "../ui/Button";
 import useCodeInput from "@/hooks/useCodeInput";
 
 const EmailConfirmation = () => {

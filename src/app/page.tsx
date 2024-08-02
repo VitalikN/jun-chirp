@@ -1,11 +1,11 @@
-import Faqs from "@/components/Faqs";
+import Faqs from "@/components/home/Faqs";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import Hero from "@/components/home/Hero";
 import MyProfile from "@/components/MyProfile";
-import ProjectStatistics from "@/components/ProjectStatistics";
-import RoleSelectionLink from "@/components/RoleSelectionLink";
-import Testimonials from "@/components/Testimonials";
-import WhatWeOffer from "@/components/WhatWeOffer";
+import ProjectStatistics from "@/components/home/ProjectStatistics";
+import RoleSelectionLink from "@/components/home/RoleSelectionLink";
+import Testimonials from "@/components/home/Testimonials";
+import WhatWeOffer from "@/components/home/WhatWeOffer";
 
 export default function Home() {
   return (
