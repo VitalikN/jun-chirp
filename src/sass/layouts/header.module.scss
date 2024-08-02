@@ -7,99 +7,74 @@
 .container__header {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
+  border-bottom: var(--border);
+  border-color: var(--border-color);
+  padding: 15px 0;
+
+  @include mediaQuery(1280px) {
+    padding: 30px 0;
+  }
 }
 
-.logo__link {
-  position: absolute;
-}
-.text__link {
-  margin: 0 auto;
-  // padding: 48px 0;
-  @include font(27px, 4vw, 68px, 400, 79px);
-  @include flex();
-  gap: 24px;
-  // @include mediaQuery(768px) {
-  //   @include font(40px, 4vw, 48px, 400, 56px);
-  // }
-  // @include mediaQuery(1280px) {
-  //   @include font(48px, 4vw, 68px, 400, 56px);
-  // }
-  // @include mediaQuery(1536px) {
-  //   @include font(48px, 4vw, 68px, 400, 56px);
-  // }
-  // @include mediaQuery(1920px) {
-  //   @include fontSize(68px, 400, 79px);
-  // }
+@include mediaMaxQuery(1279px) {
+  .container__header {
+    display: grid;
+    grid-auto-flow: column;
+
+    gap: 16px;
+    grid-template-areas:
+      "logo__link nav"
+      "text__link text__link";
+  }
+  .logo__link {
+    justify-self: start;
+    align-self: center;
+    grid-area: logo__link;
+  }
+  .nav {
+    grid-area: nav;
+    justify-self: end;
+    align-self: center;
+  }
+  .text__link {
+    grid-area: text__link;
+    align-self: center;
+    justify-self: center;
+  }
 }
 
 .text__link__chip {
-  width: 44px;
-  height: 38px;
-  @include mediaQuery(768px) {
-    width: 56px;
-    height: 50px;
-  }
+  width: 100%;
+  max-width: 300px;
+
   @include mediaQuery(1280px) {
-    // width: 73px;
-    // height: 64px;
-  }
-  @include mediaQuery(1536px) {
-    // width: 73px;
-    // height: 64px;
-  }
-  @include mediaQuery(1920px) {
-    width: 73px;
-    height: 64px;
+    max-width: 438px;
   }
 }
 .nav {
   display: flex;
   gap: 16px;
-}
-// .box__input {
-//   border: var(--border);
-//   border-radius: 12px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding-right: 20px;
-//   max-width: 295px;
-//   @include mediaQuery(1280px) {
-//     width: 295px;
-//   }
-// }
-// .input {
-//   background: transparent;
-//   outline: none;
-//   border: none;
-//   padding: 8px 20px 8px 20px;
 
-//   @include font(14px, 2vw, 16px, 400, 19px);
-//   &::placeholder {
-//     color: var(--text-color);
-//   }
-// }
-// .btn {
-//   background: transparent;
-//   outline: none;
-//   border: none;
-//   cursor: pointer;
-// }
-// .chip {
-//   transition: all 0.5s;
-//   &:focus,
-//   &:hover {
-//     scale: 1.15;
-//   }
-// }
+  @include mediaQuery(768px) {
+    width: 100%;
+    max-width: 315px;
+  }
+  @include mediaQuery(1280px) {
+    max-width: 336px;
+  }
+}
 
 .link {
+  width: 100%;
   @include flexCenter();
-  padding: 12px 22px 12px 22px;
+  padding: 10px 22px 10px 22px;
   background-color: #141416;
-  border: var(--border);
+  border: var(--border-btn);
 
   border-radius: 30px;
-  @include font(20px, 2vw, 32px, 400, 37px);
+  @include font(18px, 2vw, 18px, 400, 18px);
+  @include mediaMaxQuery(767px) {
+    display: none;
+  }
 }

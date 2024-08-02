@@ -1,0 +1,52 @@
+@import "../utils/container.scss";
+@import "../utils/mixins";
+
+.body-no-scroll {
+  overflow: hidden;
+}
+
+.burger__button {
+  @include mediaMaxQuery(767px) {
+    display: flex;
+  }
+  display: none;
+
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  gap: 6px;
+
+  &:hover::after {
+    bottom: -300%;
+  }
+}
+
+.line {
+  border-radius: 30px;
+
+  width: 100%;
+  height: 4px;
+  background: #228b22;
+
+  transition: transform 700ms ease, opacity 700ms ease, background 700ms;
+}
+
+.spin .line:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.spin .line:nth-child(2) {
+  opacity: 0;
+}
+
+.spin .line:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}

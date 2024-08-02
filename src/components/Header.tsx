@@ -7,6 +7,7 @@ import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
 import SvgIcon from "./ui/SvgIcon";
+import BurgerButton from "./BurgerButton";
 
 const Header = () => {
   const pathname = usePathname();
@@ -25,51 +26,48 @@ const Header = () => {
 
   return (
     <header className={s.header}>
-      <div className={`${s.container} ${s.container__header} `}>
-        <Link
-          href="/"
-          className={`${
-            pathname === "/sign_in" ||
-            pathname === "/register" ||
-            pathname === "/confirm"
-              ? s.logo__link
-              : ""
-          }`}
-        >
-          <Logo />
-        </Link>
-        <Link href="/" className={s.text__link}>
-          Твій старт в
-          <SvgIcon
-            id="it"
-            width={73}
-            height={64}
-            className={s.text__link__chip}
-          />
-        </Link>
-        {pathname !== "/sign_in" &&
-          pathname !== "/register" &&
-          pathname !== "/confirm" && (
-            <nav className={`${s.nav}  `}>
-              {/* умова якщо є токен тоді показуємо box__input */}
-              {token && (
-                <button type="button" onClick={handleLogout}>
-                  Logout
-                </button>
-              )}
+      <div className={`${s.container} `}>
+        <div className={` ${s.container__header} `}>
+          <Link href="/" className={s.logo__link}>
+            <Logo />
+          </Link>
+          <Link href="/" className={s.text__link}>
+            <SvgIcon
+              id="future-of-it"
+              width={438}
+              height={50}
+              className={s.text__link__chip}
+            />
+          </Link>
+          {pathname !== "/sign_in" &&
+            pathname !== "/register" &&
+            pathname !== "/confirm" && (
+              <nav className={`${s.nav}  `}>
+                {/* умова якщо є токен тоді показуємо box__input */}
+                {token && (
+                  <button type="button" onClick={handleLogout}>
+                    Logout
+                  </button>
+                )}
 
-              <Link
-                className={s.link}
-                href={
-                  // "/sign_in"
-                  token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
-                }
-              >
-                {/* <SvgIcon id="user" width={27} height={33} className={s.chip} /> */}
-                {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
-              </Link>
-            </nav>
-          )}
+                <Link
+                  className={s.link}
+                  href={
+                    // "/sign_in"
+                    token
+                      ? isConfirmed
+                        ? "/my_office"
+                        : "/confirm"
+                      : "/sign_in"
+                  }
+                >
+                  {/* <SvgIcon id="user" width={27} height={33} className={s.chip} /> */}
+                  {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
+                </Link>
+                <BurgerButton />
+              </nav>
+            )}
+        </div>
       </div>
     </header>
   );
