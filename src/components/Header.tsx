@@ -44,11 +44,6 @@ const Header = () => {
             pathname !== "/confirm" && (
               <nav className={`${s.nav}  `}>
                 {/* умова якщо є токен тоді показуємо box__input */}
-                {token && (
-                  <button type="button" onClick={handleLogout}>
-                    Logout
-                  </button>
-                )}
 
                 <Link
                   className={s.link}
@@ -65,6 +60,20 @@ const Header = () => {
                   {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
                 </Link>
                 <BurgerButton />
+                {token && (
+                  <button
+                    className={s.btn__exit}
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    <SvgIcon
+                      id="exit"
+                      width={25}
+                      height={20}
+                      className={s.exit__chip}
+                    />
+                  </button>
+                )}
               </nav>
             )}
         </div>

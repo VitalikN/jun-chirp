@@ -78,3 +78,15 @@
     display: none;
   }
 }
+.btn__exit {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px 5px 0;
+}
+.exit__chip {
+  width: 30px;
+  height: 25px;
+  fill: #33cc00;
+}
