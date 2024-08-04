@@ -16,10 +16,7 @@ export default function Home() {
       <WhatWeOffer />
       <Testimonials />
       <Faqs />
-
       <MyProfile />
-
-      <Footer />
     </>
   );
 }

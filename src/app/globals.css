@@ -18,6 +18,7 @@
   --text-color-dark: #141416;
 
   --btn-background: #228b22;
+  --btn-bg-confirm: #D4B000;
   --btn-text-color-hover: #141416;
   --hover-background: #228b22;
   --hover-text-color: #228b22;
@@ -48,9 +49,12 @@ body {
 body {
   background: var(--background-color);
   color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 main {
-  height: calc(100vh - 120px);
+  flex: 1;
 }
 
 a {
