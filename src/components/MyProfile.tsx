@@ -64,9 +64,9 @@ const MyProfile = () => {
             {menuItems.map((item, index) => (
               <li key={index} className={s.menu_item}>
                 <button
-                  className={`${s.menu_button} ${
+                  className={` ${
                     selectedMenu === item.id ? s.currentMenu : ""
-                  }`}
+                  } ${s.menu_button}`}
                   onClick={() => handleClick(item.id)}
                 >
                   <svg className={s.nav__icons_svg} width="24" height="24">

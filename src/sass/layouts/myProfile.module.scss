@@ -10,6 +10,29 @@
   display: flex;
 }
 
+.menu_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu_button {
+  width: 276px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 .currentMenu {
-  background: red;
+  background: #8ef569;
+  padding-left: 12px;
+}
+
+.nav__icons_svg {
+  margin-right: 10px;
 }
