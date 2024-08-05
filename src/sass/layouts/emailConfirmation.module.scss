@@ -51,6 +51,7 @@
   outline: none;
   background-color: transparent;
   text-align: center;
+  color: var(--text-color);
   @include font(40px, 2vw, 61px, 400, 71px);
   &:focus {
     border-color: #0033ff;
@@ -79,7 +80,7 @@
 .styledBtn {
   padding: 10px 20px 10px 20px;
   background-color: #616161;
-  color: #ffffff;
+  color: var(--text-color);
   border-radius: 12px;
   border: none;
   outline: none;

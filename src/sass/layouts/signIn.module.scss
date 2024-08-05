@@ -2,61 +2,90 @@
 @import "../utils/mixins";
 
 .section {
-  padding-top: 55px;
+  padding: 40px 0;
+  @include mediaQuery(768px) {
+    padding: 74px 0;
+  }
+
+  @include mediaQuery(1536px) {
+    padding: 94px 0;
+  }
+  @include mediaQuery(1920px) {
+    padding: 114px 0;
+  }
 }
 .box__link {
   @include flexCenter();
   gap: 8px;
-  @include font(20px, 2vw, 24px, 400, 29px);
+  @include font(22px, 2vw, 25px, 400, 25px);
 }
 
 .link__sign_in {
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }
 .link__register {
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }
 .form {
   display: flex;
   flex-direction: column;
+  gap: 30px;
 
-  padding-top: 24px;
-  max-width: 400px;
+  padding-top: 52px;
   margin: 0 auto;
+
+  max-width: 400px;
+  @include mediaQuery(768px) {
+    gap: 35px;
+  }
+  @include mediaQuery(1280px) {
+    max-width: 530px;
+    gap: 48px;
+  }
+  @include mediaQuery(1536px) {
+  }
+  @include mediaQuery(1920px) {
+    max-width: 584px;
+  }
 }
 
 .form__box {
   position: relative;
 }
-.nth__child {
-  margin: 25px 0 20px;
-}
+
 .label {
   position: absolute;
-
+  color: var(--color);
   top: -11px;
   left: 11px;
-  background: #fff;
-  padding: 0 4px;
-  @include font(12px, 2vw, 13px, 400, 15px);
+  background: var(--background-color);
+  padding: 0 18px 0 12px;
+  border-bottom-left-radius: 10px;
+  @include font(14px, 2vw, 18px, 400, 18px);
   &.invalid {
-    color: #b3261e;
+    color: var(--invalid);
   }
 }
 .input {
   width: 100%;
   border: var(--border);
-  border-radius: 12px;
-  padding: 4px 25px 4px 16px;
+  border-radius: var(--border-radius);
+  padding: 12px 40px 12px 16px;
   outline: none;
   background-color: transparent;
-  @include font(14px, 2vw, 16px, 400, 46px);
-  &:focus {
-    border-color: #0033ff;
+  @include font(16px, 2vw, 20px, 400, 20px);
+  color: var(--text-color);
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  &[data-autocompleted] {
+    background-color: transparent !important;
   }
 
   &.valid {
@@ -64,35 +93,48 @@
   }
 
   &.invalid {
-    border-color: #b3261e;
+    padding-right: 96px;
+    color: var(--text-color);
+    border-color: var(--invalid);
+  }
+  &:hover {
+    border-color: #33cc00;
   }
 }
 
 .error {
   position: absolute;
-  bottom: -15px;
+  bottom: -18px;
   left: 0;
-  color: #b3261e;
-  @include font(9px, 2vw, 12px, 400, 12px);
+  color: var(--invalid);
+  @include font(10px, 2vw, 12px, 400, 12px);
+
+  @include mediaQuery(1280px) {
+    @include font(12px, 2vw, 14px, 400, 14px);
+  }
+  @include mediaQuery(1536px) {
+    @include font(14px, 2vw, 16px, 400, 16px);
+  }
 }
 
 .chip__eye {
   position: absolute;
-  right: 0;
-  top: 8px;
+  right: 4px;
+  top: 4px;
   cursor: pointer;
+  fill: var(--text-color);
 }
-.form__box__checkbox {
-  padding-bottom: 24px;
+.warning + .chip__eye {
+  right: 49px;
 }
 
 .checkboxLabel {
   position: relative;
-
+  font-family: Roboto;
   display: flex;
   align-items: center;
   cursor: pointer;
-  @include font(14px, 2vw, 16px, 400, 19px);
+  @include font(16px, 2vw, 16px, 400, 16px);
 
   .checkbox {
     appearance: none;
@@ -125,14 +167,14 @@
 
 .warning {
   position: absolute;
-  top: 18px;
-  right: -30px;
+  top: 14px;
+  right: 14px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #b3261e;
+  background-color: var(--invalid);
   @include flexCenter();
-  color: #fff;
+  color: var(--text-color-dark);
 }
 .chip__checkbox__valid {
   position: absolute;
@@ -145,35 +187,44 @@
   height: 21px;
 }
 .error__backend {
-  color: #b3261e;
+  color: var(--invalid);
   text-align: center;
-  margin-bottom: 24px;
   @include font(14px, 2vw, 20px, 400, 19px);
 }
+
 .styledBtn {
-  padding: 10px 20px 10px 20px;
+  @include flexCenter();
+  gap: 28px;
+  cursor: pointer;
   background: #616161;
-  color: #ffffff;
-  border-radius: 12px;
-  border: none;
+  color: var(--text-color);
+  border: var(--border);
+
+  border-radius: var(--border-radius);
   outline: none;
-  width: 192px;
+  width: 280px;
   margin: 0 auto;
   @include font(14px, 2vw, 16px, 400, 19px);
-
+  padding: 10px 20px;
+  transition: all 0.3s;
   .warning {
     position: static;
     background-color: #fff;
-    color: #b3261e;
+    color: var(--invalid);
   }
   &.invalid {
-    background-color: #b3261e;
+    background-color: var(--invalid);
     @include flexCenter();
     gap: 8px;
   }
 
   &.valid {
-    background-color: green;
+    border: none;
+    background-color: var(--btn-background);
+  }
+  &:hover {
+    background-color: var(--hover-background);
+    box-shadow: 0px 0px 8px #fff;
   }
 }
 
@@ -183,7 +234,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 24px;
 }
 .text {
   @include font(14px, 2vw, 16px, 400, 19px);
@@ -193,16 +244,11 @@
   align-items: center;
   gap: 32px;
 }
-// .link__icons {
-// }
-// .chip__google {
-// }
-// .chip__linkedin {
-// }
+
 .link__forgot__password {
   @include font(14px, 2vw, 16px, 400, 19px);
 
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   text-decoration-thickness: 1px;
 }

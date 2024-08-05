@@ -2,15 +2,17 @@ import { Field, Form, Formik } from "formik";
 import useRegisterFormik from "@/hooks/useRegisterFormik";
 import { validationSchemaRegister } from "@/utils/schema/validationRegister";
 import ErrorFeedback from "./ErrorFeedback";
-import ToastContainer from "../ToastContainer";
+import ToastContainer from "../ui/ToastContainer";
 import s from "@/sass/layouts/register.module.scss";
-import Button from "../Button";
+import Button from "../ui/Button";
+import SvgIcon from "../ui/SvgIcon";
+import Loader from "../ui/Loader";
 
 const RegisterFormik = () => {
   const {
     handleSubmit,
     togglePasswordVisibility,
-    toggleConfirmPasswordVisibility,
+    // toggleConfirmPasswordVisibility,
     showPassword,
     showConfirmPassword,
     isLoading,
@@ -40,9 +42,7 @@ const RegisterFormik = () => {
                 } `}
               >
                 Ім`я
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
                 className={`${s.input} ${
@@ -60,9 +60,7 @@ const RegisterFormik = () => {
                 <span className={s.warning}>!</span>
               ) : touched.userName && !errors.userName ? (
                 <p className={s.chip__checkbox__valid}>
-                  <svg width="12" height="10">
-                    <use href="/symbol-defs.svg#checkbox"></use>
-                  </svg>
+                  <SvgIcon id="checkbox" width={12} height={10} />
                 </p>
               ) : null}
               <ErrorFeedback name="userName" />
@@ -77,9 +75,7 @@ const RegisterFormik = () => {
                 } `}
               >
                 Email
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
                 className={`${s.input} ${
@@ -97,9 +93,7 @@ const RegisterFormik = () => {
                 <span className={s.warning}>!</span>
               ) : touched.email && !errors.email ? (
                 <p className={s.chip__checkbox__valid}>
-                  <svg width="12" height="10">
-                    <use href="/symbol-defs.svg#checkbox"></use>
-                  </svg>
+                  <SvgIcon id="checkbox" width={12} height={10} />
                 </p>
               ) : null}
               <ErrorFeedback name="email" />
@@ -111,9 +105,7 @@ const RegisterFormik = () => {
                 }`}
               >
                 Пароль
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
 
               <Field
@@ -131,18 +123,13 @@ const RegisterFormik = () => {
               {touched.password && errors.password && (
                 <span className={s.warning}>!</span>
               )}
-              <svg
-                width="40"
-                height="40"
+              <SvgIcon
+                id={showPassword ? "eye-close" : "eye"}
+                width={40}
+                height={40}
                 className={s.chip__eye}
-                onClick={togglePasswordVisibility}
-              >
-                <use
-                  href={`/symbol-defs.svg#${
-                    showPassword ? "eye-close" : "eye"
-                  }`}
-                ></use>
-              </svg>
+                onClick={() => togglePasswordVisibility("password")}
+              />
 
               <ErrorFeedback name="password" />
             </div>
@@ -156,9 +143,7 @@ const RegisterFormik = () => {
                 }`}
               >
                 Повторити пароль
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
                 className={`${s.input} ${
@@ -175,18 +160,13 @@ const RegisterFormik = () => {
               {touched.confirmPassword && errors.confirmPassword && (
                 <span className={s.warning}>!</span>
               )}{" "}
-              <svg
-                width="40"
-                height="40"
+              <SvgIcon
+                id={showConfirmPassword ? "eye-close" : "eye"}
+                width={40}
+                height={40}
                 className={s.chip__eye}
-                onClick={toggleConfirmPasswordVisibility}
-              >
-                <use
-                  href={`/symbol-defs.svg#${
-                    showConfirmPassword ? "eye-close" : "eye"
-                  }`}
-                ></use>
-              </svg>
+                onClick={() => togglePasswordVisibility("confirmPassword")}
+              />
               <ErrorFeedback name="confirmPassword" />
             </div>
 
@@ -197,12 +177,24 @@ const RegisterFormik = () => {
                   name="rememberMe"
                   className={`${s.checkbox} `}
                 />
-                <svg width="14" height="12" className={`${s.chip__checkbox} `}>
-                  <use href="/symbol-defs.svg#checkbox"></use>
-                </svg>
+
+                <SvgIcon
+                  id="checkbox"
+                  width={14}
+                  height={12}
+                  className={s.chip__checkbox}
+                />
                 <p className={s.text}>
-                  Я погоджуюсь з<span> Умовами використання </span> та
-                  <span> Політикою конфіденційності </span>
+                  Я погоджуюсь з
+                  <span className={s.text__chip__checkbox}>
+                    {" "}
+                    Умовами використання{" "}
+                  </span>{" "}
+                  та
+                  <span className={s.text__chip__checkbox}>
+                    {" "}
+                    Політикою конфіденційності{" "}
+                  </span>
                 </p>
               </label>
               {touched.rememberMe && errors.rememberMe && (
@@ -223,7 +215,6 @@ const RegisterFormik = () => {
                 isDisabled={!dirty || isLoading}
               />
               <Button
-                title={isLoading ? "Loading...." : "Зареєструватись"}
                 className={`${s.styledBtn} ${
                   !touched.userName ||
                   errors.userName ||
@@ -242,7 +233,16 @@ const RegisterFormik = () => {
                 }`}
                 type="submit"
                 isDisabled={!dirty || !isValid || isLoading}
-              />
+              >
+                {isLoading ? (
+                  <>
+                    Зареєструватись
+                    <Loader />
+                  </>
+                ) : (
+                  "Зареєструватись"
+                )}
+              </Button>
             </div>
           </Form>
         )}
@@ -251,17 +251,3 @@ const RegisterFormik = () => {
   );
 };
 export default RegisterFormik;
-//
-//  className={`${s.styledBtn} ${
-//                 (!dirty ||
-//                   !isValid ||
-//                   isLoading ||
-//                   touched.userName && errors.userName ||
-//                   touched.email && errors.email ||
-//                   touched.password && errors.password ||
-//                   touched.confirmPassword && errors.confirmPassword ||
-//                   touched.rememberMe && errors.rememberMe ||
-//                   backendError)
-//                   ? s.invalid
-//                   : s.valid
-//               }`}

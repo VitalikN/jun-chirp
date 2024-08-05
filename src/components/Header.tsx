@@ -1,79 +1,82 @@
 "use client";
 import Link from "next/link";
 import s from "@/sass/layouts/header.module.scss";
-import Logo from "./Logo";
+import Logo from "./ui/Logo";
 import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
-// import { useLogoutMutation } from "@/redux/auth/authApi";
+import { useLogoutMutation } from "@/redux/auth/authApi";
+import SvgIcon from "./ui/SvgIcon";
+import BurgerButton from "./BurgerButton";
 
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
-  // const [logout] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
 
-  // const handleLogout = async () => {
-  //   try {
-  //     const res = await logout({}).unwrap();
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.error("Failed to logout:", err);
-  //   }
-  // };
+  const handleLogout = async () => {
+    try {
+      const res = await logout({}).unwrap();
+      console.log(res);
+    } catch (err) {
+      console.error("Failed to logout:", err);
+    }
+  };
 
   return (
     <header className={s.header}>
-      <div className={`${s.container} ${s.container__header} `}>
-        <Link
-          href="/"
-          className={`${
-            pathname === "/sign_in" ||
-            pathname === "/register" ||
-            pathname === "/confirm"
-              ? s.logo__link
-              : ""
-          }`}
-        >
-          <Logo />
-        </Link>
-        <Link href="/" className={s.text__link}>
-          Твій старт в <span className={s.text__link__chip}>ІТ</span>
-        </Link>
-        {pathname !== "/sign_in" &&
-          pathname !== "/register" &&
-          pathname !== "/confirm" && (
-            <nav className={`${s.nav}  `}>
-              {/* умова якщо є токен тоді показуємо box__input */}
-              {token && (
-                <div className={s.box__input}>
-                  <input type="text" className={s.input} placeholder="Пошук" />
-                  <button type="button" className={s.btn}>
-                    <svg width="18" height="18" className={s.chip}>
-                      <use href="/symbol-defs.svg#serch"></use>
-                    </svg>
+      <div className={`${s.container} `}>
+        <div className={` ${s.container__header} `}>
+          <Link href="/" className={s.logo__link}>
+            <Logo />
+          </Link>
+          <Link href="/" className={s.text__link}>
+            <SvgIcon
+              id="future-of-it"
+              width={438}
+              height={50}
+              className={s.text__link__chip}
+            />
+          </Link>
+          {pathname !== "/sign_in" &&
+            pathname !== "/register" &&
+            pathname !== "/confirm" && (
+              <nav className={`${s.nav}  `}>
+                {/* умова якщо є токен тоді показуємо box__input */}
+
+                <Link
+                  className={s.link}
+                  href={
+                    // "/sign_in"
+                    token
+                      ? isConfirmed
+                        ? "/my_office"
+                        : "/confirm"
+                      : "/sign_in"
+                  }
+                >
+                  {/* <SvgIcon id="user" width={27} height={33} className={s.chip} /> */}
+                  {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
+                </Link>
+                <BurgerButton />
+                {token && (
+                  <button
+                    className={s.btn__exit}
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    <SvgIcon
+                      id="exit"
+                      width={25}
+                      height={20}
+                      className={s.exit__chip}
+                    />
                   </button>
-                </div>
-              )}
-              <Link
-                className={s.link}
-                href={
-                  // "/sign_in"
-                  token ? (isConfirmed ? "/my_office" : "/confirm") : "/sign_in"
-                }
-              >
-                <svg width="27" height="33" className={s.chip}>
-                  <use href="/symbol-defs.svg#user"></use>
-                </svg>
-                {token ? "Мій кабінет" : "Увійти"}
-              </Link>
-              {/* {token && (
-                <button type="button" onClick={handleLogout}>
-                  Logout
-                </button>
-              )} */}
-            </nav>
-          )}
+                )}
+              </nav>
+            )}
+        </div>
       </div>
     </header>
   );

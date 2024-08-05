@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
 import s from "@/sass/layouts/signIn.module.scss";
+import SvgIcon from "../ui/SvgIcon";
 
 const SignIn = () => {
   const pathname = usePathname();
@@ -36,14 +37,20 @@ const SignIn = () => {
           <p className={s.text}>Увійти за допомогою</p>
           <div className={s.link__group}>
             <Link href="#" className={s.link__icons}>
-              <svg width="50" height="50" className={s.chip__google}>
-                <use href="/symbol-defs.svg#google"></use>
-              </svg>
+              <SvgIcon
+                id="google"
+                width={50}
+                height={50}
+                className={s.chip__google}
+              />
             </Link>
             <Link href="#" className={s.link__icons}>
-              <svg width="50" height="50" className={s.chip__linkedin}>
-                <use href="/symbol-defs.svg#linkedin"></use>
-              </svg>
+              <SvgIcon
+                id="linkedin"
+                width={50}
+                height={50}
+                className={s.chip__linkedin}
+              />
             </Link>
           </div>
           <Link href="#" className={s.link__forgot__password}>

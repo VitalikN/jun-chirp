@@ -4,13 +4,13 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { montserrat } from "@/utils/fonts";
 import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
-import ToastContainer from "@/components/ToastContainer";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "JunChirp",
   description: "JunChirp",
   openGraph: {
-    images: "/logo.png",
+    images: ["/logo.png"],
     type: "website",
   },
 };
@@ -25,8 +25,8 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <ReduxProvider>
           <Header />
-
           <main className="main">{children}</main>
+          <Footer />
         </ReduxProvider>
       </body>
     </html>

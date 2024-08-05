@@ -1,4 +1,3 @@
-// hooks/useEmailConfirmation.ts
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -26,9 +25,14 @@ const useEmailConfirmation = () => {
   const [backendError, setBackendError] = useState<string | null>(null);
 
   const customError = error as customError;
+  console.log("email 28", email);
 
-  useEffect(() => {
-    const storedEmailData = sessionStorage.getItem("registrationFormData");
+  useMemo(() => {
+    const storedEmailData =
+      sessionStorage.getItem("registrationFormData") ||
+      sessionStorage.getItem("loginFormData");
+
+    console.log("storedEmailData", storedEmailData);
 
     if (storedEmailData) {
       const { email } = JSON.parse(storedEmailData);
@@ -37,7 +41,8 @@ const useEmailConfirmation = () => {
   }, []);
 
   useEffect(() => {
-    if (email === null) {
+    console.log("email 44", email);
+    if (!email) {
       pushRouter("/register");
     }
   }, [email, pushRouter]);
@@ -149,9 +154,9 @@ const useEmailConfirmation = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       const res = await confirm({ email, code: values.code }).unwrap();
-      console.log(res.accessToken);
+      console.log(res.user.accessToken);
 
-      if (res.accessToken) {
+      if (res.user.accessToken) {
         setTimeLeft(0);
         setCooldown(null);
         localStorage.removeItem("resendCooldown");
@@ -195,6 +200,7 @@ const useEmailConfirmation = () => {
     handleSubmit,
     handleResendCode,
     formatTime,
+    pushRouter,
   };
 };
 

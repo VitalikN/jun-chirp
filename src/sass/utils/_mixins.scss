@@ -17,6 +17,17 @@
   align-items: center;
 }
 
+@mixin flexSpaceBetween() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex() {
+  display: flex;
+  align-items: center;
+}
+
 @mixin font(
   $fsMin: 14px,
   $fsPreferred: 2vw,
@@ -29,6 +40,11 @@
   line-height: $lh;
 }
 // @include font(14px, 2vw, 24px, 400, 21px);
+@mixin fontSize($fs: 14px, $fw: 400px, $lh: 14px) {
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh / $fs;
+}
 
 :export {
   flexCenter: #{mixinStr(flexCenter)};

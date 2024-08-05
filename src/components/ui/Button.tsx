@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-
 interface ButtonProps {
-  title: string;
+  title?: string;
   className?: string;
   type?: "button" | "submit" | "reset";
   isDisabled: boolean;
   onClick?: () => void;
+  children?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,6 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   isDisabled,
   onClick,
+  children,
 }) => {
   return (
     <button
@@ -24,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={isDisabled}
       onClick={onClick}
     >
-      {title}
+      {title || children}
     </button>
   );
 };

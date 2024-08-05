@@ -2,27 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { authApi } from "./authApi";
-
-export interface IUser {
-  userName: string | null;
-  email: string | null;
-  id: number | null;
-  accessToken?: string | null;
-  isConfirmed: boolean;
-}
-
-export interface IAuthState {
-  user: IUser;
-  token: string | null;
-  isLoggedIn: boolean;
-  isRefreshing: boolean;
-  isLoading: boolean;
-}
+import { IAuthState } from "@/utils/types/IUser";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "user"],
+  whitelist: ["accessToken", "user"],
 };
 
 const initialState: IAuthState = {
@@ -31,11 +16,8 @@ const initialState: IAuthState = {
     email: null,
     id: null,
     isConfirmed: false,
+    accessToken: "",
   },
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -44,6 +26,9 @@ const authSlice = createSlice({
   reducers: {
     clearToken: () => {
       return { ...initialState };
+    },
+    tokenReceived: (state, { payload }) => {
+      state.user.accessToken = payload.accessToken;
     },
   },
 
@@ -54,8 +39,6 @@ const authSlice = createSlice({
         authApi.endpoints.register.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.token = payload.user?.accessToken;
-          state.isLoggedIn = true;
         }
       )
 
@@ -63,8 +46,6 @@ const authSlice = createSlice({
         authApi.endpoints.confirmEmail.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.isLoggedIn = true;
-          state.token = payload.accessToken;
         }
       )
 
@@ -72,17 +53,13 @@ const authSlice = createSlice({
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
-          state.token = payload.user?.accessToken;
-          state.isLoggedIn = true;
         }
-      );
-    // .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-    //   console.log("Logout fulfilled, resetting state");
+      )
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        console.log("Logout fulfilled, resetting state");
 
-    //   state.token = null;
-    //   state.isLoggedIn = false;
-    //   state.user = initialState.user;
-    // });
+        state.user = initialState.user;
+      });
   },
 });
 
@@ -91,5 +68,5 @@ const persisteAuthReducer = persistReducer(
   authSlice.reducer
 );
 
-export const { clearToken } = authSlice.actions;
+export const { clearToken, tokenReceived } = authSlice.actions;
 export default persisteAuthReducer;

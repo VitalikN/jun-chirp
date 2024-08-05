@@ -1,26 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-import { clearToken } from "./authSlice";
-import store from "../store";
-
-type RootState = ReturnType<typeof store.getState>;
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-
-  tagTypes: ["auth"],
+import mainApi from "../mainApi";
+export const authApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (userData) => ({
@@ -54,14 +33,14 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
-    // logout: builder.mutation({
-    //   query: () => ({
-    //     url: "auth/logout",
-    //     method: "DELETE",
-    //   }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "auth/logout",
+        method: "DELETE",
+      }),
 
-    //   invalidatesTags: ["auth"],
-    // }),
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
 
@@ -70,5 +49,5 @@ export const {
   useConfirmEmailMutation,
   useLoginMutation,
   useResendConfirmationCodeMutation,
-  // useLogoutMutation,
+  useLogoutMutation,
 } = authApi;

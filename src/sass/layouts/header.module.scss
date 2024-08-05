@@ -2,74 +2,91 @@
 @import "../utils/mixins";
 
 .header {
-  background: linear-gradient(to bottom, #01cc01, #ffffff);
+  background: transparent;
 }
 .container__header {
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-.logo__link {
-  position: absolute;
-}
-.text__link {
-  margin: 0 auto;
-  padding: 48px 0;
-
-  @include font(20px, 2vw, 40px, 400, 30px);
-}
-
-.nav {
-  display: flex;
-  gap: 16px;
-}
-.box__input {
-  border: var(--border);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding-right: 20px;
-  max-width: 295px;
-  @include mediaQuery(1280px) {
-    width: 295px;
-  }
-}
-.input {
-  background: transparent;
-  outline: none;
-  border: none;
-  padding: 8px 20px 8px 20px;
+  border-bottom: var(--border);
+  border-color: var(--border-color);
+  padding: 15px 0;
 
-  @include font(14px, 2vw, 16px, 400, 19px);
-  &::placeholder {
-    color: var(--text-color);
+  @include mediaQuery(1280px) {
+    padding: 30px 0;
   }
 }
-.btn {
-  background: transparent;
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
-.chip {
-  transition: all 0.5s;
-  &:focus,
-  &:hover {
-    scale: 1.15;
+
+@include mediaMaxQuery(1279px) {
+  .container__header {
+    display: grid;
+    grid-auto-flow: column;
+
+    gap: 16px;
+    grid-template-areas:
+      "logo__link nav"
+      "text__link text__link";
+  }
+  .logo__link {
+    justify-self: start;
+    align-self: center;
+    grid-area: logo__link;
+  }
+  .nav {
+    grid-area: nav;
+    justify-self: end;
+    align-self: center;
+  }
+  .text__link {
+    grid-area: text__link;
+    align-self: center;
+    justify-self: center;
   }
 }
 
 .text__link__chip {
-  @include font(20px, 2vw, 40px, 600, 30px);
+  width: 100%;
+  max-width: 300px;
+
+  @include mediaQuery(1280px) {
+    max-width: 438px;
+  }
 }
-.link {
+.nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 192px;
-  padding: 8px 20px 8px 20px;
-  border: var(--border);
-  border-radius: 12px;
+  gap: 16px;
+
+  @include mediaQuery(768px) {
+    width: 100%;
+    max-width: 315px;
+  }
+  @include mediaQuery(1280px) {
+    max-width: 336px;
+  }
+}
+
+.link {
+  width: 100%;
+  @include flexCenter();
+  padding: 10px 22px 10px 22px;
+  background-color: #141416;
+  border: var(--border-btn);
+
+  border-radius: 30px;
+  @include font(18px, 2vw, 18px, 400, 18px);
+  @include mediaMaxQuery(767px) {
+    display: none;
+  }
+}
+.btn__exit {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px 5px 0;
+}
+.exit__chip {
+  width: 30px;
+  height: 25px;
+  fill: #33cc00;
 }

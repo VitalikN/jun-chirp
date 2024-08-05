@@ -28,10 +28,21 @@ const useSignInFormik = () => {
         pushRouter("/");
       }
     } catch (error) {
-      const status = customError?.status;
+      const status = (error as customError)?.status;
       let errorMessage = "Неправильний логін або пароль";
 
-      if (status === 422) errorMessage = "Облікові дані недійсні";
+      if (status === 401) {
+        sessionStorage.setItem(
+          "loginFormData",
+          JSON.stringify({ email: values.email })
+        );
+
+        errorMessage =
+          "Для завершення реєстрації підтвердіть свою електронну пошту";
+        pushRouter("/confirm");
+      } else if (status === 422) {
+        errorMessage = "Неправильний логін або пароль";
+      }
 
       setBackendError(errorMessage);
     }

@@ -2,11 +2,13 @@ import { Field, Form, Formik } from "formik";
 
 import useSignInFormik from "@/hooks/useSignInFormik";
 import ErrorFeedback from "./ErrorFeedback";
-import ToastContainer from "../ToastContainer";
+import ToastContainer from "../ui/ToastContainer";
 
 import { validationSchemaSignIn } from "@/utils/schema/validationSchemaSignIn";
 import s from "@/sass/layouts/signIn.module.scss";
-import Button from "../Button";
+import Button from "../ui/Button";
+import SvgIcon from "../ui/SvgIcon";
+import Loader from "../ui/Loader";
 
 const SignInFormik = () => {
   const {
@@ -34,9 +36,7 @@ const SignInFormik = () => {
                 } `}
               >
                 Email
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
                 className={`${s.input} ${
@@ -52,12 +52,6 @@ const SignInFormik = () => {
               />
               {(touched.email && errors.email) || backendError ? (
                 <span className={s.warning}>!</span>
-              ) : touched.email && !errors.email ? (
-                <p className={s.chip__checkbox__valid}>
-                  <svg width="12" height="10">
-                    <use href="/symbol-defs.svg#checkbox"></use>
-                  </svg>
-                </p>
               ) : null}
               <ErrorFeedback name="email" />
             </div>
@@ -68,9 +62,7 @@ const SignInFormik = () => {
                 }`}
               >
                 Пароль
-                <svg width="6" height="16" className={s.chip}>
-                  <use href="/symbol-defs.svg#icon"></use>
-                </svg>
+                <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
 
               <Field
@@ -90,18 +82,13 @@ const SignInFormik = () => {
                 <span className={s.warning}>!</span>
               )}
 
-              <svg
-                width="40"
-                height="40"
+              <SvgIcon
+                id={showPassword ? "eye-close" : "eye"}
+                width={40}
+                height={40}
                 className={s.chip__eye}
                 onClick={togglePasswordVisibility}
-              >
-                <use
-                  href={`/symbol-defs.svg#${
-                    showPassword ? "eye-close" : "eye"
-                  }`}
-                ></use>
-              </svg>
+              />
 
               <ErrorFeedback name="password" />
             </div>
@@ -113,9 +100,12 @@ const SignInFormik = () => {
                   name="rememberMe"
                   className={s.checkbox}
                 />
-                <svg width="14" height="12" className={s.chip__checkbox}>
-                  <use href="/symbol-defs.svg#checkbox"></use>
-                </svg>
+                <SvgIcon
+                  id="checkbox"
+                  width={14}
+                  height={12}
+                  className={s.chip__checkbox}
+                />
                 Запам`ятати мене
               </label>
             </div>
@@ -123,36 +113,14 @@ const SignInFormik = () => {
               <div className={s.error__backend}>{backendError}</div>
             )}
 
-            {/* <button
-              className={`${s.styledBtn} ${
-                (touched.password && errors.password) ||
-                (touched.email && errors.email) ||
-                backendError
-                  ? s.invalid
-                  : (touched.password && !errors.password) ||
-                    (touched.email && errors.email)
-                  ? s.valid
-                  : ""
-              }`}
-              type="submit"
-              // isDisabled={!dirty || !isValid || isLoading}
-            >
-              {isLoading ? "Loading...." : "Увійти"}
-              {(touched.password && errors.password) ||
-              (touched.email && errors.email) ? (
-                <span className={s.warning}>!</span>
-              ) : (
-                ""
-              )}
-            </button> */}
-
             <Button
-              title={isLoading ? "Loading...." : "Увійти"}
               className={`${s.styledBtn} ${
-                !touched.email ||
-                errors.email ||
-                !touched.password ||
-                errors.password
+                isLoading
+                  ? s.styledBtn
+                  : !touched.email ||
+                    errors.email ||
+                    !touched.password ||
+                    errors.password
                   ? ""
                   : !touched.email ||
                     errors.email ||
@@ -161,10 +129,20 @@ const SignInFormik = () => {
                     backendError
                   ? s.invalid
                   : s.valid
-              }`}
+              }
+              `}
               type="submit"
               isDisabled={!dirty || !isValid || isLoading}
-            />
+            >
+              {isLoading ? (
+                <>
+                  Увійти
+                  <Loader />
+                </>
+              ) : (
+                "Увійти"
+              )}
+            </Button>
           </Form>
         )}
       </Formik>
