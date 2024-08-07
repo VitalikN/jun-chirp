@@ -6,7 +6,7 @@
 }
 
 .burger__button {
-  @include mediaMaxQuery(767px) {
+  @include mediaMaxQuery(1279px) {
     @include flexCenter();
   }
   display: none;
