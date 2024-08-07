@@ -17,50 +17,23 @@
   }
 }
 
-@include mediaMaxQuery(1279px) {
-  .container__header {
-    display: grid;
-    grid-auto-flow: column;
-
-    gap: 16px;
-    grid-template-areas:
-      "logo__link nav"
-      "text__link text__link";
-  }
-  .logo__link {
-    justify-self: start;
-    align-self: center;
-    grid-area: logo__link;
-  }
-  .nav {
-    grid-area: nav;
-    justify-self: end;
-    align-self: center;
-  }
-  .text__link {
-    grid-area: text__link;
-    align-self: center;
-    justify-self: center;
-  }
-}
-
 .text__link__chip {
   width: 100%;
   max-width: 300px;
+  max-width: 243px;
+  height: 22px;
 
   @include mediaQuery(1280px) {
-    max-width: 438px;
+    max-width: 380px;
+    height: 40px;
   }
 }
 .nav {
   display: flex;
   gap: 16px;
 
-  @include mediaQuery(768px) {
-    width: 100%;
-    max-width: 315px;
-  }
   @include mediaQuery(1280px) {
+    width: 100%;
     max-width: 336px;
   }
 }
@@ -74,7 +47,7 @@
 
   border-radius: 30px;
   @include font(18px, 2vw, 18px, 400, 18px);
-  @include mediaMaxQuery(767px) {
+  @include mediaMaxQuery(1279px) {
     display: none;
   }
 }

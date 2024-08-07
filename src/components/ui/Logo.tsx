@@ -34,11 +34,11 @@ const Logo = () => {
       //   calculatedHeight = 154;
       // }
       if (w <= 375) {
-        calculatedWidth = 97;
-        calculatedHeight = 54;
+        calculatedWidth = 61;
+        calculatedHeight = 34;
       } else if (w <= 767) {
-        calculatedWidth = 93;
-        calculatedHeight = 52;
+        calculatedWidth = 80;
+        calculatedHeight = 45;
       } else if (w <= 1535) {
         calculatedWidth = 96;
         calculatedHeight = 54;
