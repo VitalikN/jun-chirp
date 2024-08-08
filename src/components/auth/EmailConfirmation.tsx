@@ -28,8 +28,8 @@ const EmailConfirmation = () => {
 
   return (
     <section className={s.section}>
-      <ToastContainer />
       <div className={`${s.container}    ${s.container__resend}`}>
+        <ToastContainer />
         <h2 className={s.title}>Підтвердження електронної пошти</h2>
         <p className={s.text}>
           Введіть 6 - значний код, який ми надіслали на вашу пошту
