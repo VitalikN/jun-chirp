@@ -107,8 +107,9 @@
   cursor: pointer;
   background: transparent;
   border: none;
+  color: var(--text-color);
   text-decoration: underline;
-  text-decoration-color: #000000;
+  text-decoration-color: var(--text-color);
   @include font(14px, 2vw, 16px, 400, 19px);
   &.disabled {
     text-decoration-color: #989898;
