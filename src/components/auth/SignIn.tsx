@@ -53,7 +53,10 @@ const SignIn = () => {
               />
             </Link>
           </div>
-          <Link href="#" className={s.link__forgot__password}>
+          <Link
+            href="/request_password_reset"
+            className={s.link__forgot__password}
+          >
             Забули пароль?
           </Link>
         </div>
