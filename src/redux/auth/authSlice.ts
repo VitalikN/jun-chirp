@@ -56,8 +56,6 @@ const authSlice = createSlice({
         }
       )
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-        console.log("Logout fulfilled, resetting state");
-
         state.user = initialState.user;
       });
   },

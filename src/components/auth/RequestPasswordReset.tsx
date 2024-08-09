@@ -22,19 +22,23 @@ const RequestPasswordReset = () => {
     useRequestPasswordResetMutation();
   const { pushRouter } = useRouterPush();
   const [backendError, setBackendError] = useState<string | null>(null);
+  console.log(backendError);
 
   const handleSubmit = async (
     values: FormValuesRequestPasswordReset,
     { resetForm }: { resetForm: () => void }
   ) => {
     try {
-      await requestPasswordReset(values.email).unwrap();
-      toast.success("Запит на зміну паролю успішно відправлено.");
-      resetForm();
-      pushRouter("/reset_password");
+      const { email } = values;
+      const res = await requestPasswordReset({ email }).unwrap();
+
+      if (res) {
+        resetForm();
+        pushRouter("/reset_password");
+      }
     } catch (error) {
-      toast.error("Сталася помилка при відправленні запиту на зміну паролю.");
-      const status = (error as customError)?.status;
+      const err = error as customError;
+      const status = err.status;
       let errorMessage = "Користувача не знайдено";
       if (status === 404) setBackendError(errorMessage);
     }
@@ -62,9 +66,8 @@ const RequestPasswordReset = () => {
                 </label>
                 <Field
                   className={`${s.input} ${
-                    touched.email && errors.email
-                      ? // || backendError
-                        s.invalid
+                    (touched.email && errors.email) || backendError
+                      ? s.invalid
                       : touched.email && !errors.email
                       ? s.valid
                       : ""
@@ -73,13 +76,14 @@ const RequestPasswordReset = () => {
                   name="email"
                   error={touched.email && errors.email}
                 />
-                {touched.email && errors.email ? (
-                  // || backendError
+                {(touched.email && errors.email) || backendError ? (
                   <span className={s.warning}>!</span>
                 ) : null}
                 <ErrorFeedback name="email" />
               </div>
-
+              {backendError && (
+                <div className={s.error__backend}>{backendError}</div>
+              )}
               <Button
                 className={`${s.styledBtn}
                  ${
@@ -87,9 +91,8 @@ const RequestPasswordReset = () => {
                      ? s.styledBtn
                      : !touched.email || errors.email
                      ? ""
-                     : !touched.email || errors.email
-                     ? // || backendError
-                       s.invalid
+                     : !touched.email || errors.email || backendError
+                     ? s.invalid
                      : s.valid
                  } `}
                 type="submit"
