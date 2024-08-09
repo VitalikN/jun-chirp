@@ -244,6 +244,9 @@
   align-items: center;
   gap: 32px;
 }
+.link__icons {
+  cursor: pointer;
+}
 
 .link__forgot__password {
   @include font(14px, 2vw, 16px, 400, 19px);

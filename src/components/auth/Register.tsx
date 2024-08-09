@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import s from "@/sass/layouts/register.module.scss";
 import RegisterFormik from "./RegisterFormik";
 import SvgIcon from "../ui/SvgIcon";
+import SocialLoginGroup from "../ui/SocialLoginGroup";
 
 const Register = () => {
   const pathname = usePathname();
@@ -35,24 +36,7 @@ const Register = () => {
         <RegisterFormik />
         <div className={s.box__link__group}>
           <p className={s.text}>Зареєструватись за допомогою</p>
-          <div className={s.link__group}>
-            <Link href="#" className={s.link__icons}>
-              <SvgIcon
-                id="google"
-                width={50}
-                height={50}
-                className={s.chip__google}
-              />
-            </Link>
-            <Link href="#" className={s.link__icons}>
-              <SvgIcon
-                id="linkedin"
-                width={50}
-                height={50}
-                className={s.chip__linkedin}
-              />
-            </Link>
-          </div>
+          <SocialLoginGroup />
         </div>
       </div>
     </section>
