@@ -39,7 +39,6 @@ const ResetPassword = () => {
         toast.success(
           "Ваш пароль успішно змінено. Ви будете перенаправлені на сторінку входу."
         );
-
         resetForm();
         pushRouter("/sign_in");
       }

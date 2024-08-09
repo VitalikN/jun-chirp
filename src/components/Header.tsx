@@ -17,8 +17,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await logout({}).unwrap();
-      console.log(res);
+      await logout({}).unwrap();
     } catch (err) {
       console.error("Failed to logout:", err);
     }
