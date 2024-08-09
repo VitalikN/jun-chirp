@@ -30,6 +30,9 @@ const authSlice = createSlice({
     tokenReceived: (state, { payload }) => {
       state.user.accessToken = payload.accessToken;
     },
+    setToken: (state, action) => {
+      state.user.accessToken = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -66,5 +69,5 @@ const persisteAuthReducer = persistReducer(
   authSlice.reducer
 );
 
-export const { clearToken, tokenReceived } = authSlice.actions;
+export const { clearToken, tokenReceived, setToken } = authSlice.actions;
 export default persisteAuthReducer;

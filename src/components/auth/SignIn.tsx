@@ -10,6 +10,13 @@ import SvgIcon from "../ui/SvgIcon";
 const SignIn = () => {
   const pathname = usePathname();
 
+  const hundelGoole = () => {
+    const res = (window.location.href =
+      "https://junchirp.vercel.app/auth/google");
+
+    console.log(res);
+  };
+
   return (
     <section className={`${s.section} `}>
       <div className={`${s.container} `}>
@@ -42,6 +49,7 @@ const SignIn = () => {
                 width={50}
                 height={50}
                 className={s.chip__google}
+                onClick={hundelGoole}
               />
             </Link>
             <Link href="#" className={s.link__icons}>

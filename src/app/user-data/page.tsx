@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-const MyOfficePage = ({ searchParams }: any) => {
+const UserData = ({ searchParams }: any) => {
   const dispatch = useDispatch();
   const { userName, token, email, photo } = searchParams;
   useEffect(() => {
@@ -15,7 +15,7 @@ const MyOfficePage = ({ searchParams }: any) => {
   }, [dispatch, token]);
   return (
     <div>
-      <h1>myOff</h1>
+      <h1>UserData</h1>
       <p>{userName}</p>
       <p>{email}</p>
       {photo && (
@@ -25,4 +25,4 @@ const MyOfficePage = ({ searchParams }: any) => {
   );
 };
 
-export default MyOfficePage;
+export default UserData;
