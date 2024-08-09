@@ -17,6 +17,7 @@ const initialState: IAuthState = {
     id: null,
     isConfirmed: false,
     accessToken: "",
+    photo: null,
   },
 };
 
@@ -30,8 +31,9 @@ const authSlice = createSlice({
     tokenReceived: (state, { payload }) => {
       state.user.accessToken = payload.accessToken;
     },
-    setToken: (state, action) => {
-      state.user.accessToken = action.payload;
+
+    setUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
     },
   },
 
@@ -69,5 +71,5 @@ const persisteAuthReducer = persistReducer(
   authSlice.reducer
 );
 
-export const { clearToken, tokenReceived, setToken } = authSlice.actions;
+export const { clearToken, tokenReceived, setUser } = authSlice.actions;
 export default persisteAuthReducer;

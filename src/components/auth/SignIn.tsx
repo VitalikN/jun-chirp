@@ -5,17 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
 import s from "@/sass/layouts/signIn.module.scss";
-import SvgIcon from "../ui/SvgIcon";
+import SocialLoginGroup from "../ui/SocialLoginGroup";
 
 const SignIn = () => {
   const pathname = usePathname();
-
-  const hundelGoole = () => {
-    const res = (window.location.href =
-      "https://junchirp.vercel.app/auth/google");
-
-    console.log(res);
-  };
 
   return (
     <section className={`${s.section} `}>
@@ -42,25 +35,7 @@ const SignIn = () => {
         <SignInFormik />
         <div className={s.box__link__group}>
           <p className={s.text}>Увійти за допомогою</p>
-          <div className={s.link__group}>
-            <Link href="#" className={s.link__icons}>
-              <SvgIcon
-                id="google"
-                width={50}
-                height={50}
-                className={s.chip__google}
-                onClick={hundelGoole}
-              />
-            </Link>
-            <Link href="#" className={s.link__icons}>
-              <SvgIcon
-                id="linkedin"
-                width={50}
-                height={50}
-                className={s.chip__linkedin}
-              />
-            </Link>
-          </div>
+          <SocialLoginGroup />
           <Link
             href="/request_password_reset"
             className={s.link__forgot__password}

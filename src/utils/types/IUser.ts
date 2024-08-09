@@ -4,6 +4,7 @@ export interface IUser {
   id: number | null;
   accessToken: string | null;
   isConfirmed: boolean;
+  photo: string | null;
 }
 
 export interface IAuthState {
