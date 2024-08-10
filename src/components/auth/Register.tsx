@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from "@/sass/layouts/register.module.scss";
 import RegisterFormik from "./RegisterFormik";
-import SvgIcon from "../ui/SvgIcon";
 import SocialLoginGroup from "../ui/SocialLoginGroup";
 
 const Register = () => {

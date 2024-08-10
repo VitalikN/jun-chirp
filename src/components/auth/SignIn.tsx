@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
-import s from "@/sass/layouts/signIn.module.scss";
 import SocialLoginGroup from "../ui/SocialLoginGroup";
+import s from "@/sass/layouts/signIn.module.scss";
 
 const SignIn = () => {
   const pathname = usePathname();
