@@ -1,18 +1,12 @@
 "use client";
 
-import { setUser } from "@/redux/auth/authSlice";
+import useSaveUser from "@/hooks/useSaveUser";
 import Image from "next/image";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { SearchParams } from "@/utils/types/SearchParams";
 
-const MyOfficePage = ({ searchParams }: any) => {
-  const dispatch = useDispatch();
+const MyOfficePage = ({ searchParams }: SearchParams) => {
   const { userName, token, email, photo } = searchParams;
-  useEffect(() => {
-    if (token) {
-      dispatch(setUser({ accessToken: token, userName, email, photo }));
-    }
-  }, [dispatch, email, photo, token, userName]);
+  useSaveUser({ userName, token, email, photo });
   return (
     <div>
       <h1>MyOfficePage</h1>

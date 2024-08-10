@@ -2,22 +2,29 @@
 import Link from "next/link";
 import s from "@/sass/layouts/header.module.scss";
 import Logo from "./ui/Logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
 import SvgIcon from "./ui/SvgIcon";
 import BurgerButton from "./BurgerButton";
+import useRouterPush from "@/hooks/useRouter";
 
 const Header = () => {
   const pathname = usePathname();
   const token = useSelector(authSelector.selectToken);
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
   const [logout] = useLogoutMutation();
+  const { pushRouter } = useRouterPush();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
+      console.log("logout");
+
       await logout({}).unwrap();
+      // pushRouter("/");
+      router.replace("/");
     } catch (err) {
       console.error("Failed to logout:", err);
     }
