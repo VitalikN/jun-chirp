@@ -48,7 +48,6 @@ const useRegisterFormik = () => {
       setBackendError(null);
     } catch (error) {
       const customError = error as customError;
-      console.log("Error:", customError);
 
       const status = customError?.status;
       let errorMessage = "Електронна адреса вже існує.";
@@ -61,7 +60,6 @@ const useRegisterFormik = () => {
       }
 
       setBackendError(errorMessage);
-      console.log("Backend Error:", backendError);
     }
   };
 

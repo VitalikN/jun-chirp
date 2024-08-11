@@ -132,7 +132,7 @@ const SignInFormik = () => {
               }
               `}
               type="submit"
-              isDisabled={!dirty || !isValid || isLoading}
+              isDisabled={!dirty || isLoading}
             >
               {isLoading ? (
                 <>
