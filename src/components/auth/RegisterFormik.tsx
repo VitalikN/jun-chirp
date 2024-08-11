@@ -197,7 +197,7 @@ const RegisterFormik = () => {
                   </span>
                 </p>
               </label>
-              {touched.rememberMe && errors.rememberMe && (
+              {errors.rememberMe && touched.rememberMe && (
                 <div className={s.invalid__checkbox__message}>
                   {errors.rememberMe}
                 </div>
@@ -232,7 +232,7 @@ const RegisterFormik = () => {
                     : s.valid
                 }`}
                 type="submit"
-                isDisabled={!dirty || !isValid || isLoading}
+                isDisabled={!dirty || isLoading}
               >
                 {isLoading ? (
                   <>

@@ -11,6 +11,7 @@ import ToastContainer from "../ui/ToastContainer";
 import s from "@/sass/layouts/emailConfirmation.module.scss";
 import Button from "../ui/Button";
 import useCodeInput from "@/hooks/useCodeInput";
+import Loader from "../ui/Loader";
 
 const EmailConfirmation = () => {
   const {
@@ -79,7 +80,6 @@ const EmailConfirmation = () => {
                 <div className={s.error__backend}>{backendError}</div>
               )}
               <Button
-                title={isLoading ? "Loading...." : "підтвердити"}
                 className={`${s.styledBtn} ${
                   (touched.code && errors.code) || backendError
                     ? s.invalid
@@ -90,12 +90,21 @@ const EmailConfirmation = () => {
               ${backendError ? s.invalid__backendError : ""}`}
                 type="submit"
                 isDisabled={isLoading || !dirty}
-              />
+              >
+                {isLoading ? (
+                  <>
+                    Підтвердити
+                    <Loader />
+                  </>
+                ) : (
+                  "Підтвердити"
+                )}
+              </Button>
             </Form>
           )}
         </Formik>
         <Button
-          title="Відправити новий код повторно"
+          title="Надіслати код повторно"
           onClick={() => email && handleResendCode(email)}
           className={`${s.btn__resend} ${cooldown !== null ? s.disabled : ""}`}
           isDisabled={cooldown !== null || isLoading}

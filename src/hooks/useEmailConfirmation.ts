@@ -14,25 +14,24 @@ const useEmailConfirmation = () => {
   const [confirm, { isLoading, error }] = useConfirmEmailMutation();
   const [resendCode] = useResendConfirmationCodeMutation();
   const { pushRouter } = useRouterPush();
-
   const emailSelector = useSelector(authSelector.getEmail);
   const [email, setEmail] = useState<string | null>(emailSelector || "");
-  const [timeLeft, setTimeLeft] = useState(600);
 
+  const storedTimeLeft = parseInt(
+    localStorage.getItem("timeLeft") || "600",
+    10
+  );
+  const [timeLeft, setTimeLeft] = useState(storedTimeLeft);
   const [attempts, setAttempts] = useState(0);
+
   const [cooldown, setCooldown] = useState<number | null>(null);
 
   const [backendError, setBackendError] = useState<string | null>(null);
-
-  const customError = error as customError;
-  console.log("email 28", email);
 
   useMemo(() => {
     const storedEmailData =
       sessionStorage.getItem("registrationFormData") ||
       sessionStorage.getItem("loginFormData");
-
-    console.log("storedEmailData", storedEmailData);
 
     if (storedEmailData) {
       const { email } = JSON.parse(storedEmailData);
@@ -41,7 +40,6 @@ const useEmailConfirmation = () => {
   }, []);
 
   useEffect(() => {
-    console.log("email 44", email);
     if (!email) {
       pushRouter("/register");
     }
@@ -78,7 +76,9 @@ const useEmailConfirmation = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (timeLeft > 0) {
-        setTimeLeft(timeLeft - 1);
+        const newTimeLeft = timeLeft - 1;
+        setTimeLeft(newTimeLeft);
+        localStorage.setItem("timeLeft", newTimeLeft.toString());
       }
     }, 1000);
 
@@ -86,6 +86,8 @@ const useEmailConfirmation = () => {
   }, [timeLeft]);
 
   const handleResendCode = async (email: string) => {
+    setTimeLeft(600);
+
     if (cooldown !== null) {
       toast.error(
         `Код активний ще ${formatTime(cooldown)}. Будь ласка, зачекайте.`,
@@ -117,15 +119,17 @@ const useEmailConfirmation = () => {
       );
       return;
     }
+
     try {
       await resendCode({ email }).unwrap();
 
       setAttempts(attempts + 1);
       localStorage.setItem("resendAttempts", (attempts + 1).toString());
+      setTimeLeft(0);
       setCooldown(600);
       localStorage.setItem("resendCooldown", "600");
-
-      toast.success(` Новий код підтвердження успішно надіслано  ${email}`, {
+      localStorage.setItem("timeLeft", "600");
+      toast.success(`Новий код підтвердження успішно надіслано на ${email}`, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -154,7 +158,6 @@ const useEmailConfirmation = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       const res = await confirm({ email, code: values.code }).unwrap();
-      console.log(res.user.accessToken);
 
       if (res.user.accessToken) {
         setTimeLeft(0);

@@ -10,7 +10,9 @@
 .checkboxLabel {
   align-items: flex-start;
 }
-
+.text__chip__checkbox {
+  color: #0033ff;
+}
 .invalid__checkbox__message {
   padding-top: 12px;
   color: #b3261e;
@@ -41,6 +43,7 @@
     text-decoration-color: var(--hover-text-color);
   }
 }
+
 .styledBtn {
   margin: 0;
   text-transform: uppercase;

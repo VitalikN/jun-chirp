@@ -15,6 +15,7 @@
 }
 
 .text {
+  text-align: center;
   padding-top: 24px;
   @include font(14px, 2vw, 18px, 500, 22px);
 }
@@ -30,22 +31,33 @@
 .form {
   flex-direction: column;
   @include flexCenter();
-  // gap: 24px;
+  max-width: 349px;
+  width: 100%;
+  @include mediaQuery(768px) {
+    max-width: 426px;
+  }
+  @include mediaQuery(1280px) {
+    max-width: 580px;
+  }
+  @include mediaQuery(1536px) {
+    max-width: 696px;
+  }
+  @include mediaQuery(1920px) {
+    max-width: 888px;
+  }
 }
 .form__box {
   position: relative;
-  max-width: 768px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  @include mediaMaxQuery(477px) {
-    justify-content: center;
-  }
+
+  justify-content: space-between;
 }
 
 .input {
-  width: 100px;
-  height: 100px;
+  width: 48px;
+  height: 48px;
   border: var(--border);
   border-radius: 12px;
   outline: none;
@@ -53,6 +65,24 @@
   text-align: center;
   color: var(--text-color);
   @include font(40px, 2vw, 61px, 400, 71px);
+
+  @include mediaQuery(768px) {
+    width: 56px;
+    height: 56px;
+  }
+  @include mediaQuery(1280px) {
+    width: 80px;
+    height: 80px;
+  }
+  @include mediaQuery(1536px) {
+    width: 95px;
+    height: 95px;
+  }
+  @include mediaQuery(1920px) {
+    width: 100px;
+    height: 100px;
+  }
+
   &:focus {
     border-color: #0033ff;
   }
@@ -120,4 +150,8 @@
   text-align: center;
   margin-top: 35px;
   @include font(14px, 2vw, 20px, 400, 19px);
+}
+.disabled {
+  text-decoration-color: #989898;
+  color: #989898;
 }

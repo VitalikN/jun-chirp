@@ -161,7 +161,12 @@ const ResetPassword = () => {
 
                 <ErrorFeedback name="newPassword" />
               </div>
-
+              {/* <Button
+                title="ВІДМІНИТИ"
+                className={s.resetBtn}
+                type="reset"
+                isDisabled={!dirty || isLoading}
+              /> */}
               <Button
                 className={`${s.styledBtn}
                  
