@@ -1,50 +1,259 @@
 @import "../utils/container.scss";
 @import "../utils/mixins";
 
-.footer{
-    @include flexSpaceBetween();
-    padding-top: 37px;
-    padding-bottom: 37px
-}
+.footer {
+  padding-top: 10px;
+  border-top: var(--border-btn);
 
-.footer_nav{
-    @include flexCenter();
-    gap: 24px; 
-    & nav{
-        @include flexCenter();
-        gap: 24px; 
-        font-size: 20px;
-        font-weight: 400px;
-
-        & a {
-            width: 280px;
-            text-align: center;
-            &:first-child {
-                width: 128px;
-            }
-           
-        }
-        & p {
-            font-size: 16px;
-            width: 128px;
-            text-align: center;
-        }
-    }
-}
-
-
-.footerIcons {
-     fill: white;
+  @include mediaQuery(767px) {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    padding-top: 24px;
   }
 
-.btn_confirm{
-    background: var(--btn-bg-confirm);
-    border: 1px black solid ;
-    border-radius: 20px;
-    padding: 5px 10px ;
-    width: 280px;
-    text-align: center;
+  @include mediaQuery(1280px) {
+    @include flexSpaceBetween();
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
 
-    font-size: 25px;
-    font-weight: 500px;
+  @include mediaQuery(1536px) {
+    @include flexSpaceBetween();
+  }
+}
+
+.footer_nav {
+  @include flexSpaceBetween();
+  @include mediaQuery(1280px) {
+  }
+
+  @include mediaQuery(767px) {
+    flex-direction: row-reverse;
+  }
+
+  & nav {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 400;
+
+    @include mediaQuery(767px) {
+      font-size: 18px;
+    }
+
+    @include mediaQuery(1280px) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 54px;
+    }
+
+    @include mediaQuery(1800px) {
+      gap: 24px;
+    }
+
+    & a {
+      text-align: center;
+      padding: 4px;
+      border-radius: 20px;
+      transition: background-color 0.25s ease;
+      transition: color 0.3s ease;
+      @include mediaQuery(1280px) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 188px;
+      }
+
+      @include mediaQuery(1536px) {
+        width: 216px;
+      }
+
+      @include mediaQuery(1800px) {
+        width: 280px;
+      }
+
+      &:first-child {
+        @include mediaQuery(1280px) {
+          width: 80px;
+        }
+        @include mediaQuery(1536px) {
+          width: 96px;
+        }
+
+        @include mediaQuery(1800px) {
+          width: 128px;
+        }
+      }
+
+      &:nth-child(4) {
+        @include mediaQuery(1280px) {
+          width: 280px;
+        }
+
+        @include mediaQuery(1536px) {
+          width: 336px;
+        }
+
+        @include mediaQuery(1800px) {
+          width: 280px;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        background-color: var(--hover-text-color);
+        color: var(--black);
+      }
+    }
+  }
+}
+
+.footerIcons {
+  display: flex;
+  flex-direction: column;
+  fill: white;
+  gap: 8px;
+  padding-top: 10px;
+
+  @include mediaQuery(1280px) {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  @include mediaQuery(1800px) {
+    gap: 16px;
+  }
+  a svg {
+    fill: white;
+    transition: fill 0.3s ease;
+  }
+
+  a:hover svg,
+  a:focus svg {
+    fill: var(--btn-bg-confirm);
+  }
+
+  &:nth-child(3) {
+    display: none;
+    @include mediaQuery(1280px) {
+      display: block;
+    }
+  }
+
+  & p {
+    display: none;
+
+    @include mediaQuery(1280px) {
+      display: block;
+    }
+  }
+}
+
+.btn_confirm {
+  background: var(--btn-bg-confirm);
+  border: 1px var(--black) solid;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--black);
+  height: 39px;
+  text-align: center;
+  height: 24px;
+  min-width: 152px;
+  @include flexCenter();
+
+  @include mediaQuery(767px) {
+    font-size: 20px;
+    min-width: 204px;
+    height: 33px;
+  }
+
+  @include mediaQuery(1280px) {
+    min-width: 180px;
+  }
+  @include mediaQuery(1536px) {
+    width: 216px;
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px var(--btn-bg-confirm) solid;
+    color: var(--color);
+  }
+}
+
+.display_none_mobile {
+  display: none;
+  @include mediaQuery(1280px) {
+    display: flex;
+  }
+}
+
+.display_none_768 {
+  display: none;
+  @include mediaQuery(767px) {
+    display: flex;
+  }
+}
+
+.display_none_tablet {
+  display: flex;
+  @include mediaQuery(767px) {
+    display: none;
+  }
+}
+
+.display_none_767 {
+  display: none;
+  @include mediaQuery(767px) {
+    display: flex;
+  }
+  @include mediaQuery(1280px) {
+    display: none;
+  }
+}
+
+.display_none_1280 {
+  display: flex;
+  @include mediaQuery(1280px) {
+    display: none;
+  }
+}
+
+.footer_logo {
+  @include flexSpaceBetween();
+  margin-bottom: 16px;
+  @include mediaQuery(767px) {
+    @include flexCenter();
+    margin-bottom: 0px;
+  }
+}
+
+.footer_nav_mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.copywrite {
+  font-size: 12px;
+  text-align: end;
+  margin-left: auto;
+
+  @include mediaQuery(767px) {
+    font-size: 14px;
+    margin-left: 0;
+    margin-top: 24px;
+  }
+
+  @include mediaQuery(1279px) {
+    font-size: 16px;
+  }
 }
