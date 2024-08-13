@@ -2,36 +2,48 @@ import s from "@/sass/layouts/footer.module.scss";
 import Link from "next/link";
 import Logo from "./ui/Logo";
 import FooterNav from "./FooterNav";
-import { roboto } from "@/utils/fonts";
-import SvgIcon from "./ui/SvgIcon";
+import { roboto, montserrat } from "@/utils/fonts";
+import FooterIcons from "./FooterIcons";
 
 const Footer = () => {
   return (
-    <footer className={roboto.className}>
-      <div className={`${s.container} ${s.footer}`}>
-        <Link href="/">
-          <Logo />
-        </Link>
-        <div className={s.footer_nav}>
-          {" "}
-          <FooterNav />
-          
+    <footer className={`${roboto.className} ${s.container} `}>
+      <div className={`${s.footer}`}>
+        <div className={s.footer_logo}>
+          <Link href="/">
+            <Logo />
+          </Link>
+          <Link
+            className={`${s.btn_confirm} ${s.display_none_tablet}`}
+            href="#"
+          >
+            Підтримай нас
+          </Link>
         </div>
+        <Link className={`${s.btn_confirm} ${s.display_none_767}`} href="#">
+          Підтримай нас
+        </Link>
+        <div className={` ${s.footer_nav}`}>
+          <div className={`${s.footerIcons} ${s.display_none_tablet} `}>
+            <FooterIcons>
+              <p className={montserrat.className}>
+                &copy; {new Date().getFullYear()}
+              </p>
+            </FooterIcons>
+          </div>
 
-        <div>
-          <Link href="#" className={s.footerIcons}>
-            <SvgIcon id="email" width={50} height={50} />
-          </Link>
-          <Link href="#">
-            <SvgIcon
-              id="linkedin"
-              width={50}
-              height={50}
-              className={s.footerIcons}
-            />
-          </Link>
+          <div className={s.footer_nav}>
+            {" "}
+            <FooterNav />
+          </div>
+        </div>
+        <div className={`${s.footerIcons} ${s.display_none_768}`}>
+          <FooterIcons />
         </div>
       </div>
+      <p className={`${montserrat.className} ${s.copywrite}`}>
+        &copy; {new Date().getFullYear()}
+      </p>
     </footer>
   );
 };
