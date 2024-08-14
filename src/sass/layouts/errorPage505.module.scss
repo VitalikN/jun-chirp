@@ -1,0 +1,60 @@
+@import "../utils/container.scss";
+@import "../utils/mixins";
+
+.content__block {
+  width: 321px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.img__505 {
+  margin-bottom: 14px;
+}
+
+.title {
+  color: #228b22;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.details {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.button {
+  width: 321px;
+  display: flex;
+  height: 40px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  border: 0.2px solid #228b22;
+  background: #228b22;
+  cursor: pointer;
+
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

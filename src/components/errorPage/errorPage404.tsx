@@ -3,13 +3,9 @@ import Link from "next/link";
 import { roboto, montserrat } from "@/utils/fonts";
 
 const errorPage404 = () => {
-  const contentBlockStyle = {
-    fontFamily: roboto,
-  };
-
   return (
     <section className={s.section}>
-      <div className={`${s.container}  `}>
+      <div className={`${roboto.className} ${s.container} `}>
         <div className={s.content__block}>
           <svg className={s.img__404} width="242" height="210">
             <use href="/symbol-defs.svg#404"></use>
