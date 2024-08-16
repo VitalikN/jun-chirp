@@ -2,7 +2,7 @@ import s from "@/sass/layouts/errorPage404.module.scss";
 import Link from "next/link";
 import { roboto, montserrat } from "@/utils/fonts";
 
-const errorPage404 = () => {
+const ErrorPage404 = () => {
   return (
     <section className={s.section}>
       <div className={`${roboto.className} ${s.container} `}>
@@ -27,4 +27,4 @@ const errorPage404 = () => {
   );
 };
 
-export default errorPage404;
+export default ErrorPage404;
