@@ -94,20 +94,14 @@ const SignInFormik = () => {
             </div>
 
             <div className={s.form__box__checkbox}>
-              <label className={s.checkboxLabel}>
-                <Field
-                  type="checkbox"
-                  name="rememberMe"
-                  className={s.checkbox}
-                />
-                <SvgIcon
-                  id="checkbox"
-                  width={14}
-                  height={12}
-                  className={s.chip__checkbox}
-                />
-                Запам`ятати мене
-              </label>
+              <Field type="checkbox" name="rememberMe" className={s.checkbox} />
+              <SvgIcon
+                id="checkbox"
+                width={14}
+                height={12}
+                className={s.chip__checkbox}
+              />
+              <label className={s.checkboxLabel}>Запам`ятати мене</label>{" "}
             </div>
             {backendError && (
               <div className={s.error__backend}>{backendError}</div>
