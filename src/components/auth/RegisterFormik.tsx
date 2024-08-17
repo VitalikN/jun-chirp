@@ -7,12 +7,12 @@ import s from "@/sass/layouts/register.module.scss";
 import Button from "../ui/Button";
 import SvgIcon from "../ui/SvgIcon";
 import Loader from "../ui/Loader";
+import PasswordStrengthIndicator from "./PasswordStrengthIndicator";
 
 const RegisterFormik = () => {
   const {
     handleSubmit,
     togglePasswordVisibility,
-    // toggleConfirmPasswordVisibility,
     showPassword,
     showConfirmPassword,
     isLoading,
@@ -33,7 +33,7 @@ const RegisterFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaRegister}
       >
-        {({ errors, touched, dirty, isValid }) => (
+        {({ errors, touched, dirty, values }) => (
           <Form className={s.form}>
             <div className={s.form__box}>
               <label
@@ -133,6 +133,11 @@ const RegisterFormik = () => {
 
               <ErrorFeedback name="password" />
             </div>
+
+            <PasswordStrengthIndicator
+              password={values.password}
+              userName={values.userName}
+            />
 
             <div className={`${s.form__box} `}>
               <label

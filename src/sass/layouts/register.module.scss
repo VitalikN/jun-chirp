@@ -48,3 +48,24 @@
   margin: 0;
   text-transform: uppercase;
 }
+.passwordStrength {
+  .strengthBar {
+    height: 3px;
+    border-radius: 3px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-bottom: 4px;
+  }
+
+  .strengthLevels {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    span {
+      transition: color 0.3s ease;
+      @include font(12px, 2vw, 14px, 400, 15px);
+    }
+  }
+}
