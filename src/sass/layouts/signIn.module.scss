@@ -129,14 +129,11 @@
 }
 
 .form__box__checkbox {
-  display: flex;
   font-family: Roboto;
-  align-items: center;
   position: relative;
 
-  gap: 8px;
-
   .checkboxLabel {
+    margin-left: 8px;
     @include font(16px, 2vw, 16px, 400, 16px);
   }
   .checkbox {
@@ -148,7 +145,7 @@
     border-radius: 2px;
     position: relative;
     cursor: pointer;
-
+    z-index: 1;
     &:focus {
       outline: none;
     }

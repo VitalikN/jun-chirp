@@ -176,32 +176,34 @@ const RegisterFormik = () => {
             </div>
 
             <div className={s.form__box__checkbox}>
-              <label className={`${s.checkboxLabel} `}>
+              <div className={s.form__box__checkbox__field}>
+                {" "}
                 <Field
                   type="checkbox"
                   name="rememberMe"
                   className={`${s.checkbox} `}
                 />
-
                 <SvgIcon
                   id="checkbox"
                   width={14}
                   height={12}
                   className={s.chip__checkbox}
                 />
-                <p className={s.text}>
-                  Я погоджуюсь з
-                  <span className={s.text__chip__checkbox}>
-                    {" "}
-                    Умовами використання{" "}
-                  </span>{" "}
-                  та
-                  <span className={s.text__chip__checkbox}>
-                    {" "}
-                    Політикою конфіденційності{" "}
-                  </span>
-                </p>
-              </label>
+                <label className={`${s.checkboxLabel} `}>
+                  <p className={s.text}>
+                    Я погоджуюсь з
+                    <span className={s.text__chip__checkbox}>
+                      {" "}
+                      Умовами використання{" "}
+                    </span>{" "}
+                    та
+                    <span className={s.text__chip__checkbox}>
+                      {" "}
+                      Політикою конфіденційності{" "}
+                    </span>
+                  </p>
+                </label>
+              </div>
               {errors.rememberMe && touched.rememberMe && (
                 <div className={s.invalid__checkbox__message}>
                   {errors.rememberMe}
