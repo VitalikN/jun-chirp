@@ -12,7 +12,7 @@ export const validationSchemaRegister = Yup.object().shape({
 
   email: Yup.string()
     .email("Некоректний формат електронної пошти")
-    .required("Обов'язкове поле!")
+    .required("Поле електронної пошти не може бути порожнім")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Введіть дійсну електронну адресу у форматі username@example.com"
@@ -58,10 +58,10 @@ export const validationSchemaRegister = Yup.object().shape({
       const { userName } = this.parent;
       return !value || !new RegExp(userName, "i").test(value);
     })
-    .required("Обов'язкове поле!"),
+    .required("Будь ласка, введіть пароль"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), undefined], "Паролі повинні збігатися")
-    .required("Обов'язкове поле!"),
+    .required("Будь ласка, введіть пароль"),
 
   rememberMe: Yup.boolean()
     .oneOf(

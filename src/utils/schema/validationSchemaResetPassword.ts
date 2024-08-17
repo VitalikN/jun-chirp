@@ -7,7 +7,7 @@ export const validationSchemaResetPassword = Yup.object().shape({
     .required("Обов'язкове поле!"),
   email: Yup.string()
     .email("Некоректний формат електронної пошти")
-    .required("Обов'язкове поле!")
+    .required("Поле електронної пошти не може бути порожнім")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Введіть дійсну електронну адресу у форматі username@example.com"
@@ -50,5 +50,5 @@ export const validationSchemaResetPassword = Yup.object().shape({
       "Уникайте очевидних паролів, таких як 'password123'."
     )
 
-    .required("Обов'язкове поле!"),
+    .required("Будь ласка, введіть пароль"),
 });
