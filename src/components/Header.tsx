@@ -2,7 +2,7 @@
 import Link from "next/link";
 import s from "@/sass/layouts/header.module.scss";
 import Logo from "./ui/Logo";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
@@ -16,15 +16,13 @@ const Header = () => {
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
   const [logout] = useLogoutMutation();
   const { pushRouter } = useRouterPush();
-  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       console.log("logout");
 
       await logout({}).unwrap();
-      // pushRouter("/");
-      router.replace("/");
+      pushRouter("/");
     } catch (err) {
       console.error("Failed to logout:", err);
     }
@@ -49,12 +47,9 @@ const Header = () => {
             pathname !== "/register" &&
             pathname !== "/confirm" && (
               <nav className={`${s.nav}  `}>
-                {/* умова якщо є токен тоді показуємо box__input */}
-
                 <Link
                   className={s.link}
                   href={
-                    // "/sign_in"
                     token
                       ? isConfirmed
                         ? "/my_office"
@@ -62,7 +57,6 @@ const Header = () => {
                       : "/sign_in"
                   }
                 >
-                  {/* <SvgIcon id="user" width={27} height={33} className={s.chip} /> */}
                   {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
                 </Link>
                 <BurgerButton />
