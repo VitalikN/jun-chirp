@@ -54,12 +54,11 @@
   background-color: transparent;
   border: none;
   outline: none;
-  padding: 10px 20px;
+  margin: 0 auto;
   text-transform: uppercase;
   text-decoration: underline;
   text-decoration-color: #616161;
   text-decoration-thickness: 1px;
-  width: 280px;
   color: #616161;
   @include font(14px, 2vw, 16px, 400, 19px);
   transition: all 0.3s;
