@@ -216,7 +216,7 @@ const RegisterFormik = () => {
             )}
             <div className={s.box__btn}>
               <Button
-                title="ВІДМІНИТИ"
+                title="ОЧИСТИТИ"
                 className={s.resetBtn}
                 type="reset"
                 isDisabled={!dirty || isLoading}

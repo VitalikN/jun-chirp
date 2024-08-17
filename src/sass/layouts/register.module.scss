@@ -7,8 +7,30 @@
   flex-direction: column;
 }
 
+.form__box__checkbox .checkbox {
+  appearance: none;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  border: var(--border);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  &:focus {
+    outline: none;
+  }
+
+  &:checked + .chip__checkbox {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 4px;
+  }
+}
 .form__box__checkbox__field {
-  display: flex;
+  @include flex();
 }
 .text__chip__checkbox {
   color: #0033ff;
