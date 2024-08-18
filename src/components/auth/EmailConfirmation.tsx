@@ -33,7 +33,7 @@ const EmailConfirmation = () => {
         <ToastContainer />
         <h2 className={s.title}>Підтвердження електронної пошти</h2>
         <p className={s.text}>
-          Введіть 6 - значний код, який ми надіслали на вашу пошту
+          Введіть 6 значний код, який ми надіслали на Вашу електронну пошту
           <span className={s.email__text}>{email}</span>
         </p>
         <p className={s.timer}>

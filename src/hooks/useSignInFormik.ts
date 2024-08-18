@@ -26,7 +26,7 @@ const useSignInFormik = () => {
       }
     } catch (error) {
       const status = (error as customError)?.status;
-      let errorMessage = "Неправильний логін або пароль";
+      let errorMessage = "Неправильна електронна пошта або пароль";
 
       if (status === 401) {
         sessionStorage.setItem(
@@ -38,7 +38,7 @@ const useSignInFormik = () => {
           "Для завершення реєстрації підтвердіть свою електронну пошту";
         pushRouter("/confirm");
       } else if (status === 422) {
-        errorMessage = "Неправильний логін або пароль";
+        errorMessage = "Неправильна електронна пошта або пароль";
       }
 
       setBackendError(errorMessage);

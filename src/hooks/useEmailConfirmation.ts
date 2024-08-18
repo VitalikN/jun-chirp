@@ -86,7 +86,7 @@ const useEmailConfirmation = () => {
   }, [timeLeft]);
 
   const handleResendCode = async (email: string) => {
-    setTimeLeft(600);
+    setTimeLeft(0);
 
     if (cooldown !== null) {
       toast.error(
