@@ -107,13 +107,10 @@
   bottom: -18px;
   left: 0;
   color: var(--invalid);
-  @include font(10px, 2vw, 12px, 400, 12px);
+  @include font(10px, 2vw, 11px, 400, 12px);
 
   @include mediaQuery(1280px) {
     @include font(12px, 2vw, 14px, 400, 14px);
-  }
-  @include mediaQuery(1536px) {
-    @include font(14px, 2vw, 16px, 400, 16px);
   }
 }
 
