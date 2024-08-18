@@ -56,9 +56,23 @@ const usePasswordStrength = ({
     },
     [userName, commonPasswords]
   );
+  const getColor = (strength: string) => {
+    switch (strength) {
+      case "weak":
+        return "#B3261E";
+      case "medium":
+        return "#F5D251";
+      case "strong":
+        return "#228B22";
+      default:
+        return "#616161";
+    }
+  };
 
   useEffect(() => {
     setStrength(checkStrength(password));
+    const result = checkStrength(password);
+    console.log("Password strength:", result);
   }, [password, checkStrength]);
 
   const getBarStyle = (strength: string) => {
@@ -95,19 +109,6 @@ const usePasswordStrength = ({
   };
 
   return { strength, getBarStyle, getTextColor };
-};
-
-const getColor = (strength: string) => {
-  switch (strength) {
-    case "weak":
-      return "#B3261E";
-    case "medium":
-      return "#F5D251";
-    case "strong":
-      return "#228B22";
-    default:
-      return "#616161";
-  }
 };
 
 export default usePasswordStrength;

@@ -1,5 +1,5 @@
 import usePasswordStrength from "@/hooks/usePasswordStrength";
-import s from "@/sass/layouts/register.module.scss"; // Стилі
+import s from "@/sass/layouts/register.module.scss";
 
 interface Indicator {
   password: string;
