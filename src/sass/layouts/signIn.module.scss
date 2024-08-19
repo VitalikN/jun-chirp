@@ -204,6 +204,7 @@
   @include font(14px, 2vw, 16px, 400, 19px);
   padding: 10px 20px;
   transition: all 0.3s;
+  text-transform: uppercase;
   .warning {
     position: static;
     background-color: #fff;
