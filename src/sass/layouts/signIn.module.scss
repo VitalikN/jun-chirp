@@ -195,7 +195,6 @@
   cursor: pointer;
   background: #616161;
   color: var(--text-color);
-  border: var(--border);
 
   border-radius: var(--border-radius);
   outline: none;
@@ -205,6 +204,8 @@
   padding: 10px 20px;
   transition: all 0.3s;
   text-transform: uppercase;
+  border: var(--border);
+
   .warning {
     position: static;
     background-color: #fff;
@@ -214,15 +215,17 @@
     background-color: var(--invalid);
     @include flexCenter();
     gap: 8px;
+    &:hover {
+      box-shadow: 0px 0px 8px #fff;
+    }
   }
 
   &.valid {
-    border: none;
     background-color: var(--btn-background);
-  }
-  &:hover {
-    background-color: var(--hover-background);
-    box-shadow: 0px 0px 8px #fff;
+
+    &:hover {
+      box-shadow: 0px 0px 8px #fff;
+    }
   }
 }
 
