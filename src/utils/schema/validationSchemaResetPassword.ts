@@ -10,7 +10,7 @@ export const validationSchemaResetPassword = Yup.object().shape({
     .required("Поле електронної пошти не може бути порожнім")
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Електронна адреса повинна містити тільки латинські літери"
+      "Введіть дійсну електронну адресу у форматі username@example.com"
     )
     .matches(
       /^[^\s@]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,

@@ -6,9 +6,9 @@ import {
   useResendConfirmationCodeMutation,
 } from "@/redux/auth/authApi";
 import authSelector from "@/redux/auth/authSelector";
-import useRouterPush from "@/hooks/useRouter";
 import { customError } from "@/utils/types/customError";
 import { FormikValues } from "formik";
+import useRouterPush from "./useRouter";
 
 const useEmailConfirmation = () => {
   const [confirm, { isLoading, error }] = useConfirmEmailMutation();

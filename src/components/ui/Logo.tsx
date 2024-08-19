@@ -15,30 +15,12 @@ const Logo = () => {
 
       let calculatedWidth, calculatedHeight;
 
-      // if (w <= 375) {
-      //   calculatedWidth = 103;
-      //   calculatedHeight = 55;
-      // } else if (w <= 767) {
-      //   calculatedWidth = 103;
-      //   calculatedHeight = 55;
-      // } else if (w <= 1535) {
-      //   calculatedWidth = 204;
-      //   calculatedHeight = 114;
-      // } else if (w <= 1919) {
-      //   calculatedWidth = 216;
-      //   calculatedHeight = 120;
-      // } else {
-
-      //   calculatedWidth = 280;
-
-      //   calculatedHeight = 154;
-      // }
       if (w <= 375) {
         calculatedWidth = 61;
         calculatedHeight = 34;
       } else if (w <= 767) {
-        calculatedWidth = 80;
-        calculatedHeight = 45;
+        calculatedWidth = 61;
+        calculatedHeight = 34;
       } else if (w <= 1535) {
         calculatedWidth = 96;
         calculatedHeight = 54;

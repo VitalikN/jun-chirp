@@ -10,14 +10,13 @@
   justify-content: space-between;
   border-bottom: var(--border);
   border-color: var(--border-color);
-  padding: 15px 0;
-
-  @include mediaQuery(1280px) {
-    padding: 30px 0;
-  }
+  padding: 30px 0;
 }
+
 .text__link {
-  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .text__link__chip {
   width: 100%;
