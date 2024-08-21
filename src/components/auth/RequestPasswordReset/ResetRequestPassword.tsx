@@ -1,21 +1,22 @@
 "use client";
+import React from "react";
 
+import { useRequestPasswordResetMutation } from "@/redux/auth/authApi";
+import useRouterPush from "@/hooks/useRouter";
+import { customError } from "@/utils/types/customError";
 import Loader from "../../Loader/Loader";
 
 import { Field, Form, Formik } from "formik";
 import SvgIcon from "../../SvgIcon/SvgIcon";
 import ErrorFeedback from "../ErrorFeedback";
 import Button from "../../Button/Button";
-import { useRequestPasswordResetMutation } from "@/redux/auth/authApi";
 import ToastContainer from "../../ToastContainer/ToastContainer";
 import { useState } from "react";
-import { customError } from "@/utils/types/customError";
-import { validationSchemaRequestPasswordReset } from "@/components/auth/RequestPasswordReset/RequestPasswordReset";
-import useRouterPush from "@/hooks/useRouter";
-import s from "./requestPasswordReset.module.scss";
+import { validationSchemaRequestPasswordReset } from "./RequestPasswordReset";
 import { FormValuesRequestPasswordReset } from "./FormValuesRequestPasswordReset";
+import s from "./requestPasswordReset.module.scss";
 
-const RequestPasswordReset = () => {
+const ResetRequestPassword = () => {
   const [requestPasswordReset, { isLoading }] =
     useRequestPasswordResetMutation();
   const { pushRouter } = useRouterPush();
@@ -97,15 +98,15 @@ const RequestPasswordReset = () => {
               )}
               <Button
                 className={`${s.styledBtn}
-                 ${
-                   isLoading
-                     ? s.styledBtn
-                     : !touched.email || errors.email
-                     ? ""
-                     : !touched.email || errors.email || backendError
-                     ? s.invalid
-                     : s.valid
-                 } `}
+               ${
+                 isLoading
+                   ? s.styledBtn
+                   : !touched.email || errors.email
+                   ? ""
+                   : !touched.email || errors.email || backendError
+                   ? s.invalid
+                   : s.valid
+               } `}
                 type="submit"
                 isDisabled={!dirty || !isValid || isLoading}
               >
@@ -124,4 +125,5 @@ const RequestPasswordReset = () => {
     </section>
   );
 };
-export default RequestPasswordReset;
+
+export default ResetRequestPassword;

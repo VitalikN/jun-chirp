@@ -1,6 +1,6 @@
-import RequestPasswordReset from "@/components/auth/RequestPasswordReset/RequestPasswordReset";
+import ResetRequestPassword from "@/components/auth/RequestPasswordReset/ResetRequestPassword";
 
 const RequestPasswordResetPage = () => {
-  return <RequestPasswordReset />;
+  return <ResetRequestPassword />;
 };
 export default RequestPasswordResetPage;
