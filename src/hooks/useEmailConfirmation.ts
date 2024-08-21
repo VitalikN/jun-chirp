@@ -194,6 +194,10 @@ const useEmailConfirmation = () => {
       .padStart(2, "0")}`;
   };
 
+  const handleChangeBackend = () => {
+    setBackendError(null);
+  };
+
   return {
     backendError,
     email,
@@ -204,6 +208,7 @@ const useEmailConfirmation = () => {
     handleResendCode,
     formatTime,
     pushRouter,
+    handleChangeBackend,
   };
 };
 

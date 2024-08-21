@@ -63,6 +63,9 @@ const useRegisterFormik = () => {
     }
   };
 
+    const handleChange = () => {
+      setBackendError(null);
+    };
   const togglePasswordVisibility = (type: "password" | "confirmPassword") => {
     if (type === "password") {
       setShowPassword(!showPassword);
@@ -78,6 +81,7 @@ const useRegisterFormik = () => {
     showConfirmPassword,
     isLoading,
     backendError,
+    handleChange,
   };
 };
 

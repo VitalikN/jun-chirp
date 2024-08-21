@@ -24,6 +24,9 @@ const RequestPasswordReset = () => {
   const [backendError, setBackendError] = useState<string | null>(null);
   console.log(backendError);
 
+  const handleChange = () => {
+    setBackendError(null);
+  };
   const handleSubmit = async (
     values: FormValuesRequestPasswordReset,
     { resetForm }: { resetForm: () => void }
@@ -53,7 +56,13 @@ const RequestPasswordReset = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchemaRequestPasswordReset}
         >
-          {({ errors, touched, dirty, isValid }) => (
+          {({
+            errors,
+            touched,
+            dirty,
+            isValid,
+            handleChange: formikHandleChange,
+          }) => (
             <Form className={s.form}>
               <div className={s.form__box}>
                 <label
@@ -65,6 +74,10 @@ const RequestPasswordReset = () => {
                   <SvgIcon id="icon" width={6} height={16} className={s.chip} />
                 </label>
                 <Field
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    formikHandleChange(e);
+                    handleChange();
+                  }}
                   className={`${s.input} ${
                     (touched.email && errors.email) || backendError
                       ? s.invalid

@@ -3,6 +3,7 @@
 
 .section {
   padding-top: 55px;
+  padding-bottom: 55px;
 }
 .container__resend {
   display: flex;
@@ -30,6 +31,8 @@
 }
 .form {
   flex-direction: column;
+  gap: 48px;
+
   @include flexCenter();
   max-width: 349px;
   width: 100%;
@@ -108,6 +111,7 @@
 }
 
 .styledBtn {
+  cursor: pointer;
   padding: 10px 20px 10px 20px;
   background-color: #616161;
   color: var(--text-color);
@@ -116,7 +120,7 @@
   outline: none;
   width: 192px;
   margin: 0 auto;
-  margin-top: 24px;
+  // margin-top: 24px;
   text-transform: uppercase;
   @include font(14px, 2vw, 16px, 400, 19px);
 
@@ -124,9 +128,7 @@
     background-color: var(--invalid);
     @include flexCenter();
     gap: 8px;
-    &:hover {
-      box-shadow: 0px 0px 8px #fff;
-    }
+    // margin-top: 24px;
   }
 
   &.valid {
@@ -138,7 +140,7 @@
   }
 
   &.invalid__backendError {
-    margin-top: 24px;
+    // margin-top: 24px;
   }
 }
 
@@ -158,7 +160,6 @@
 .error__backend {
   color: #b3261e;
   text-align: center;
-  margin-top: 35px;
   @include font(14px, 2vw, 20px, 400, 19px);
 }
 .disabled {

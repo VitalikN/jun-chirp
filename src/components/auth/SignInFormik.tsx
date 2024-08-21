@@ -17,6 +17,7 @@ const SignInFormik = () => {
     isLoading,
     showPassword,
     backendError,
+    handleChange,
   } = useSignInFormik();
 
   return (
@@ -27,7 +28,7 @@ const SignInFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaSignIn}
       >
-        {({ errors, touched, dirty, isValid }) => (
+        {({ errors, touched, dirty, handleChange: formikHandleChange }) => (
           <Form className={s.form}>
             <div className={s.form__box}>
               <label
@@ -48,6 +49,10 @@ const SignInFormik = () => {
                 }`}
                 type="email"
                 name="email"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 error={touched.email && errors.email}
               />
               {(touched.email && errors.email) || backendError ? (
@@ -75,6 +80,10 @@ const SignInFormik = () => {
                 }`}
                 type={showPassword ? "text" : "password"}
                 name="password"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 error={touched.password && errors.password}
               />
 

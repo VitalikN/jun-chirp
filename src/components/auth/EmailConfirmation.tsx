@@ -23,6 +23,7 @@ const EmailConfirmation = () => {
     handleResendCode,
     formatTime,
     backendError,
+    handleChangeBackend,
   } = useEmailConfirmation();
 
   const { inputRefs, handleChange, handlePaste } = useCodeInput();
@@ -48,7 +49,14 @@ const EmailConfirmation = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchemaConfirm}
         >
-          {({ errors, touched, values, setFieldValue, dirty }) => (
+          {({
+            errors,
+            touched,
+            values,
+            setFieldValue,
+            dirty,
+            handleChange: formikHandleChange,
+          }) => (
             <Form className={s.form}>
               <div
                 className={s.form__box}
@@ -60,16 +68,22 @@ const EmailConfirmation = () => {
                     name={`code[${index}]`}
                     type="text"
                     className={`${s.input} ${
-                      touched.code && errors.code ? s.invalid : ""
+                      (touched.code && errors.code) || backendError
+                        ? s.invalid
+                        : touched.code && !errors.code
+                        ? s.valid
+                        : ""
                     }`}
                     maxLength="1"
                     value={values.code[index] || ""}
                     innerRef={(ref: HTMLInputElement) =>
                       (inputRefs.current[index] = ref)
                     }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, index, setFieldValue, values)
-                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      formikHandleChange(e);
+                      handleChangeBackend();
+                      handleChange(e, index, setFieldValue, values);
+                    }}
                   />
                 ))}
                 {touched.code && errors.code && (
