@@ -1,4 +1,4 @@
-import s from "@/sass/layouts/errorPage404.module.scss";
+import s from "./errorPage404.module.scss";
 import Link from "next/link";
 import { roboto, montserrat } from "@/utils/fonts";
 
