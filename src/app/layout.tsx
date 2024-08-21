@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import { montserrat } from "@/utils/fonts";
 import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "JunChirp",

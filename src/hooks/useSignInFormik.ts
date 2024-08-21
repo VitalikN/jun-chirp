@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLoginMutation } from "@/redux/auth/authApi";
 import useRouterPush from "@/hooks/useRouter";
 import { customError } from "@/utils/types/customError";
-import { FormValuesSignIn } from "@/utils/types/FormValuesSignIn";
+import { FormValuesSignIn } from "@/components/auth/SignIn/FormValuesSignIn";
 
 const useSignInFormik = () => {
   const [login, { isLoading, error }] = useLoginMutation();

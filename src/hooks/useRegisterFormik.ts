@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "@/redux/auth/authApi";
 import useRouterPush from "@/hooks/useRouter";
-import { FormValuesRegister } from "@/utils/types/FormValuesRegister";
+import { FormValuesRegister } from "@/components/auth/Register/FormValuesRegister";
 import { customError } from "@/utils/types/customError";
 
 const useRegisterFormik = () => {
@@ -63,9 +63,9 @@ const useRegisterFormik = () => {
     }
   };
 
-    const handleChange = () => {
-      setBackendError(null);
-    };
+  const handleChange = () => {
+    setBackendError(null);
+  };
   const togglePasswordVisibility = (type: "password" | "confirmPassword") => {
     if (type === "password") {
       setShowPassword(!showPassword);
