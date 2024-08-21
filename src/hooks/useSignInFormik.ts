@@ -44,7 +44,9 @@ const useSignInFormik = () => {
       setBackendError(errorMessage);
     }
   };
-
+  const handleChange = () => {
+    setBackendError(null);
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -55,6 +57,7 @@ const useSignInFormik = () => {
     isLoading,
     showPassword,
     backendError,
+    handleChange,
   };
 };
 

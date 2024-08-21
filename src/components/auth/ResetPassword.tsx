@@ -26,6 +26,9 @@ const ResetPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleChange = () => {
+    setBackendError(null);
+  };
   const handleSubmit = async (
     values: FormValuesResetPassword,
     { resetForm }: { resetForm: () => void }
@@ -43,9 +46,9 @@ const ResetPassword = () => {
         pushRouter("/sign_in");
       }
     } catch (error) {
-      toast.error("Неправильний код або пароль");
+      toast.error("Неправильний email або code");
 
-      let errorMessage = "Неправильний код або пароль";
+      let errorMessage = "Неправильний email або code";
 
       setBackendError(errorMessage);
     }
@@ -66,7 +69,13 @@ const ResetPassword = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchemaResetPassword}
         >
-          {({ errors, touched, dirty, isValid }) => (
+          {({
+            errors,
+            touched,
+            dirty,
+            isValid,
+            handleChange: formikHandleChange,
+          }) => (
             <Form className={s.form}>
               <div className={s.form__box}>
                 <label
@@ -78,9 +87,13 @@ const ResetPassword = () => {
                   <SvgIcon id="icon" width={6} height={16} className={s.chip} />
                 </label>
                 <Field
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    formikHandleChange(e);
+                    handleChange();
+                  }}
                   className={`${s.input} ${
-                    touched.email && errors.email
-                      ? // || backendError
+                    (touched.email && errors.email) || backendError
+                      ? //
                         s.invalid
                       : touched.email && !errors.email
                       ? s.valid
@@ -90,8 +103,7 @@ const ResetPassword = () => {
                   name="email"
                   error={touched.email && errors.email}
                 />
-                {touched.email && errors.email ? (
-                  // || backendError
+                {(touched.email && errors.email) || backendError ? (
                   <span className={s.warning}>!</span>
                 ) : null}
                 <ErrorFeedback name="email" />
@@ -106,8 +118,12 @@ const ResetPassword = () => {
                   <SvgIcon id="icon" width={6} height={16} className={s.chip} />
                 </label>
                 <Field
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    formikHandleChange(e);
+                    handleChange();
+                  }}
                   className={`${s.input} ${
-                    touched.code && errors.code
+                    (touched.code && errors.code) || backendError
                       ? // || backendError
                         s.invalid
                       : touched.code && !errors.code
@@ -118,8 +134,7 @@ const ResetPassword = () => {
                   name="code"
                   error={touched.code && errors.code}
                 />
-                {touched.code && errors.code ? (
-                  // || backendError
+                {(touched.code && errors.code) || backendError ? (
                   <span className={s.warning}>!</span>
                 ) : null}
                 <ErrorFeedback name="code" />
@@ -135,6 +150,10 @@ const ResetPassword = () => {
                 </label>
 
                 <Field
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    formikHandleChange(e);
+                    handleChange();
+                  }}
                   className={`${s.input} ${
                     touched.newPassword && errors.newPassword
                       ? s.invalid
@@ -161,12 +180,12 @@ const ResetPassword = () => {
 
                 <ErrorFeedback name="newPassword" />
               </div>
-              {/* <Button
+              <Button
                 title="ВІДМІНИТИ"
                 className={s.resetBtn}
                 type="reset"
                 isDisabled={!dirty || isLoading}
-              /> */}
+              />
               <Button
                 className={`${s.styledBtn}
                  
@@ -175,9 +194,8 @@ const ResetPassword = () => {
                      ? s.styledBtn
                      : !touched.email || errors.email
                      ? ""
-                     : !touched.email || errors.email
-                     ? // || backendError
-                       s.invalid
+                     : !touched.email || errors.email || backendError
+                     ? s.invalid
                      : s.valid
                  } `}
                 type="submit"

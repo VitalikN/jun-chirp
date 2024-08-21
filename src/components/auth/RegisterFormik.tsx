@@ -17,6 +17,7 @@ const RegisterFormik = () => {
     showConfirmPassword,
     isLoading,
     backendError,
+    handleChange,
   } = useRegisterFormik();
 
   return (
@@ -33,7 +34,13 @@ const RegisterFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaRegister}
       >
-        {({ errors, touched, dirty, values }) => (
+        {({
+          errors,
+          touched,
+          dirty,
+          values,
+          handleChange: formikHandleChange,
+        }) => (
           <Form className={s.form}>
             <div className={s.form__box}>
               <label
@@ -45,6 +52,10 @@ const RegisterFormik = () => {
                 <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 className={`${s.input} ${
                   touched.userName && errors.userName
                     ? s.invalid
@@ -78,6 +89,10 @@ const RegisterFormik = () => {
                 <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 className={`${s.input} ${
                   (touched.email && errors.email) || backendError
                     ? s.invalid
@@ -109,6 +124,10 @@ const RegisterFormik = () => {
               </label>
 
               <Field
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 className={`${s.input} ${
                   touched.password && errors.password
                     ? s.invalid
@@ -151,6 +170,10 @@ const RegisterFormik = () => {
                 <SvgIcon id="icon" width={6} height={16} className={s.chip} />
               </label>
               <Field
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  formikHandleChange(e);
+                  handleChange();
+                }}
                 className={`${s.input} ${
                   touched.confirmPassword && errors.confirmPassword
                     ? s.invalid
@@ -179,6 +202,10 @@ const RegisterFormik = () => {
               <div className={s.form__box__checkbox__field}>
                 {" "}
                 <Field
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    formikHandleChange(e);
+                    handleChange();
+                  }}
                   type="checkbox"
                   name="rememberMe"
                   className={`${s.checkbox} `}
