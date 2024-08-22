@@ -20,12 +20,18 @@
   --text-color-dark: #141416;
 
   --btn-background: #228b22;
-  --btn-bg-confirm: #D4B000;
+  --btn-bg-confirm: #d4b000;
   --btn-text-color-hover: #141416;
   --hover-background: #228b22;
   --hover-text-color: #228b22;
 
   --invalid: #b3261e;
+
+  --screen-size-l: 1536px;
+  --screen-size-m: 1280px;
+  --screen-size-s: 768px;
+  --screen-size-xs: 375px;
+  --transition-time: 0.3s;
 }
 
 /* #B3261E */
@@ -51,9 +57,9 @@ body {
 body {
   background: var(--background-color);
   color: var(--text-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 main {
   flex: 1;

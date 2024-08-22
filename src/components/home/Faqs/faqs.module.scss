@@ -1,2 +1,200 @@
 @import "../../../sass/utils/container";
 @import "../../../sass/utils/mixins";
+@import "../../../sass/utils/variables";
+
+.faq {
+  display: flex;
+  flex-direction: column;
+
+  &__question {
+    @include flexCenter();
+    @include font(24px, 2vw, 24px, 400, 36px);
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(20px, 2vw, 20px, 400, 30px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(20px, 2vw, 20px, 400, 30px);
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      @include font(16px, 2vw, 16px, 400, 24px);
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(12px, 2vw, 12px, 400, 18px);
+    }
+  }
+
+  &__answer {
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: transform var(--transition-time) ease-in-out,
+      opacity var(--transition-time) ease-in-out, max-height 0.4s ease-out;
+
+    &.active {
+      transform: scaleY(1);
+      opacity: 1;
+      max-height: 500px;
+      margin-top: 32px;
+
+      @include mediaMaxQuery($screen-size-l) {
+        margin-top: 24px;
+      }
+
+      @include mediaMaxQuery($screen-size-s) {
+        margin-top: 12px;
+      }
+
+      @include mediaMaxQuery($screen-size-xs) {
+        margin-top: 24px;
+      }
+    }
+
+    @include font(20px, 2vw, 20px, 500, 30px);
+    color: var(--text-color-valid);
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(20px, 2vw, 20px, 500, 30px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(18px, 2vw, 18px, 500, 27px);
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      @include font(16px, 2vw, 40px, 500, 24px);
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(12px, 2vw, 12px, 500, 18px);
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &__title {
+    @include font(40px, 2vw, 40px, 600, 44px);
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(32px, 2vw, 32px, 600, 35px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(40px, 2vw, 40px, 600, 44px);
+    }
+    @include mediaMaxQuery($screen-size-s) {
+      @include font(24px, 2vw, 24px, 600, 26px);
+    }
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(20px, 2vw, 22px, 600, 22px);
+      @include flexCenter;
+    }
+  }
+}
+
+.faqs {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 3.55%,
+    rgba(34, 139, 34, 0.2) 122.16%
+  );
+  border: 2px solid var(--color);
+  box-sizing: border-box;
+  border-radius: 40px;
+  padding: 50px 152px;
+  display: flex;
+  flex-direction: column;
+
+  @include mediaMaxQuery($screen-size-l) {
+    padding: 40px 189px 50px 189px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    padding: 50px 122px 40px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    padding: 24px 69px 24px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    padding: 32px 24px 24px;
+  }
+}
+
+.container__faqs {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 40px;
+
+  @include mediaMaxQuery($screen-size-l) {
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    gap: 12px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+}
+
+.toggleIcon {
+  @include font(40px, 2vw, 40px, 600, 44px);
+  color: var(--text-color-valid);
+
+  @include mediaMaxQuery($screen-size-xs) {
+    @include font(20px, 2vw, 20px, 600, 22px);
+  }
+}
+
+.link {
+  border: 1px solid var(--border-color);
+  width: 242px;
+  height: 49px;
+  border-radius: 12px;
+  gap: 8px;
+  @include font(20px, 2vw, 20px, 300, 24px);
+  @include flexCenter();
+  @include hover(transform, scale(1.05));
+
+  @include mediaMaxQuery($screen-size-m) {
+    @include font(18px, 2vw, 18px, 300, 22px);
+    width: 225px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    @include font(16px, 2vw, 16px, 300, 20px);
+    width: 188px;
+    height: 33px;
+  }
+  @include mediaMaxQuery($screen-size-xs) {
+    width: 32px;
+    height: 32px;
+    border-radius: 40px;
+  }
+
+  &__text {
+    @include mediaMaxQuery($screen-size-xs) {
+      display: none;
+    }
+  }
+}
+
+.container__link {
+  @include flexCenter;
+}
