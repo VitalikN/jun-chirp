@@ -18,3 +18,9 @@
     max-width: 584px;
   }
 }
+
+.title {
+  text-align: center;
+
+  @include font(20px, 2vw, 26px, 500, 25px);
+}
