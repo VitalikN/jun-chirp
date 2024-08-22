@@ -9,6 +9,7 @@ import BurgerButton from "../BurgerButton/BurgerButton";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import useRouterPush from "@/hooks/useRouter";
 import s from "./header.module.scss";
+import { AppRouteEnum } from "@/libs/enums/enums";
 
 const Header = () => {
   const pathname = usePathname();
@@ -22,7 +23,7 @@ const Header = () => {
       console.log("logout");
 
       await logout({}).unwrap();
-      pushRouter("/");
+      pushRouter(AppRouteEnum.ROOT);
     } catch (err) {
       console.error("Failed to logout:", err);
     }
@@ -32,10 +33,10 @@ const Header = () => {
     <header className={s.header}>
       <div className={`${s.container} `}>
         <div className={` ${s.container__header} `}>
-          <Link href="/" className={s.logo__link}>
+          <Link href={AppRouteEnum.ROOT} className={s.logo__link}>
             <Logo />
           </Link>
-          <Link href="/" className={s.text__link}>
+          <Link href={AppRouteEnum.ROOT} className={s.text__link}>
             <SvgIcon
               id="future-of-it"
               width={438}
@@ -43,18 +44,18 @@ const Header = () => {
               className={s.text__link__chip}
             />
           </Link>
-          {pathname !== "/sign_in" &&
-            pathname !== "/register" &&
-            pathname !== "/confirm" && (
+          {pathname !== AppRouteEnum.SIGN_IN &&
+            pathname !== AppRouteEnum.SIGN_UP &&
+            pathname !== AppRouteEnum.CONFIRM && (
               <nav className={`${s.nav}  `}>
                 <Link
                   className={s.link}
                   href={
                     token
                       ? isConfirmed
-                        ? "/my_office"
-                        : "/confirm"
-                      : "/sign_in"
+                        ? AppRouteEnum.MY_OFFICE
+                        : AppRouteEnum.CONFIRM
+                      : AppRouteEnum.SIGN_IN
                   }
                 >
                   {token ? "Мій кабінет" : "Зареєструватись / Увійти"}

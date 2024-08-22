@@ -6,7 +6,7 @@ import s from "./faqs.module.scss";
 import { faqs } from "./faqsText";
 import { useState } from "react";
 import SvgIcon from "@/components/SvgIcon/SvgIcon";
-import { AppRoute } from "@/consts/route-enum";
+import { AppRouteEnum } from "@/libs/enums/enums";
 
 const Faqs = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -44,7 +44,7 @@ const Faqs = () => {
           </div>
 
           <div className={s.container__link}>
-            <Link className={s.link} href={AppRoute.SUPPORT}>
+            <Link className={s.link} href={AppRouteEnum.SUPPORT}>
               <span className={s.link__text}>Переглянути всі</span>
               <SvgIcon width={19} height={15} id="arrow-down" />
             </Link>
