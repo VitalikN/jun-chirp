@@ -1,3 +1,5 @@
+@import "./variables";
+
 // mixin media query
 @mixin mediaQuery($breakpoint) {
   @media screen and (min-width: $breakpoint) {
@@ -46,10 +48,18 @@
   line-height: $lh / $fs;
 }
 
+@mixin hover($property, $value) {
+  transition: #{$property} $transition-time ease;
+  &:hover {
+    #{$property}: $value;
+  }
+}
+
 :export {
   flexCenter: #{mixinStr(flexCenter)};
   font: #{mixinStr(font)};
   mediaQuery: #{mixinStr(mediaQuery)};
 
   mediaMaxQuery: #{mixinStr(mediaMaxQuery)};
+  hover: #{mixinStr(hover)};
 }
