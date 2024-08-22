@@ -1,0 +1,99 @@
+
+
+@import "../../sass/utils/container";
+@import "../../sass/utils/mixins";
+
+@import "../../components/auth/SignIn/signIn.module.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__box__checkbox .checkbox {
+  appearance: none;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  border: var(--border);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  &:focus {
+    outline: none;
+  }
+
+  &:checked + .chip__checkbox {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 4px;
+    @include mediaQuery(1280px) {
+      top: 0;
+    }
+  }
+}
+.form__box__checkbox__field {
+  @include flex();
+}
+.text__chip__checkbox {
+  color: #0033ff;
+}
+.invalid__checkbox__message {
+  padding-top: 12px;
+  color: #b3261e;
+  @include font(14px, 2vw, 20px, 400, 19px);
+}
+
+.box__btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.resetBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0 auto;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: #616161;
+  text-decoration-thickness: 1px;
+  color: #616161;
+  @include font(14px, 2vw, 16px, 400, 19px);
+  transition: all 0.3s;
+  &:hover {
+    color: var(--hover-text-color);
+    text-decoration-color: var(--hover-text-color);
+  }
+}
+
+.styledBtn {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.passwordStrength {
+  .strengthBar {
+    height: 3px;
+    border-radius: 3px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-bottom: 4px;
+  }
+
+  .strengthLevels {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    span {
+      transition: color 0.3s ease;
+      @include font(12px, 2vw, 14px, 400, 15px);
+    }
+  }
+}
