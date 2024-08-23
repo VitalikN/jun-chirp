@@ -8,7 +8,7 @@ const NotFoundPage = () => {
       <div className={`${roboto.className} ${styles.container} `}>
         <div className={styles.content__block}>
           <svg className={styles.img__404} width="242" height="210">
-            <use href="/symbol-defstyles.svg#404"></use>
+            <use href="/symbol-defs.svg#404"></use>
           </svg>
           <h1 className={styles.title}>Error 404 - Page not found</h1>
           <p className={styles.details}>
