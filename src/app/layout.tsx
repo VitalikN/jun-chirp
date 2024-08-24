@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import { montserrat } from "@/utils/fonts";
 import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
 import Footer from "@/components/Footer/Footer";
+import { Temporary } from "@/components/temporary/temporary";
 
 export const metadata: Metadata = {
   title: "JunChirp",
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <ReduxProvider>
           <Header />
+          <Temporary />
           <main className="main">{children}</main>
           <Footer />
         </ReduxProvider>
