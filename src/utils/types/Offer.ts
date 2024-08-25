@@ -4,4 +4,5 @@ export type Offer = {
   text: string;
   buttonText: string;
   image: string;
+  id: number;
 };

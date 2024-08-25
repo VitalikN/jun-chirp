@@ -3,6 +3,7 @@ import s from "./whatWeOffer.module.scss";
 import { FC } from "react";
 import { Offer } from "@/utils/types/Offer";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   offer: Offer;
@@ -11,7 +12,13 @@ type Props = {
 const WhatWeOfferCard: FC<Props> = ({ offer }) => {
   return (
     <div className={s.card}>
-      <img src={offer.image} className={s.img} alt="offer" />
+      <Image
+        src={offer.image}
+        className={s.img}
+        alt="offer"
+        height={400}
+        width={400}
+      />
       <div className={s.layer}>
         <div className={s.layer__info}>
           <div className={s.layer__title}>{offer.title}</div>

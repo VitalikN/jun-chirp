@@ -1,4 +1,3 @@
-import SvgIcon from "@/components/SvgIcon/SvgIcon";
 import s from "./whatWeOffer.module.scss";
 import WhatWeOfferList from "./WhatWeOfferList";
 import { offeringsData } from "./whatWeOfferData";
