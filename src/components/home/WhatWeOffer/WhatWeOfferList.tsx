@@ -1,7 +1,7 @@
-import s from "./whatWeOffer.module.scss";
 import { FC } from "react";
 import { Offer } from "@/utils/types/Offer";
 import WhatWeOfferCard from "./WhatWeOfferCard";
+import s from "./whatWeOffer.module.scss";
 
 type Props = {
   offers: Offer[];

@@ -1,9 +1,10 @@
+import Link from "next/link";
+import Image from "next/image";
+
 import SvgIcon from "@/components/SvgIcon/SvgIcon";
 import s from "./whatWeOffer.module.scss";
 import { FC } from "react";
 import { Offer } from "@/utils/types/Offer";
-import Link from "next/link";
-import Image from "next/image";
 
 type Props = {
   offer: Offer;
