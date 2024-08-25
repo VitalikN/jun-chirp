@@ -1,2 +1,279 @@
 @import "../../../sass/utils/container";
 @import "../../../sass/utils/mixins";
+
+.card {
+  box-sizing: border-box;
+  position: relative;
+
+  @include mediaMaxQuery($screen-size-l) {
+    width: 456px;
+    height: 540px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    width: 391px;
+    height: 454px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    width: 346px;
+    height: 461px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    width: 319px;
+    height: 440px;
+    scroll-snap-align: start;
+  }
+}
+
+.img {
+  box-sizing: border-box;
+  width: 584px;
+  height: 640px;
+  border-radius: 40px;
+  border: 2px solid var(--color);
+
+  @include mediaMaxQuery($screen-size-l) {
+    width: 456px;
+    height: 540px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    width: 391px;
+    height: 454px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    width: 346px;
+    height: 461px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    width: 319px;
+    height: 440px;
+  }
+}
+
+.list {
+  @include flexCenter();
+  gap: 24px;
+  flex-wrap: wrap;
+  row-gap: 40px;
+
+  @include mediaMaxQuery($screen-size-l) {
+    row-gap: 32px;
+    gap: 12px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    gap: 16px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    gap: 16px;
+    row-gap: 30px;
+  }
+
+  @include mediaBetweenQuery($screen-size-xs, $screen-size-s) {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    justify-content: start;
+    overflow-y: hidden;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    justify-content: start;
+    overflow-y: hidden;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.title {
+  margin-bottom: 92px;
+  @include font(112px, 2vw, 112px, 700, 136px);
+  @include flexCenter();
+  text-align: center;
+
+  @include mediaMaxQuery($screen-size-l) {
+    @include font(80px, 2vw, 80px, 700, 98px);
+    margin-bottom: 44px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    @include font(70px, 2vw, 70px, 700, 85px);
+    margin-bottom: 40px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    @include font(48px, 2vw, 48px, 700, 58px);
+    margin-bottom: 68px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    @include font(24px, 2vw, 24px, 700, 30px);
+    margin-bottom: 53px;
+  }
+}
+
+.layer {
+  position: absolute;
+  top: 78px;
+  background: linear-gradient(90deg, #141416 0%, #124713 100%);
+  width: 100%;
+  border-radius: 40px;
+  border: 2px solid var(--color);
+  height: calc(100% - 78px);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s ease-in-out;
+
+  @include mediaMaxQuery($screen-size-l) {
+    height: calc(100% - 55px);
+    top: 55px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    height: calc(100% - 75px);
+    top: 75px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    height: calc(100% - 48px);
+    top: 48px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    height: 100%;
+    top: 0;
+  }
+
+  .card:hover & {
+    transform: scaleY(1);
+  }
+
+  &__info {
+    padding: 20px 40px 0px 40px;
+
+    @include mediaMaxQuery($screen-size-l) {
+      padding: 20px 32px 0px 32px;
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      padding: 20px 20px 0px 20px;
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      padding: 24px 24px 0px 24px;
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      padding: 45px 20px 0px 20px;
+    }
+  }
+
+  &__title {
+    text-align: left;
+    @include flexCenter();
+    @include font(40px, 2vw, 40px, 400, 49px);
+    margin-bottom: 24px;
+    box-sizing: border-box;
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(32px, 2vw, 32px, 500, 39px);
+      margin-bottom: 16px;
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(24px, 2vw, 24px, 500, 30px);
+      margin-bottom: 12px;
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      @include font(20px, 2vw, 20px, 500, 24px);
+      margin-bottom: 20px;
+    }
+  }
+
+  &__description {
+    margin-bottom: 16px;
+    @include font(24px, 2vw, 24px, 400, 30px);
+    text-align: center;
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(20px, 2vw, 20px, 400, 25px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(16px, 2vw, 16px, 400, 20px);
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      margin-bottom: 12px;
+    }
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(14px, 2vw, 14px, 400, 17px);
+      margin-bottom: 16px;
+    }
+  }
+
+  &__text {
+    @include font(18px, 2vw, 18px, 400, 21px);
+    text-align: left;
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(15px, 2vw, 15px, 400, 17px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(12px, 2vw, 12px, 400, 13px);
+    }
+  }
+
+  &__button {
+    width: calc(100% - 40px);
+    left: 20px;
+    gap: 12px;
+    @include flexCenter();
+    border: 1px solid var(--color);
+    border-radius: 40px;
+    height: 55px;
+    bottom: 20px;
+    position: absolute;
+
+    @include mediaMaxQuery($screen-size-l) {
+      height: 48px;
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      height: 44px;
+      bottom: 12px;
+    }
+
+    @include mediaMaxQuery($screen-size-s) {
+      height: 40px;
+      @include font(18px, 2vw, 18px, 600, 21px);
+    }
+
+    @include mediaBetweenQuery($screen-size-xs, $screen-size-s) {
+      height: 48px;
+      @include font(16px, 2vw, 16px, 600, 21px);
+      bottom: 33px;
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      height: 48px;
+      @include font(16px, 2vw, 16px, 600, 21px);
+      bottom: 33px;
+    }
+  }
+
+  &__buttonText {
+    text-transform: uppercase;
+  }
+}
