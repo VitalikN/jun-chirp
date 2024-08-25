@@ -5,7 +5,7 @@ import FooterNav from "./FooterNav";
 import { roboto, montserrat } from "@/utils/fonts";
 import FooterIcons from "./FooterIcons";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className={`${roboto.className} ${s.container} `}>
       <div className={`${s.footer}`}>
