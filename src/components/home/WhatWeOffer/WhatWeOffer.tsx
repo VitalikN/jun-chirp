@@ -6,7 +6,7 @@ const WhatWeOffer = () => {
   return (
     <section className={s.section}>
       <div className={`${s.container}  `}>
-        <h1 className={s.title}>Що ми пропонуємо</h1>
+        <h2 className={s.title}>Що ми пропонуємо</h2>
         <WhatWeOfferList offers={offeringsData} />
       </div>
     </section>
