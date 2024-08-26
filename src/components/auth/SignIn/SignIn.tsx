@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import SignInFormik from "./SignInFormik";
 import SocialLoginGroup from "../../SocialLoginGroup/SocialLoginGroup";
 import s from "./signIn.module.scss";
+import { AppRouteEnum } from "@/libs/enums/enums";
 
 const SignIn = () => {
   const pathname = usePathname();
@@ -15,18 +16,18 @@ const SignIn = () => {
       <div className={`${s.container} `}>
         <div className={s.box__link}>
           <Link
-            href="/sign_in"
+            href={AppRouteEnum.SIGN_IN}
             className={` ${s.link} ${
-              pathname === "/sign_in" ? s.link__sign_in : ""
+              pathname === `${AppRouteEnum.SIGN_IN}` ? s.link__sign_in : ""
             } `}
           >
             Увійти
           </Link>
           <span>/</span>
           <Link
-            href="/register"
+            href={AppRouteEnum.SIGN_UP}
             className={` ${s.link} ${
-              pathname === "/register" ? s.link__register : ""
+              pathname === `${AppRouteEnum.SIGN_UP}` ? s.link__register : ""
             } `}
           >
             Зареєструватись
