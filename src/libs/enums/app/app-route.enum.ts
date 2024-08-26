@@ -12,6 +12,8 @@ const AppRouteEnum = {
   REQUEST_PASSWORD_RESET: "/request-password-reset",
   RESET_PASSWORD: "/reset-password",
   USER_DATA: "/user-data",
+  //
+  ROLE_CONFIRMATION: "/account-verification/role-confirmation",
 } as const;
 
 export { AppRouteEnum };
