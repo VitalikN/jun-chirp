@@ -1,0 +1,13 @@
+.list {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.list li {
+  padding: 0.125rem 0.25rem;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+}

@@ -1,5 +1,6 @@
 // import ErrorPage404 from "@/components/errorPage/errorPage404";
 // import ErrorPage505 from "@/components/errorPage/errorPage505";
+import MagicButton from "@/components/temp/magickButton";
 
 import Faqs from "@/components/home/Faqs/Faqs";
 import Hero from "@/components/home/Hero/Hero";
@@ -18,6 +19,7 @@ export default function Home() {
       <Testimonials />
       <Faqs />
 
+      <MagicButton />
       {/* <ErrorPage404 />
       <ErrorPage505 /> */}
     </>

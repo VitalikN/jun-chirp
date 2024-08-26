@@ -55,6 +55,12 @@
   }
 }
 
+@mixin mediaBetweenQuery($min-width, $max-width) {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
+    @content;
+  }
+}
+
 :export {
   flexCenter: #{mixinStr(flexCenter)};
   font: #{mixinStr(font)};
@@ -62,4 +68,5 @@
 
   mediaMaxQuery: #{mixinStr(mediaMaxQuery)};
   hover: #{mixinStr(hover)};
+  mediaBetweenQuery: #{mixinStr(mediaBetweenQuery)};
 }
