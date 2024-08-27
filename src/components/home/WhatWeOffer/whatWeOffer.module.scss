@@ -245,6 +245,7 @@
     height: 55px;
     bottom: 20px;
     position: absolute;
+    @include font(24px, 2vw, 24px, 600, 28px);
 
     @include mediaMaxQuery($screen-size-l) {
       height: 48px;
@@ -253,6 +254,7 @@
     @include mediaMaxQuery($screen-size-m) {
       height: 44px;
       bottom: 12px;
+      @include font(20px, 2vw, 20px, 600, 23px);
     }
 
     @include mediaMaxQuery($screen-size-s) {
