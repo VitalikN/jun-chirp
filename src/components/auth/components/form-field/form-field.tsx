@@ -28,6 +28,7 @@ const FormField = <T extends object>(props: FormFieldProps<T>) => {
     togglePasswordVisibility,
   } = props;
   const isThisPassword = name === "password";
+  console.log(showPassword);
 
   return (
     <div className={s.form__box}>
@@ -36,7 +37,7 @@ const FormField = <T extends object>(props: FormFieldProps<T>) => {
           touched[name] && errors[name] ? s.invalid : ""
         }`}
       >
-        {label} 
+        {label}
         <SvgIcon id="icon" width={6} height={16} className={s.chip} />
       </label>
       <Field
