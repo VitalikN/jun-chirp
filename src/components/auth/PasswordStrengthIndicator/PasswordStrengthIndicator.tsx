@@ -11,6 +11,7 @@ const PasswordStrengthIndicator = ({ password, userName }: Indicator) => {
     password,
     userName,
   });
+  console.log(strength)
 
   return (
     <div className={s.passwordStrength}>
