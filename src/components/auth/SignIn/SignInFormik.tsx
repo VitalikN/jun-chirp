@@ -6,10 +6,10 @@ import { validationSchemaSignIn } from "./validationSchemaSignIn";
 
 import s from "./signIn.module.scss";
 import ToastContainer from "@/components/ToastContainer/ToastContainer";
-import { FormField } from "../components/form-field/form-field";
 import SvgIcon from "@/components/SvgIcon/SvgIcon";
 import Button from "@/components/Button/Button";
 import Loader from "@/components/Loader/Loader";
+import { FormField } from "@/components/common/form-field/form-field";
 
 const SignInFormik = () => {
   const {
@@ -56,6 +56,7 @@ const SignInFormik = () => {
               }}
               showPassword={showPassword}
               togglePasswordVisibility={togglePasswordVisibility}
+              isThisPassword={true}
             />
 
             <div className={s.form__box__checkbox}>

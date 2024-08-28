@@ -13,6 +13,7 @@ type FormFieldProps<T extends object> = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   showPassword?: boolean;
   togglePasswordVisibility?: () => void;
+  isThisPassword?: boolean;
 };
 
 const FormField = <T extends object>(props: FormFieldProps<T>) => {
@@ -25,10 +26,9 @@ const FormField = <T extends object>(props: FormFieldProps<T>) => {
     backendError,
     onChange,
     showPassword,
+    isThisPassword,
     togglePasswordVisibility,
   } = props;
-  const isThisPassword = name === "password";
-  console.log(showPassword);
 
   return (
     <div className={s.form__box}>
@@ -48,7 +48,7 @@ const FormField = <T extends object>(props: FormFieldProps<T>) => {
             ? s.valid
             : ""
         }`}
-        type={type}
+        type={showPassword === true ? "text" : type}
         name={name as string}
         onChange={onChange}
       />

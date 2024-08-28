@@ -66,12 +66,8 @@ const useRegisterFormik = () => {
   const handleChange = () => {
     setBackendError(null);
   };
-  const togglePasswordVisibility = (type: "password" | "confirmPassword") => {
-    if (type === "password") {
-      setShowPassword(!showPassword);
-    } else if (type === "confirmPassword") {
-      setShowConfirmPassword(!showConfirmPassword);
-    }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return {
