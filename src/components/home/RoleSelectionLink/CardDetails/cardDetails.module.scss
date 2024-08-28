@@ -1,0 +1,144 @@
+@import "../../../../sass/utils/mixins";
+
+.card {
+  padding: 36px 27px 42px;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 24px;
+  background: linear-gradient(
+    183.73deg,
+    rgb(20, 20, 22) 3.557%,
+    rgb(34, 139, 34) 466.303%
+  );
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    > * {
+      width: 50%;
+    }
+
+    @include mediaQuery($screen-size-s) {
+      flex-direction: column;
+      gap: initial;
+    }
+  }
+
+  @include mediaQuery($screen-size-s) {
+    align-self: start;
+    padding: 20px 32px;
+    gap: 16px;
+
+    &:nth-child(2) {
+      margin-top: 103px;
+    }
+
+    &:nth-child(3) {
+      margin-top: -50px;
+    }
+
+    &:nth-child(4) {
+      margin-top: 103px;
+    }
+  }
+  @include mediaQuery($screen-size-m) {
+    gap: 12px;
+  }
+  @include mediaQuery($screen-size-l) {
+    gap: 24px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+
+    @include font(24px, 2vw, 48px, 700, 29px);
+    @include mediaQuery($screen-size-s) {
+      text-align: center;
+    }
+    @include mediaQuery($screen-size-m) {
+      line-height: 39px;
+    }
+    @include mediaQuery($screen-size-xl) {
+      line-height: 58px;
+    }
+  }
+
+  .subtitle {
+    text-align: left;
+    color: rgb(250, 250, 250);
+
+    @include font(12px, 2vw, 20px, 400, 15px);
+    @include mediaQuery($screen-size-s) {
+      margin-bottom: 24px;
+      text-align: center;
+      width: initial;
+      font-weight: 500;
+      line-height: 17px;
+    }
+    @include mediaQuery($screen-size-m) {
+      line-height: 20px;
+    }
+    @include mediaQuery($screen-size-l) {
+      margin-bottom: 20px;
+      line-height: 24px;
+    }
+  }
+
+  .description {
+    display: none;
+    @include mediaQuery($screen-size-s) {
+      margin-bottom: 32px;
+      width: initial;
+      display: block;
+      @include font(12px, 2vw, 16px, 400, 15px);
+    }
+    @include mediaQuery($screen-size-m) {
+      margin-bottom: 44px;
+      line-height: 17px;
+    }
+    @include mediaQuery($screen-size-l) {
+      margin-bottom: 32px;
+      line-height: 20px;
+    }
+    @include mediaQuery($screen-size-xl) {
+      margin-bottom: 56px;
+    }
+  }
+
+  .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 135px;
+
+    > * {
+      flex-shrink: 0;
+    }
+
+    height: 100%;
+    padding: 0px 20px;
+    text-transform: uppercase;
+    border: 1px solid rgb(250, 250, 250);
+    border-radius: 69px;
+    background: rgb(34, 139, 34);
+
+    color: rgb(255, 255, 255);
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+
+    @include mediaQuery($screen-size-s) {
+      max-width: initial;
+    }
+  }
+}
