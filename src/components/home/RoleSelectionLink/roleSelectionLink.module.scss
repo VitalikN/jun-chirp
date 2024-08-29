@@ -5,15 +5,24 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  // background-image: linear-gradient(
+  //     to bottom,
+  //     rgba(20, 20, 22, 1) 0px,
+  //     rgba(20, 20, 22, 1) 2px,
+  //     rgba(20, 20, 22, 0) 50%,
+  //     rgba(20, 20, 22, 1) calc(100% - 2px),
+  //     rgba(20, 20, 22, 1) 100%
+  //   ),
+  //   url("/img.jpg");
   background-image: linear-gradient(
       to bottom,
-      rgba(20, 20, 22, 1) 0px,
-      rgba(20, 20, 22, 1) 2px,
-      rgba(20, 20, 22, 0) 50%,
-      rgba(20, 20, 22, 1) calc(100% - 2px),
-      rgba(20, 20, 22, 1) 100%
+      rgba(20, 20, 22, 0.5) 5%,
+      rgba(20, 20, 22, 0.5) 100%
     ),
     url("/img.jpg");
+  border: none;
+  box-shadow: inset 0px 4px 168.6px 0px rgba(0, 0, 0, 0.25);
+  background-attachment: fixed;
 }
 
 .cards {
@@ -21,7 +30,8 @@
   padding-bottom: 51px;
   display: flex;
   flex-direction: column;
-
+  width: 100%;
+  margin: 0 auto;
   transition: all 1s ease;
   @include mediaMaxQuery($screen-max-size-m) {
     gap: 16px;
@@ -31,20 +41,21 @@
     flex-wrap: wrap;
 
     justify-content: center;
-    width: 768px;
+    max-width: 768px;
   }
   @include mediaQuery($screen-size-m) {
-    width: 998px;
+    max-width: 998px;
     justify-content: space-between;
 
     row-gap: 69px;
   }
   @include mediaQuery($screen-size-l) {
-    width: 1536px;
+    max-width: 1536px;
+    justify-content: center;
     gap: 24px;
   }
   @include mediaQuery($screen-size-xl) {
-    width: 1920px;
+    max-width: 1920px;
   }
   @include mediaMaxQuery($screen-max-size-s) {
     max-width: 500px;
