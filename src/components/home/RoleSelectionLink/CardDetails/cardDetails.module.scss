@@ -1,4 +1,5 @@
 @import "../../../../sass/utils/mixins";
+@import "../roleSelectionLink.module.scss";
 
 .card {
   padding: 36px 27px 42px;
@@ -16,40 +17,58 @@
   );
   @include mediaQuery($screen-size-s) {
     max-width: 346px;
+    gap: 16px;
+    height: 453px;
   }
 
   @include mediaQuery($screen-size-m) {
     max-width: 392px;
+    height: 539px;
+
+    &:nth-child(3) {
+      margin-left: 101px;
+    }
+
+    &:nth-child(4) {
+      margin-right: -101px;
+    }
   }
 
   @include mediaQuery($screen-size-l) {
     max-width: 336px;
+    gap: 12px;
+    height: 577px;
+    &:nth-child(3),
+    &:nth-child(4) {
+      margin-right: 0;
+      margin-left: 0;
+    }
   }
 
   @include mediaQuery($screen-size-xl) {
     max-width: 432px;
+    gap: 24px;
   }
 
   .content {
     display: flex;
-    justify-content: space-between;
+    gap: 24px;
     align-items: center;
-    gap: 8px;
-
+    height: 100%;
     > * {
       width: 50%;
     }
 
     @include mediaQuery($screen-size-s) {
       flex-direction: column;
-      gap: initial;
+      // gap: initial;
     }
   }
 
   @include mediaQuery($screen-size-s) {
     align-self: start;
     padding: 20px 32px;
-    gap: 16px;
+    // gap: 16px;
 
     &:nth-child(2) {
       margin-top: 103px;
@@ -64,14 +83,39 @@
     }
   }
   @include mediaQuery($screen-size-m) {
-    gap: 12px;
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      margin-top: 0;
+      //
+    }
   }
   @include mediaQuery($screen-size-l) {
-    gap: 24px;
+    gap: 20px;
+    &:nth-child(2) {
+      margin-top: 140px;
+    }
+    &:nth-child(3) {
+      margin-top: 280px;
+    }
+    &:nth-child(4) {
+      margin-top: 420px;
+    }
+  }
+  @include mediaQuery($screen-size-xl) {
+    &:nth-child(2) {
+      margin-top: 160px;
+    }
+    &:nth-child(3) {
+      margin-top: 320px;
+    }
+    &:nth-child(4) {
+      margin-top: 480px;
+    }
   }
 
   .title {
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     text-transform: uppercase;
     color: rgb(255, 255, 255);
 
@@ -93,7 +137,7 @@
 
     @include font(12px, 2vw, 14px, 500, 17px);
     @include mediaQuery($screen-size-s) {
-      margin-bottom: 24px;
+      // margin-bottom: 24px;
       text-align: center;
       width: initial;
       line-height: 17px;
@@ -102,7 +146,7 @@
       line-height: 20px;
     }
     @include mediaQuery($screen-size-l) {
-      margin-bottom: 20px;
+      // margin-bottom: 20px;
       line-height: 24px;
     }
   }
@@ -110,21 +154,20 @@
   .description {
     display: none;
     @include mediaQuery($screen-size-s) {
-      margin-bottom: 32px;
+      margin-bottom: auto;
+
       width: initial;
       display: block;
       @include font(12px, 2vw, 12px, 400, 15px);
     }
     @include mediaQuery($screen-size-m) {
-      margin-bottom: 44px;
-      @include font(14px, 2vw, 16px, 400, 17px);
+      // margin-bottom: 44px;
+      @include font(14px, 2vw, 14px, 400, 17px);
     }
     @include mediaQuery($screen-size-l) {
-      margin-bottom: 32px;
-      line-height: 20px;
     }
     @include mediaQuery($screen-size-xl) {
-      margin-bottom: 56px;
+      @include font(14px, 2vw, 16px, 400, 20px);
     }
   }
 
