@@ -52,7 +52,7 @@
 
   .content {
     display: flex;
-    gap: 24px;
+    gap: 8px;
     align-items: center;
     height: 100%;
     > * {
@@ -61,7 +61,7 @@
 
     @include mediaQuery($screen-size-s) {
       flex-direction: column;
-      // gap: initial;
+      gap: 24px;
     }
   }
 
