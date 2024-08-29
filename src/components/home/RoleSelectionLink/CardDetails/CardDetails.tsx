@@ -14,7 +14,12 @@ const CardDetails = ({ title, subtitle, description }: Card) => {
         <p className={s.description}>{description}</p>
         <Link className={s.link} href="#">
           Перейти
-          <SvgIcon width={25} height={25} id="arrow-next" />
+          <SvgIcon
+            className={s.content__icon}
+            width={19}
+            height={15}
+            id="arrow-next-role"
+          />
         </Link>
       </div>
     </div>

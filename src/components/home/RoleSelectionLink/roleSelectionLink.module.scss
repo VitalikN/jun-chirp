@@ -1,13 +1,26 @@
 @import "../../../sass/utils/container";
 @import "../../../sass/utils/mixins";
 
+.section__role {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(20, 20, 22, 1) 0px,
+      rgba(20, 20, 22, 1) 2px,
+      rgba(20, 20, 22, 0) 50%,
+      rgba(20, 20, 22, 1) calc(100% - 2px),
+      rgba(20, 20, 22, 1) 100%
+    ),
+    url("/img.jpg");
+}
+
 .cards {
   padding-top: 51px;
   padding-bottom: 51px;
-
   display: flex;
   flex-direction: column;
-  // align-items: flex-start;
   gap: 16px;
   transition: all 1s ease;
   @include mediaQuery($screen-size-s) {
@@ -15,5 +28,10 @@
     grid-template-columns: repeat(2, 1fr);
 
     gap: 24px;
+  }
+  @include mediaMaxQuery($screen-max-size-s) {
+    max-width: 500px;
+    justify-content: center;
+    align-items: center;
   }
 }
