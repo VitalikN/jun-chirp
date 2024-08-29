@@ -1,2 +1,101 @@
 @import "../../../sass/utils/container";
 @import "../../../sass/utils/mixins";
+
+.section__statistics {
+  padding: 40px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  @include mediaQuery($screen-size-s) {
+    flex-direction: row;
+    align-items: stretch;
+    // max-width: 708px;
+    width: 100%;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  @include mediaQuery($screen-size-m) {
+    // max-width: 1200px;
+  }
+  @include mediaQuery($screen-size-m) {
+    // max-width: 1200px;
+  }
+}
+.list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  border: var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  @include mediaQuery($screen-size-s) {
+    gap: 8px;
+    padding: 8px 20px;
+    max-width: 220px;
+  }
+  @include mediaQuery($screen-size-m) {
+    gap: 8px;
+    padding: 20px;
+    max-width: 391px;
+  }
+  @include mediaQuery($screen-size-l) {
+    padding: 20px 40px;
+    border-radius: 24px;
+    max-width: 456px;
+    border: 2px solid rgba(255, 255, 255, 1);
+  }
+  @include mediaQuery($screen-size-xl) {
+    padding: 20px 60px;
+    border-radius: 32px;
+    max-width: 584px;
+  }
+}
+.item__title {
+  text-align: center;
+  font-family: sans-serif;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--green, #228b22);
+
+  @include fontSize(36px, 700, 43px);
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(32px, 700, 37px);
+  }
+
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(64px, 700, 78px);
+    -webkit-text-stroke: 2px var(--green, #228b22);
+  }
+  @include mediaQuery($screen-size-l) {
+    -webkit-text-stroke: 3px var(--green, #228b22);
+
+    @include fontSize(104px, 700, 116px);
+  }
+  @include mediaQuery($screen-size-xl) {
+    @include fontSize(128px, 700, 144px);
+    -webkit-text-stroke: 4px var(--green, #228b22);
+  }
+}
+.item__text {
+  color: var(--white, #fafafa);
+  text-align: center;
+
+  @include fontSize(16px, 400, 20px);
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(12px, 400, 14px);
+  }
+
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(20px, 400, 24px);
+  }
+  @include mediaQuery($screen-size-xl) {
+    @include fontSize(26px, 400, 32px);
+  }
+}
