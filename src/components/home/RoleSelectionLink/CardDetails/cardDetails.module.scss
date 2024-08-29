@@ -5,15 +5,30 @@
   display: flex;
   gap: 24px;
   flex-direction: column;
-
+  width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgb(255, 255, 255);
+  border: var(--border);
   border-radius: 24px;
   background: linear-gradient(
     183.73deg,
     rgb(20, 20, 22) 3.557%,
     rgb(34, 139, 34) 466.303%
   );
+  @include mediaQuery($screen-size-s) {
+    max-width: 346px;
+  }
+
+  @include mediaQuery($screen-size-m) {
+    max-width: 392px;
+  }
+
+  @include mediaQuery($screen-size-l) {
+    max-width: 336px;
+  }
+
+  @include mediaQuery($screen-size-xl) {
+    max-width: 432px;
+  }
 
   .content {
     display: flex;
@@ -76,12 +91,11 @@
     text-align: left;
     color: rgb(250, 250, 250);
 
-    @include font(12px, 2vw, 20px, 400, 15px);
+    @include font(12px, 2vw, 14px, 500, 17px);
     @include mediaQuery($screen-size-s) {
       margin-bottom: 24px;
       text-align: center;
       width: initial;
-      font-weight: 500;
       line-height: 17px;
     }
     @include mediaQuery($screen-size-m) {
@@ -99,11 +113,11 @@
       margin-bottom: 32px;
       width: initial;
       display: block;
-      @include font(12px, 2vw, 16px, 400, 15px);
+      @include font(12px, 2vw, 12px, 400, 15px);
     }
     @include mediaQuery($screen-size-m) {
       margin-bottom: 44px;
-      line-height: 17px;
+      @include font(14px, 2vw, 16px, 400, 17px);
     }
     @include mediaQuery($screen-size-l) {
       margin-bottom: 32px;
@@ -117,28 +131,43 @@
   .link {
     display: flex;
     justify-content: center;
+    gap: 12px;
     align-items: center;
-    max-width: 135px;
+
+    @include mediaMaxQuery($screen-max-size-s) {
+      max-width: 135px;
+
+      @include font(12px, 2vw, 12px, 600, 13px);
+      padding: 9px 26px;
+    }
 
     > * {
       flex-shrink: 0;
     }
 
-    height: 100%;
-    padding: 0px 20px;
     text-transform: uppercase;
     border: 1px solid rgb(250, 250, 250);
     border-radius: 69px;
-    background: rgb(34, 139, 34);
 
     color: rgb(255, 255, 255);
-    font-family: Roboto;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 14px;
+
+    @include font(12px, 2vw, 20px, 600, 23px);
 
     @include mediaQuery($screen-size-s) {
-      max-width: initial;
+      width: 100%;
+      padding: 10px 0;
     }
+    @include mediaQuery($screen-size-xl) {
+      @include font(24px, 2vw, 24px, 600, 28px);
+    }
+    transition: all 0.3s ease-in-out;
+    background: transparent;
   }
+
+  .link:hover {
+    background: rgb(34, 139, 34);
+  }
+}
+.content__icon {
+  fill: #fff;
 }

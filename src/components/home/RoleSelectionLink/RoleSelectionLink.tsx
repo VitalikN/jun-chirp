@@ -8,7 +8,7 @@ const RoleSelectionLink = () => {
   ));
 
   return (
-    <section className={s.section}>
+    <section className={`${s.section} ${s.section__role}`}>
       <div className={`${s.container}  ${s.cards}`}>{cards}</div>
     </section>
   );
