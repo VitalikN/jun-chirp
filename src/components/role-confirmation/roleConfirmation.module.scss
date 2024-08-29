@@ -1,0 +1,111 @@
+@import "../../sass/utils/container";
+@import "../../sass/utils/mixins";
+@import "../../sass/utils/variables";
+
+.card {
+  position: relative;
+  box-sizing: border-box;
+  width: 432px;
+  height: 453px;
+  padding-inline: 40px;
+  background: linear-gradient(275.12deg, #141416 5.28%, #1c551d 572.43%);
+  border: var(--border-role-card);
+  border-radius: 26px;
+  @include hover(
+    background,
+    (linear-gradient(90deg, #141416 0%, #124713 100%))
+  );
+  @include hover(border, 2px solid #a7ef8d);
+  @include hover(box-shadow, 0px 0px 8px 0px #ffffff);
+
+  &--selected {
+    background: linear-gradient(90deg, #141416 0%, #124713 100%);
+    border: 2px solid #a7ef8d;
+    box-shadow: 0px 0px 8px 0px #ffffff;
+  }
+
+  &__title {
+    @include font(40px, 2vw, 40px, 700, 49px);
+    text-align: center;
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+
+  &__description {
+    @include font(18px, 2vw, 18px, 400, 22px);
+    text-align: left;
+  }
+
+  &__property {
+    list-style: disc;
+  }
+
+  &__radio {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px 0px 0px 0px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    border-radius: 50%;
+    border: 1px solid #ffff;
+    background-color: #000;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    margin: 0;
+    transition: all $transition-time ease-in-out;
+
+    &:hover {
+      border-color: transparent;
+      background-color: #228b22;
+      background-size: cover;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+    }
+
+    &:checked {
+      border-color: #228b22;
+      background-color: #228b22;
+    }
+
+    &:checked::before {
+      background-color: #228b22;
+      border: 2px solid #228b22;
+    }
+
+    &:checked::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="white" d="m14 21.414l-5-5.001L10.413 15L14 18.586L21.585 11L23 12.415z"/><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+      background-size: cover;
+    }
+  }
+}
+
+.list {
+  @include flexCenter();
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.button {
+  @include flexCenter();
+  width: 100%;
+  background-color: #228b22;
+  height: 44px;
+  color: #fff;
+  border-radius: 40px;
+  text-transform: uppercase;
+  @include font(20px, 2vw, 20px, 600, 24px);
+  @include hover(background-color, #57e957);
+
+  &__wrapper {
+    padding-inline: 760px;
+  }
+}
