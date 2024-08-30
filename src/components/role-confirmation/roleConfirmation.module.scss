@@ -6,17 +6,37 @@
   position: relative;
   box-sizing: border-box;
   width: 432px;
-  height: 453px;
-  padding-inline: 40px;
+  height: 533px;
   background: linear-gradient(275.12deg, #141416 5.28%, #1c551d 572.43%);
   border: var(--border-role-card);
   border-radius: 26px;
+  cursor: pointer;
   @include hover(
     background,
     (linear-gradient(90deg, #141416 0%, #124713 100%))
   );
-  @include hover(border, 2px solid #a7ef8d);
+  @include hover(border, 1px solid #a7ef8d);
   @include hover(box-shadow, 0px 0px 8px 0px #ffffff);
+
+  @include mediaMaxQuery($screen-size-l) {
+    width: 336px;
+    height: 546px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    width: 291px;
+    height: 503px;
+  }
+
+  @include mediaBetweenQuery($screen-size-xs, $screen-size-s) {
+    width: 346px;
+    height: 419px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    width: 349px;
+    height: 342px;
+  }
 
   &--selected {
     background: linear-gradient(90deg, #141416 0%, #124713 100%);
@@ -29,15 +49,75 @@
     text-align: center;
     margin-bottom: 16px;
     margin-top: 40px;
+
+    @include mediaMaxQuery($screen-size-l) {
+      margin-top: 32px;
+      @include font(38px, 2vw, 38px, 700, 46px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(36px, 2vw, 36px, 700, 43px);
+    }
+    @include mediaMaxQuery($screen-size-s) {
+      margin-top: 24px;
+      @include font(34px, 2vw, 34px, 700, 41px);
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(18px, 2vw, 18px, 700, 22px);
+    }
   }
 
   &__description {
     @include font(18px, 2vw, 18px, 400, 22px);
     text-align: left;
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(16px, 2vw, 16px, 400, 19px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+    }
+    @include mediaMaxQuery($screen-size-s) {
+      @include font(15px, 2vw, 15px, 400, 18px);
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(12px, 2vw, 12px, 400, 14px);
+    }
   }
 
   &__property {
     list-style: disc;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+
+      @include mediaMaxQuery($screen-size-l) {
+        margin-bottom: 9px;
+      }
+    }
+  }
+
+  &__list {
+    list-style-position: inside;
+    padding-left: 40px;
+
+    @include mediaMaxQuery($screen-size-l) {
+      padding-inline: 32px;
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      padding-inline: 24px;
+    }
+
+    @include mediaBetweenQuery($screen-size-xs, $screen-size-s) {
+      padding-left: 32px;
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      padding-left: 32px;
+    }
   }
 
   &__radio {
@@ -56,11 +136,38 @@
     margin: 0;
     transition: all $transition-time ease-in-out;
 
+    @include mediaMaxQuery($screen-size-l) {
+      width: 32px;
+      height: 32px;
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+    }
+    @include mediaMaxQuery($screen-size-s) {
+      width: 28px;
+      height: 28px;
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+    }
+
     &:hover {
       border-color: transparent;
       background-color: #228b22;
       background-size: cover;
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+
+      @include mediaMaxQuery($screen-size-l) {
+        width: 32px;
+        height: 32px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32"><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+      }
+
+      @include mediaMaxQuery($screen-size-s) {
+        width: 28px;
+        height: 28px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32"><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+      }
     }
 
     &:checked {
@@ -84,6 +191,18 @@
       transform: translate(-50%, -50%);
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="white" d="m14 21.414l-5-5.001L10.413 15L14 18.586L21.585 11L23 12.415z"/><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
       background-size: cover;
+
+      @include mediaMaxQuery($screen-size-l) {
+        width: 32px;
+        height: 32px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32"><path fill="white" d="m14 21.414l-5-5.001L10.413 15L14 18.586L21.585 11L23 12.415z"/><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+      }
+
+      @include mediaMaxQuery($screen-size-s) {
+        width: 28px;
+        height: 28px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32"><path fill="white" d="m14 21.414l-5-5.001L10.413 15L14 18.586L21.585 11L23 12.415z"/><path fill="white" d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2m0 26a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/></svg>');
+      }
     }
   }
 }
@@ -92,20 +211,192 @@
   @include flexCenter();
   gap: 24px;
   margin-bottom: 64px;
+
+  @include mediaMaxQuery($screen-size-l) {
+    margin-bottom: 56px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    margin-bottom: 48px;
+    gap: 13px;
+  }
+
+  @include mediaBetweenQuery($screen-size-s, $screen-size-m) {
+    margin-bottom: 40px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @include mediaBetweenQuery($screen-size-xs, $screen-size-s) {
+    margin-bottom: 40px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    margin-bottom: 16px;
+    flex-direction: column;
+  }
 }
 
 .button {
   @include flexCenter();
-  width: 100%;
+  width: 280px;
   background-color: #228b22;
   height: 44px;
   color: #fff;
   border-radius: 40px;
   text-transform: uppercase;
+  border-width: 0.2px, 0.2px, 1px, 0.2px;
+  border-style: solid;
+  border-color: #228b22;
+  cursor: pointer;
   @include font(20px, 2vw, 20px, 600, 24px);
   @include hover(background-color, #57e957);
 
+  @include mediaMaxQuery($screen-size-l) {
+    @include font(14px, 2vw, 14px, 600, 17px);
+    height: 37px;
+    width: 216;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    width: 190px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    width: 165px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    @include font(20px, 2vw, 20px, 600, 24px);
+    height: 44px;
+    width: 344px;
+  }
+
   &__wrapper {
-    padding-inline: 760px;
+    @include flexCenter();
+  }
+}
+
+.stepCounterText {
+  @include font(25px, 2vw, 25px, 500, 29px);
+  text-align: center;
+  margin-bottom: 24px;
+  @include flexCenter();
+
+  @include mediaMaxQuery($screen-size-l) {
+    @include font(23px, 2vw, 23px, 500, 27px);
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    @include font(23px, 2vw, 23px, 500, 27px);
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    @include font(22px, 2vw, 22px, 500, 26px);
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    @include font(18px, 2vw, 18px, 500, 20px);
+  }
+}
+
+.step {
+  width: 35px;
+  height: 49px;
+  padding: 10px 0px 0px 0px;
+  border-radius: 10px;
+  border: 1px solid #fafafa;
+  background: #141416;
+
+  @include mediaMaxQuery($screen-size-l) {
+    width: 33px;
+    height: 47px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    width: 32px;
+    height: 45px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    width: 31px;
+    height: 27px;
+  }
+}
+
+.stepsGroup {
+  @include flexCenter();
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.role__header__wrapper {
+  margin-bottom: 80px;
+
+  @include mediaMaxQuery($screen-size-l) {
+    margin-bottom: 72px;
+  }
+
+  @include mediaMaxQuery($screen-size-m) {
+    margin-bottom: 64px;
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    margin-bottom: 56px;
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    margin-bottom: 24px;
+  }
+}
+
+.tip {
+  @include font(20px, 2vw, 20px, 400, 23px);
+  @include flexCenter();
+  text-align: center;
+
+  @include mediaMaxQuery($screen-size-l) {
+    @include font(18px, 2vw, 18px, 400, 21px);
+  }
+
+  @include mediaMaxQuery($screen-size-s) {
+    @include font(17px, 2vw, 17px, 400, 20px);
+  }
+
+  @include mediaMaxQuery($screen-size-xs) {
+    @include font(12px, 2vw, 12px, 400, 14px);
+  }
+}
+
+.step__active {
+  background: #228b22;
+}
+
+@for $i from 1 through 2 {
+  .step__#{$i}::after {
+    content: "#{$i}";
+    @include flexCenter();
+    @include font(25px, 2vw, 25px, 400, 29px);
+
+    @include mediaMaxQuery($screen-size-l) {
+      @include font(23px, 2vw, 23px, 400, 27px);
+    }
+
+    @include mediaMaxQuery($screen-size-m) {
+      @include font(21px, 2vw, 21px, 400, 24px);
+    }
+
+    @include mediaMaxQuery($screen-size-xs) {
+      @include font(18px, 2vw, 18px, 400, 21px);
+    }
+  }
+}
+
+.steps {
+  @include mediaMaxQuery($screen-size-xs) {
+    @include flexCenter();
+    gap: 16px;
   }
 }

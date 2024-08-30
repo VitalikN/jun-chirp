@@ -8,8 +8,8 @@ type Props = {
 
 export const RoleCard: FC<Props> = ({ role }) => {
   return (
-    <label key={role.id} className="">
-      <div className={s.card}>
+    <label key={role.id} className={s.card}>
+      <div>
         <input
           type="radio"
           name="role"
@@ -17,7 +17,7 @@ export const RoleCard: FC<Props> = ({ role }) => {
           className={s.card__radio}
         />
         <h1 className={s.card__title}>{role.title}</h1>
-        <div>
+        <div className={s.card__list}>
           <ul>
             {role.properties.map((property) => (
               <li className={s.card__property} key={property.id}>
