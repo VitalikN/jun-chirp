@@ -18,6 +18,7 @@ const initialState: IAuthState = {
     isConfirmed: false,
     accessToken: "",
     photo: null,
+    role: null,
   },
 };
 
@@ -62,7 +63,14 @@ const authSlice = createSlice({
       )
       .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
         state.user = initialState.user;
-      });
+      })
+
+      .addMatcher(
+        authApi.endpoints.setRole.matchFulfilled,
+        (state, { payload }) => {
+          state.user = payload.user;
+        }
+      );
   },
 });
 

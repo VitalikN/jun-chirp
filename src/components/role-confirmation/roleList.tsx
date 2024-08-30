@@ -5,13 +5,21 @@ import { RoleCard } from "./roleCard";
 
 type Props = {
   roles: RoleCardType[];
+  onSelectRole: (roleId: string) => void;
 };
 
-export const RoleList: FC<Props> = ({ roles }) => {
+export const RoleList: FC<Props> = ({
+  roles,
+  onSelectRole,
+}) => {
   return (
     <div className={s.list}>
       {roles.map((role) => (
-        <RoleCard key={role.id} role={role} />
+        <RoleCard
+          key={role.id}
+          role={role}
+          onSelectRole={onSelectRole}
+        />
       ))}
     </div>
   );

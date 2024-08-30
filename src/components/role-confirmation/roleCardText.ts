@@ -1,6 +1,9 @@
+import { Roles } from "@/libs/enums/app/Role";
+
 export const roleCardData = [
   {
     id: 1,
+    role: Roles.JUNIOR,
     title: "Junior",
     properties: [
       { id: 1, text: "пет-проєкти, комерційні проєкти, стартапи" },
@@ -16,6 +19,7 @@ export const roleCardData = [
 
   {
     id: 2,
+    role: Roles.MENTOR,
     title: "Mentor",
     properties: [
       { id: 1, text: "участь в проєктах у ролі Ментора" },
@@ -37,6 +41,7 @@ export const roleCardData = [
   },
   {
     id: 3,
+    role: Roles.INVESTOR,
     title: "Investor",
     properties: [
       { id: 1, text: "унікальні проєкти з високим потенціалом" },
@@ -53,6 +58,7 @@ export const roleCardData = [
 
   {
     id: 4,
+    role: Roles.PARTNER,
     title: "Partner",
     properties: [
       { id: 1, text: "співпраця з надання власних послуг (освіта, реклама)" },

@@ -57,6 +57,14 @@ export const authApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
     }),
+    setRole: builder.mutation({
+      query: (role) => ({
+        url: "users/confirm-role",
+        method: "PATCH",
+        body: role,
+      }),
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
 
@@ -68,4 +76,5 @@ export const {
   useLogoutMutation,
   useRequestPasswordResetMutation,
   useResetPasswordMutation,
+  useSetRoleMutation,
 } = authApi;

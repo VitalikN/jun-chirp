@@ -40,7 +40,7 @@
 
   &--selected {
     background: linear-gradient(90deg, #141416 0%, #124713 100%);
-    border: 2px solid #a7ef8d;
+    border: 1px solid #a7ef8d;
     box-shadow: 0px 0px 8px 0px #ffffff;
   }
 
@@ -253,6 +253,7 @@
   cursor: pointer;
   @include font(20px, 2vw, 20px, 600, 24px);
   @include hover(background-color, #57e957);
+  margin-bottom: 25px;
 
   @include mediaMaxQuery($screen-size-l) {
     @include font(14px, 2vw, 14px, 600, 17px);
@@ -323,6 +324,7 @@
   @include mediaMaxQuery($screen-size-xs) {
     width: 31px;
     height: 27px;
+    padding: 0;
   }
 }
 
@@ -399,4 +401,15 @@
     @include flexCenter();
     gap: 16px;
   }
+}
+
+.error {
+  @include flexCenter();
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.disabled {
+  background: #629262;
 }

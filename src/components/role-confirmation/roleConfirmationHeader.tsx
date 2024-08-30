@@ -8,7 +8,7 @@ export const RoleConfirmationHeader = () => {
   const pathname = usePathname();
 
   const isFirstStep = pathname === AppRouteEnum.ROLE_CONFIRMATION;
-  const isSecondStep = pathname === AppRouteEnum.MY_OFFICE; //змінити на роут 2 кроку
+  const isSecondStep = pathname === AppRouteEnum.ROOT; //змінити на роут 2 кроку
 
   const stepNumber = isFirstStep ? "2 кроки" : "кілька кроків";
   const tipText = isFirstStep
