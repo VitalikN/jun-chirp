@@ -68,7 +68,7 @@ const authSlice = createSlice({
       .addMatcher(
         authApi.endpoints.setRole.matchFulfilled,
         (state, { payload }) => {
-          state.user = payload.user;
+          state.user.role = payload.role;
         }
       );
   },
