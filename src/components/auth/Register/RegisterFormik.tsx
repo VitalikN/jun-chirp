@@ -86,10 +86,7 @@ const RegisterFormik = () => {
               isThisPassword={true}
             />
 
-            <PasswordStrengthIndicator
-              password={values.password}
-              userName={values.userName}
-            />
+            <PasswordStrengthIndicator password={values.password} />
 
             <FormField
               name={"confirmPassword"}

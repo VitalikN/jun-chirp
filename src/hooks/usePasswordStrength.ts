@@ -1,114 +1,50 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 interface UsePasswordStrengthProps {
   password: string;
-  userName: string;
 }
 
-const usePasswordStrength = ({
-  password,
-  userName,
-}: UsePasswordStrengthProps) => {
-  const [strength, setStrength] = useState("gray");
+const STRENGTH_LEVELS = [
+  { level: "Very Weak", color: "#B3261E", score: 1, gradient: "20%" },
+  { level: "Weak", color: "#F57C00", score: 2, gradient: "40%" },
+  { level: "Medium", color: "#F5D251", score: 3, gradient: "60%" },
+  { level: "Strong", color: "#388E3C", score: 4, gradient: "80%" },
+  { level: "Very Strong", color: "#228B22", score: 5, gradient: "100%" },
+  { level: "", color: "gray", score: 0, gradient: "0" },
+];
 
-  const commonPasswords = useMemo(() => ["123456", "password", "qwerty"], []);
+const commonPasswords = ["123456", "password", "qwerty"];
 
-  const checkStrength = useCallback(
-    (password: string) => {
-      if (!password) return "gray";
-      if (
-        password.length < 8 ||
-        /^[a-z]+$/.test(password) ||
-        commonPasswords.includes(password) ||
-        password.includes(userName)
-      ) {
-        return "weak";
-      }
+const calculateStrengthScore = (password: string): number => {
+  if (!password || commonPasswords.includes(password) || password.length === 0) return 0;
 
-      if (
-        password.length >= 8 &&
-        password.length <= 11 &&
-        /[A-Z]/.test(password) &&
-        /[a-z]/.test(password) &&
-        /\d/.test(password) &&
-        /[!@#$%^&*]/.test(password) &&
-        !password.includes(" ") &&
-        !commonPasswords.includes(password) &&
-        !password.includes(userName)
-      ) {
-        return "medium";
-      }
+  let score = 0;
+  score += password.length >= 8 ? 1 : 0;
+  score += /[A-Z]/.test(password) ? 1 : 0;
+  score += /[a-z]/.test(password) ? 1 : 0;
+  score += /\d/.test(password) ? 1 : 0;
+  score += /[!@#$%^&*(),.?":{}|<>]/.test(password) ? 1 : 0;
+  console.log(score)
+  return score;
+};
 
-      if (
-        password.length >= 12 &&
-        /[A-Z]/.test(password) &&
-        /[a-z]/.test(password) &&
-        /\d/.test(password) &&
-        /[!@#$%^&*]/.test(password) &&
-        !password.includes(" ") &&
-        !commonPasswords.includes(password) &&
-        !password.includes(userName)
-      ) {
-        return "strong";
-      }
+const getStrengthLevel = (score: number) =>
+  STRENGTH_LEVELS.find((level) => level.score === score) || STRENGTH_LEVELS[0];
 
-      return "weak";
+const usePasswordStrength = ({ password }: UsePasswordStrengthProps) => {
+  const strength = useMemo(() => {
+    const score = calculateStrengthScore(password);
+    return getStrengthLevel(score);
+  }, [password]);
+
+  return {
+    strength: strength.level,
+    barStyle: {
+      background: `linear-gradient(to right, ${strength.color} ${strength.gradient}, #616161 ${strength.gradient})`,
+      width: "100%",
     },
-    [userName, commonPasswords]
-  );
-  const getColor = (strength: string) => {
-    switch (strength) {
-      case "weak":
-        return "#B3261E";
-      case "medium":
-        return "#F5D251";
-      case "strong":
-        return "#228B22";
-      default:
-        return "#616161";
-    }
+    color: strength.color,
   };
-
-  useEffect(() => {
-    setStrength(checkStrength(password));
-    const result = checkStrength(password);
-    console.log("Password strength:", result);
-  }, [password, checkStrength]);
-
-  const getBarStyle = (strength: string) => {
-    switch (strength) {
-      case "weak":
-        return {
-          background: `linear-gradient(to right, ${getColor(
-            "weak"
-          )} 33%, #616161 33%)`,
-          width: "100%",
-        };
-      case "medium":
-        return {
-          background: `linear-gradient(to right, ${getColor(
-            "medium"
-          )} 66%, #616161 66%)`,
-          width: "100%",
-        };
-      case "strong":
-        return {
-          background: `${getColor("strong")}`,
-          width: "100%",
-        };
-      default:
-        return {
-          background: "#616161",
-          width: "100%",
-        };
-    }
-  };
-
-  const getTextColor = (strength: string) => {
-    return getColor(strength);
-  };
-
-  return { strength, getBarStyle, getTextColor };
 };
 
 export default usePasswordStrength;
