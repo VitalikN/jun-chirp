@@ -2,11 +2,12 @@
 @import "../roleSelectionLink.module.scss";
 
 .card {
-  padding: 36px 27px 42px;
+  padding: 18px;
   display: flex;
-  gap: 24px;
+  gap: 18px;
   flex-direction: column;
   width: 100%;
+  max-width: 343px;
   box-sizing: border-box;
   border: var(--border);
   border-radius: 24px;
@@ -17,13 +18,15 @@
   );
   @include mediaQuery($screen-size-s) {
     max-width: 346px;
-    gap: 16px;
-    height: 453px;
+    height: 496px;
+    border-radius: 20px;
   }
 
   @include mediaQuery($screen-size-m) {
-    max-width: 392px;
-    height: 539px;
+    max-width: 493px;
+    height: 490px;
+    padding: 24px;
+    border-radius: 24px;
 
     &:nth-child(3) {
       margin-left: 101px;
@@ -35,51 +38,55 @@
   }
 
   @include mediaQuery($screen-size-l) {
-    max-width: 336px;
+    max-width: 576px;
     gap: 12px;
-    height: 577px;
-    &:nth-child(3),
+    height: 491px;
+    border-radius: 32px;
+
+    &:nth-child(3) {
+      margin-left: 120px;
+    }
+
     &:nth-child(4) {
-      margin-right: 0;
-      margin-left: 0;
+      margin-right: -120px;
     }
   }
 
   @include mediaQuery($screen-size-xl) {
-    max-width: 432px;
+    max-width: 736px;
     gap: 24px;
+    height: 503px;
+    border-radius: 40px;
+    &:nth-child(3) {
+      margin-left: 132px;
+    }
+
+    &:nth-child(4) {
+      margin-right: -132px;
+    }
   }
 
   .content {
     display: flex;
-    gap: 8px;
     align-items: center;
+    flex-direction: column;
+    gap: 18px;
     height: 100%;
-    > * {
-      width: 50%;
-    }
 
     @include mediaQuery($screen-size-s) {
-      flex-direction: column;
-      gap: 24px;
     }
   }
 
   @include mediaQuery($screen-size-s) {
     align-self: start;
-    padding: 20px 32px;
-    // gap: 16px;
+    gap: 16px;
 
     &:nth-child(2) {
-      margin-top: 103px;
-    }
-
-    &:nth-child(3) {
-      margin-top: -50px;
+      margin-top: 57px;
     }
 
     &:nth-child(4) {
-      margin-top: 103px;
+      margin-top: 57px;
     }
   }
   @include mediaQuery($screen-size-m) {
@@ -87,87 +94,67 @@
     &:nth-child(3),
     &:nth-child(4) {
       margin-top: 0;
-      //
     }
   }
   @include mediaQuery($screen-size-l) {
     gap: 20px;
-    &:nth-child(2) {
-      margin-top: 140px;
-    }
-    &:nth-child(3) {
-      margin-top: 280px;
-    }
-    &:nth-child(4) {
-      margin-top: 420px;
-    }
   }
   @include mediaQuery($screen-size-xl) {
-    &:nth-child(2) {
-      margin-top: 160px;
-    }
-    &:nth-child(3) {
-      margin-top: 320px;
-    }
-    &:nth-child(4) {
-      margin-top: 480px;
-    }
   }
 
   .title {
-    // margin-bottom: 10px;
     text-transform: uppercase;
     color: rgb(255, 255, 255);
+    text-align: center;
 
-    @include font(24px, 2vw, 48px, 700, 29px);
+    @include fontSize(24px, 700, 29px);
+
     @include mediaQuery($screen-size-s) {
-      text-align: center;
+      @include fontSize(32px, 700, 39px);
     }
     @include mediaQuery($screen-size-m) {
-      line-height: 39px;
+      @include fontSize(36px, 700, 43px);
+    }
+    @include mediaQuery($screen-size-l) {
+      @include fontSize(48px, 700, 58px);
     }
     @include mediaQuery($screen-size-xl) {
-      line-height: 58px;
     }
   }
 
   .subtitle {
-    text-align: left;
+    text-align: center;
     color: rgb(250, 250, 250);
+    @include fontSize(12px, 500, 17px);
 
-    @include font(12px, 2vw, 14px, 500, 17px);
     @include mediaQuery($screen-size-s) {
-      // margin-bottom: 24px;
-      text-align: center;
-      width: initial;
-      line-height: 17px;
+      @include fontSize(16px, 500, 20px);
     }
     @include mediaQuery($screen-size-m) {
-      line-height: 20px;
+      @include fontSize(18px, 500, 22px);
     }
     @include mediaQuery($screen-size-l) {
-      // margin-bottom: 20px;
-      line-height: 24px;
+      @include fontSize(20px, 500, 24px);
+    }
+    @include mediaQuery($screen-size-xl) {
+      @include fontSize(24px, 500, 30px);
     }
   }
 
   .description {
-    display: none;
-    @include mediaQuery($screen-size-s) {
-      margin-bottom: auto;
+    @include fontSize(14px, 400, 17px);
+    margin-bottom: auto;
 
-      width: initial;
-      display: block;
-      @include font(12px, 2vw, 12px, 400, 15px);
+    @include mediaQuery($screen-size-s) {
     }
     @include mediaQuery($screen-size-m) {
-      // margin-bottom: 44px;
-      @include font(14px, 2vw, 14px, 400, 17px);
+      @include fontSize(16px, 400, 20px);
     }
     @include mediaQuery($screen-size-l) {
+      @include fontSize(18px, 400, 20px);
     }
     @include mediaQuery($screen-size-xl) {
-      @include font(14px, 2vw, 16px, 400, 20px);
+      @include fontSize(18px, 400, 24px);
     }
   }
 
@@ -176,16 +163,10 @@
     justify-content: center;
     gap: 12px;
     align-items: center;
-
+    width: 100%;
+    @include fontSize(12px, 600, 14px);
     @include mediaMaxQuery($screen-max-size-s) {
-      max-width: 135px;
-
-      @include font(12px, 2vw, 12px, 600, 13px);
       padding: 9px 26px;
-    }
-
-    > * {
-      flex-shrink: 0;
     }
 
     text-transform: uppercase;
@@ -194,14 +175,25 @@
 
     color: rgb(255, 255, 255);
 
-    @include font(12px, 2vw, 20px, 600, 23px);
-
     @include mediaQuery($screen-size-s) {
       width: 100%;
       padding: 10px 0;
+      max-width: 282px;
+
+      @include fontSize(16px, 600, 18px);
+    }
+
+    @include mediaQuery($screen-size-m) {
+      @include fontSize(18px, 600, 21px);
+      max-width: 328px;
+    }
+
+    @include mediaQuery($screen-size-l) {
+      @include fontSize(20px, 600, 23px);
     }
     @include mediaQuery($screen-size-xl) {
-      @include font(24px, 2vw, 24px, 600, 28px);
+      @include fontSize(24px, 600, 28px);
+      max-width: 384px;
     }
     transition: all 0.3s ease-in-out;
     background: transparent;

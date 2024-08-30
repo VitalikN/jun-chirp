@@ -13,16 +13,9 @@
   @include mediaQuery($screen-size-s) {
     flex-direction: row;
     align-items: stretch;
-    // max-width: 708px;
     width: 100%;
     justify-content: center;
     margin: 0 auto;
-  }
-  @include mediaQuery($screen-size-m) {
-    // max-width: 1200px;
-  }
-  @include mediaQuery($screen-size-m) {
-    // max-width: 1200px;
   }
 }
 .list__item {
@@ -38,23 +31,23 @@
   padding: 20px;
   @include mediaQuery($screen-size-s) {
     gap: 8px;
-    padding: 8px 20px;
-    max-width: 220px;
+    padding: 20px 10px;
+    max-width: 228px;
   }
   @include mediaQuery($screen-size-m) {
-    gap: 8px;
-    padding: 20px;
-    max-width: 391px;
+    gap: 12px;
+    padding: 30px 20px;
+    max-width: 392px;
+    border-radius: 24px;
   }
   @include mediaQuery($screen-size-l) {
-    padding: 20px 40px;
-    border-radius: 24px;
+    border-radius: 32px;
     max-width: 456px;
     border: 2px solid rgba(255, 255, 255, 1);
   }
   @include mediaQuery($screen-size-xl) {
-    padding: 20px 60px;
-    border-radius: 32px;
+    padding: 40px 20px;
+    border-radius: 40px;
     max-width: 584px;
   }
 }
@@ -64,19 +57,19 @@
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px var(--green, #228b22);
 
-  @include fontSize(36px, 700, 43px);
+  @include fontSize(60px, 700, 73px);
   @include mediaQuery($screen-size-s) {
-    @include fontSize(32px, 700, 37px);
+    @include fontSize(57px, 700, 69px);
   }
 
   @include mediaQuery($screen-size-m) {
-    @include fontSize(64px, 700, 78px);
+    @include fontSize(87px, 700, 106px);
     -webkit-text-stroke: 2px var(--green, #228b22);
   }
   @include mediaQuery($screen-size-l) {
     -webkit-text-stroke: 3px var(--green, #228b22);
 
-    @include fontSize(104px, 700, 116px);
+    @include fontSize(108px, 700, 131px);
   }
   @include mediaQuery($screen-size-xl) {
     @include fontSize(128px, 700, 144px);
@@ -87,15 +80,15 @@
   color: var(--white, #fafafa);
   text-align: center;
 
-  @include fontSize(16px, 400, 20px);
-  @include mediaQuery($screen-size-s) {
-    @include fontSize(12px, 400, 14px);
-  }
+  @include fontSize(16px, 400, 19px);
 
   @include mediaQuery($screen-size-m) {
     @include fontSize(20px, 400, 24px);
   }
+  @include mediaQuery($screen-size-l) {
+    @include fontSize(24px, 400, 29px);
+  }
   @include mediaQuery($screen-size-xl) {
-    @include fontSize(26px, 400, 32px);
+    @include fontSize(30px, 400, 32px);
   }
 }

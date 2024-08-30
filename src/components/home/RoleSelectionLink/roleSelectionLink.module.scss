@@ -33,29 +33,31 @@
   width: 100%;
   margin: 0 auto;
   transition: all 1s ease;
-  @include mediaMaxQuery($screen-max-size-m) {
+  @include mediaMaxQuery($screen-max-size-s) {
     gap: 16px;
   }
   @include mediaQuery($screen-size-s) {
     flex-direction: row;
     flex-wrap: wrap;
+    column-gap: 16px;
 
     justify-content: center;
     max-width: 768px;
   }
   @include mediaQuery($screen-size-m) {
-    max-width: 998px;
-    justify-content: space-between;
-
-    row-gap: 69px;
+    max-width: 1100px;
+    justify-content: space-around;
+    row-gap: 45px;
   }
+  @include mediaQuery(1440px) {
+    justify-content: space-between;
+  }
+
   @include mediaQuery($screen-size-l) {
-    max-width: 1536px;
-    justify-content: center;
-    gap: 24px;
+    max-width: 1260px;
   }
   @include mediaQuery($screen-size-xl) {
-    max-width: 1920px;
+    max-width: 1600px;
   }
   @include mediaMaxQuery($screen-max-size-s) {
     max-width: 500px;
