@@ -3,7 +3,7 @@ import s from "./projectStatistics.module.scss";
 
 const ProjectStatistics = () => {
   return (
-    <section className={s.section__statistics}>
+    <section className={`${s.section__statistics}`}>
       <div className={`${s.container}  `}>
         <ul className={s.list}>
           <li className={s.list__item}>
