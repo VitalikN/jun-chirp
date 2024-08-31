@@ -9,6 +9,7 @@ import authSelector from "@/redux/auth/authSelector";
 import { customError } from "@/utils/types/customError";
 import { FormikValues } from "formik";
 import useRouterPush from "./useRouter";
+import { AppRouteEnum } from "@/libs/enums/enums";
 
 const useEmailConfirmation = () => {
   const [confirm, { isLoading, error }] = useConfirmEmailMutation();
@@ -163,7 +164,7 @@ const useEmailConfirmation = () => {
         setTimeLeft(0);
         setCooldown(null);
         localStorage.removeItem("resendCooldown");
-        pushRouter("/");
+        pushRouter(`${AppRouteEnum.ROLE_CONFIRMATION}`);
       }
     } catch (error) {
       if (error && (error as customError).data) {
