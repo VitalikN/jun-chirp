@@ -4,7 +4,6 @@ import React from "react";
 
 import { Field, Form, Formik } from "formik";
 
-
 import styles from "./styles.module.scss";
 import useEmailConfirmation from "@/hooks/useEmailConfirmation";
 import useCodeInput from "@/hooks/useCodeInput";
