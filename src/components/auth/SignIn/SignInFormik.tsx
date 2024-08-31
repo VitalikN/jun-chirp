@@ -29,7 +29,13 @@ const SignInFormik = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchemaSignIn}
       >
-        {({ errors, touched, dirty, handleChange: formikHandleChange }) => (
+        {({
+          errors,
+          touched,
+          dirty,
+          handleChange: formikHandleChange,
+          isValid,
+        }) => (
           <Form className={s.form}>
             <FormField
               name={"email"}
@@ -75,8 +81,8 @@ const SignInFormik = () => {
 
             <Button
               className={`${s.styledBtn} ${
-                isLoading
-                  ? s.styledBtn
+                isLoading || isValid
+                  ? s.valid
                   : !touched.email ||
                     errors.email ||
                     !touched.password ||

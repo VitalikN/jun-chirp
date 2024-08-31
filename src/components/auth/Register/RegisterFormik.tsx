@@ -44,6 +44,7 @@ const RegisterFormik = () => {
           dirty,
           values,
           handleChange: formikHandleChange,
+          isValid,
         }) => (
           <Form className={s.form}>
             <FormField
@@ -157,16 +158,18 @@ const RegisterFormik = () => {
               />
               <Button
                 className={`${s.styledBtn} ${
-                  !touched.userName ||
-                  errors.userName ||
-                  !touched.email ||
-                  errors.email ||
-                  !touched.password ||
-                  errors.password ||
-                  !touched.confirmPassword ||
-                  errors.confirmPassword ||
-                  !touched.rememberMe ||
-                  errors.rememberMe
+                  isLoading || isValid
+                    ? s.valid
+                    : !touched.userName ||
+                      errors.userName ||
+                      !touched.email ||
+                      errors.email ||
+                      !touched.password ||
+                      errors.password ||
+                      !touched.confirmPassword ||
+                      errors.confirmPassword ||
+                      !touched.rememberMe ||
+                      errors.rememberMe
                     ? " "
                     : backendError
                     ? s.invalid
