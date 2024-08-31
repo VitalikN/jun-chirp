@@ -1,3 +1,5 @@
+import { Role } from "./Role";
+
 export interface IUser {
   userName: string | null;
   email: string | null;
@@ -6,6 +8,7 @@ export interface IUser {
   isConfirmed?: boolean;
   photo: string | null;
   token?: string | null;
+  role?: Role | null;
 }
 
 export interface IAuthState {

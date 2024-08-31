@@ -1,17 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { RoleConfirmation } from "@/components/role-confirmation/roleConfirmation";
+import { RoleConfirmationHeader } from "@/components/role-confirmation/roleConfirmationHeader";
 
 const RoleConfirmationPage = () => {
-  const params = useParams();
+ 
   return (
     <section>
-      <div>
-        RoleConfirmationPage
-        <Link href={`/account-verification/junior`}>Junior</Link>
-        <Link href={`/account-verification/mentor`}>Mentor</Link>
-      </div>
+      <RoleConfirmationHeader />
+      <RoleConfirmation />
     </section>
   );
 };

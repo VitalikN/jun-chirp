@@ -24,7 +24,7 @@
   --btn-text-color-hover: #141416;
   --hover-background: #228b22;
   --hover-text-color: #228b22;
-  --hover-bg-color:#57e957;
+  --hover-bg-color: #57e957;
 
   --invalid: #b3261e;
 
@@ -33,6 +33,8 @@
   --screen-size-s: 768px;
   --screen-size-xs: 375px;
   --transition-time: 0.3s;
+
+  --border-role-card: 1px solid #ffffff;
 }
 
 /* #B3261E */
