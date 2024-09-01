@@ -35,6 +35,12 @@
   --transition-time: 0.3s;
 
   --border-role-card: 1px solid #ffffff;
+  --swiper-pagination-color: #228b22;
+  --swiper-pagination-bullet-inactive-color: #ffffff;
+
+  --swiper-pagination-bullet-width: 12px;
+  --swiper-pagination-bullet-height: 12px;
+  --swiper-pagination-bottom: -3px;
 }
 
 /* #B3261E */

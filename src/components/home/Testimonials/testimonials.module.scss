@@ -1,2 +1,210 @@
 @import "../../../sass/utils/container";
 @import "../../../sass/utils/mixins";
+
+.section__testimonials {
+  padding: 40px 0;
+
+  @include mediaQuery($screen-size-s) {
+    padding: 80px 0;
+  }
+  @include mediaQuery($screen-size-xl) {
+    padding: 100px 0;
+  }
+}
+
+.title__testimonials {
+  @include fontSize(27px, 700, 33px);
+  text-align: center;
+  padding-bottom: 56px;
+
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(40px, 700, 49px);
+  }
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(48px, 700, 59px);
+  }
+  @include mediaQuery($screen-size-l) {
+    @include fontSize(64px, 700, 78px);
+  }
+  @include mediaQuery($screen-size-xl) {
+    @include fontSize(80px, 700, 98px);
+  }
+}
+
+.container__slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 24px 24px;
+  // border: var(--border);
+
+  border-radius: 12px;
+  width: 319px;
+  margin: 0 auto;
+  @include mediaQuery($screen-size-s) {
+    padding: 18px;
+    gap: 18px;
+    width: 100%;
+
+    max-width: 386px;
+  }
+  @include mediaQuery($screen-size-m) {
+    max-width: 392px;
+  }
+  @include mediaQuery($screen-size-l) {
+    padding: 48px 24px;
+    max-width: 456px;
+  }
+  @include mediaQuery($screen-size-xl) {
+    max-width: 584px;
+  }
+}
+
+.swiper__box {
+  position: relative;
+}
+
+.swiper-wrapper {
+  padding-bottom: 18px;
+  @include mediaQuery($screen-size-m) {
+    padding-bottom: 40px;
+  }
+  @include mediaQuery($screen-size-xl) {
+    padding-bottom: 48px;
+  }
+}
+
+.text__slide {
+  @include fontSize(14px, 400, 17px);
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(16px, 400, 20px);
+  }
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(18px, 400, 22px);
+  }
+  @include mediaQuery($screen-size-xl) {
+    @include fontSize(20px, 400, 24px);
+  }
+}
+.box__slide {
+  display: flex;
+  margin-top: 8px;
+  gap: 12px;
+  align-items: center;
+  @include mediaQuery($screen-size-s) {
+    margin-top: 0;
+  }
+}
+.img {
+  width: 60px;
+  height: 60px;
+  @include mediaQuery($screen-size-m) {
+    width: 74px;
+    height: 74px;
+  }
+  @include mediaQuery($screen-size-l) {
+    width: 88px;
+    height: 88px;
+  }
+  @include mediaQuery($screen-size-xl) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.box__title {
+  @include fontSize(12px, 400, 15px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(14px, 400, 17px);
+  }
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(16px, 400, 20px);
+  }
+  @include mediaQuery($screen-size-l) {
+    @include fontSize(18px, 400, 22px);
+  }
+}
+.title {
+  @include fontSize(16px, 600, 20px);
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(16px, 400, 20px);
+  }
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(18px, 400, 22px);
+  }
+  @include mediaQuery($screen-size-xl) {
+    @include fontSize(20px, 400, 24px);
+  }
+}
+.subtitle {
+  @include fontSize(12px, 400, 15px);
+  @include mediaQuery($screen-size-s) {
+    @include fontSize(14px, 400, 17px);
+  }
+  @include mediaQuery($screen-size-m) {
+    @include fontSize(16px, 400, 20px);
+  }
+  @include mediaQuery($screen-size-l) {
+    @include fontSize(18px, 400, 22px);
+  }
+}
+
+.mySwiper {
+  .swiper__button__prev,
+  .swiper__button__next {
+    display: none;
+  }
+}
+
+.container__slide {
+  position: relative;
+
+  .swiper__button__prev,
+  .swiper__button__next {
+    cursor: pointer;
+  }
+
+  .swiper__button__prev {
+    margin-right: 20px;
+  }
+
+  //   .swiper__button__next {
+  //   }
+}
+
+.swiperButtonPrev {
+  cursor: pointer;
+  position: absolute;
+
+  right: 53px;
+  top: -36px;
+}
+.swiperButtonNext {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: -36px;
+}
+
+//
+.swiper-pagination-bullet {
+  background: var(--swiper-pagination-color); // Колір пагінації
+  opacity: 0.5;
+  transition: all 0.3s;
+  width: var(--swiper-pagination-bullet-width);
+  height: var(--swiper-pagination-bullet-height);
+  bottom: var(--swiper-pagination-bottom);
+
+  &:hover {
+    background: var(--swiper-pagination-bullets);
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--swiper-pagination-bullet-inactive-color);
+}
