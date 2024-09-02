@@ -14,159 +14,104 @@
 
 .hero_title {
   margin-bottom: 16px;
-  font-size: 46px;
+  font-size: 47px;
   line-height: 1.2;
   text-transform: uppercase;
   font-family: "Angry", sans-serif;
+  font-weight: 400;
 
   @include mediaQuery(1280px) {
-    font-size: 72px;
+    font-size: 57px;
+
+  }
+
+  @include mediaQuery(1280px) {
+    font-size: 87px;
     margin-bottom: 24px;
   }
 
   @include mediaQuery(1536px) {
-    font-size: 96px;
-    margin-bottom: 32px;
+    font-size: 97px;
+    margin-bottom: 28px;
   }
 
   @include mediaQuery(1920px) {
     font-size: 107px;
+    margin-bottom: 32px;
   }
 }
 
 .hero_text {
   margin-bottom: 32px;
   @include mediaQuery(768px) {
-    margin-bottom: 21px;
+    font-size: 20px;
+    margin-bottom: 24px;
   }
 
   @include mediaQuery(1280px) {
-    font-size: 20px;
-    margin-bottom: 121px;
+    font-size: 26px;
   }
 
   @include mediaQuery(1536px) {
-    font-size: 24px;
-    margin-bottom: 120px;
+    font-size: 30px;
+    margin-bottom: 42px;
   }
 
   @include mediaQuery(1920px) {
     font-size: 36px;
-    margin-bottom: 140px;
+    margin-bottom: 104px;
   }
 }
 
 .hero_image_container {
-  position: relative;
   width: 100%;
-  height: 214px;
-  padding: 25px 12px 20px 41px;
+  height: 242px;
   margin-bottom: 32px;
-  border: 1.34px solid white;
-  border-radius: 12px;
 
   @include mediaQuery(768px) {
-    min-width: 377px;
-    height: 243px;
+    min-width: 346px;
+    height: 347px;
     margin-bottom: 0;
-    padding: 10px 9px 12px 20px;
   }
 
   @include mediaQuery(1280px) {
-    min-width: 598px;
-    height: 380px;
-    padding: 11px 16px 9px 29px;
+    min-width: 562px;
+    height: 401px;
   }
 
   @include mediaQuery(1536px) {
-    min-width: 696px;
-    height: 443px;
-    padding: 20px 0px 1px 36px;
+    min-width: 888px;
+    height: 626px;
   }
 
-  @include mediaQuery(1920px) {
-    min-width: 937px;
-    height: 596px;
-    padding: 25px 2px 4px 47px;
-  }
-
-  &::after {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--border-color);
-    position: absolute;
-    top: 0;
-    right: 51px;
-    transform: translate(-50%, -50%);
-
-    @include mediaQuery(768px) {
-      right: 30px;
-    }
-
-    @include mediaQuery(1280px) {
-      right: 61px;
-    }
-
-    @include mediaQuery(1536px) {
-      right: 11px;
-    }
-  }
-
-  &::before {
-    content: "";
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--border-color);
-    box-shadow: 21px 0 0 0 var(--color);
-    position: absolute;
-    top: 100%;
-    left: 16px;
-    transform: translate(-50%, -50%);
-    @include mediaQuery(768px) {
-      left: 32px;
-    }
-
-    @include mediaQuery(1280px) {
-      left: 54px;
-    }
-
-    @include mediaQuery(1536px) {
-      left: 25px;
-    }
-  }
 }
 
 .hero_image {
   display: block;
-  background-image: url("/hero-mob.png");
+  background-image: url("/hero-mobile.png");
   background-size: cover;
   background-position: center;
   width: 100%;
-  min-height: 179px;
+  min-height: 242px;
   border-radius: 12px;
 
   @include mediaQuery(767px) {
     background-image: url("/hero-768.png");
-    min-height: 218px;
+    min-height: 347px;
   }
 
   @include mediaQuery(1280px) {
     background-image: url("/hero-1280.png");
-    min-height: 360px;
+    min-height: 401px;
   }
 
   @include mediaQuery(1536px) {
     background-image: url("/hero-1536.png");
-    min-height: 421px;
+    min-height: 626px;
   }
 
   @include mediaQuery(1920px) {
     background-image: url("/hero-1920.png");
-    min-height: 567px;
   }
 }
 
@@ -187,7 +132,6 @@
   @include mediaQuery(767px) {
     width: 274px;
     height: 44px;
-    font-size: 16px;
     padding-left: 64px;
   }
 
@@ -199,7 +143,7 @@
   }
 
   @include mediaQuery(1536px) {
-    font-size: 24px;
+    font-size: 28px;
     width: 384px;
     height: 53px;
     padding-left: 84px;
@@ -268,23 +212,23 @@
 
   @include mediaQuery(767px) {
     min-width: 274px;
-    margin-right: 59px;
+    margin-right: 16px;
     align-items: start;
   }
 
   @include mediaQuery(1280px) {
     min-width: 486px;
-    margin-right: 113px;
+    margin-right: 12px;
     align-items: start;
   }
 
   @include mediaQuery(1536px) {
     min-width: 576px;
-    margin-right: 144px;
+    margin-right: 24px;
   }
 
   @include mediaQuery(1920px) {
     min-width: 736px;
-    margin-right: 127px;
+
   }
 }
