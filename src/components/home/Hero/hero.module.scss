@@ -6,7 +6,7 @@
   @include flexCenter;
   flex-direction: column;
 
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -20,21 +20,21 @@
   font-family: "Angry", sans-serif;
   font-weight: 400;
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     font-size: 57px;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     font-size: 87px;
     margin-bottom: 24px;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
     font-size: 97px;
     margin-bottom: 28px;
   }
 
-  @include mediaQuery(1920px) {
+  @include mediaQuery($screen-size-xl) {
     font-size: 107px;
     margin-bottom: 32px;
   }
@@ -42,21 +42,21 @@
 
 .hero_text {
   margin-bottom: 32px;
-  @include mediaQuery(768px) {
+  @include mediaQuery($screen-size-s) {
     font-size: 20px;
     margin-bottom: 24px;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     font-size: 26px;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
     font-size: 30px;
     margin-bottom: 42px;
   }
 
-  @include mediaQuery(1920px) {
+  @include mediaQuery($screen-size-xl) {
     font-size: 36px;
     margin-bottom: 104px;
   }
@@ -67,18 +67,23 @@
   height: auto;
   margin-bottom: 32px;
 
-  @include mediaQuery(768px) {
+  @include mediaQuery($screen-size-s) {
     min-width: 346px;
     height: 347px;
     margin-bottom: 0;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     min-width: 562px;
     height: 401px;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
+    min-width: 696px;
+    height: 486px;
+  }
+
+  @include mediaQuery($screen-size-xl) {
     min-width: 888px;
     height: 626px;
   }
@@ -90,28 +95,27 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   aspect-ratio: 343 / 242;
 
-
-
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     background-image: url("/hero-768.png");
-   height: 347px;
+    height: 347px;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     background-image: url("/hero-1280.png");
-   height: 401px;
+    height: 401px;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
     background-image: url("/hero-1536.png");
-    height: 626px;
+    height: 486px;
   }
 
-  @include mediaQuery(1920px) {
+  @include mediaQuery($screen-size-xl) {
     background-image: url("/hero-1920.png");
+    height: 626px;
   }
 }
 
@@ -129,27 +133,27 @@
   color: var(--white);
   padding-left: 76px;
 
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     width: 274px;
     height: 44px;
     padding-left: 64px;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     font-size: 20px;
     width: 352px;
     height: 48px;
     padding-left: 72px;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
     font-size: 28px;
     width: 384px;
     height: 53px;
     padding-left: 84px;
   }
 
-  @include mediaQuery(1920px) {
+  @include mediaQuery($screen-size-xl) {
     font-size: 32px;
     width: 500px;
     height: 62px;
@@ -160,7 +164,7 @@
   &:focus {
     background-color: var(--hover-bg-color);
     color: var(--black);
-    transition: all 0.25s ease;
+    transition: all var(--transition-time) ease;
   }
 
   &::before {
@@ -175,17 +179,17 @@
     left: 28px;
     transform: translate(-50%, -50%);
 
-    @include mediaQuery(767px) {
+    @include mediaQuery($screen-size-s) {
       width: 20px;
       height: 20px;
     }
 
-    @include mediaQuery(1536px) {
+    @include mediaQuery($screen-size-l) {
       width: 24px;
       height: 24px;
     }
 
-    @include mediaQuery(1920px) {
+    @include mediaQuery($screen-size-xl) {
       width: 28px;
       height: 28px;
     }
@@ -194,14 +198,14 @@
 
 .hiden_mobile {
   display: none;
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     display: flex;
   }
 }
 
 .hiden_tablet {
   display: flex;
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     display: none;
   }
 }
@@ -210,24 +214,24 @@
   @include flexCenter;
   flex-direction: column;
 
-  @include mediaQuery(767px) {
+  @include mediaQuery($screen-size-s) {
     min-width: 274px;
     margin-right: 16px;
     align-items: start;
   }
 
-  @include mediaQuery(1280px) {
+  @include mediaQuery($screen-size-m) {
     min-width: 486px;
     margin-right: 12px;
     align-items: start;
   }
 
-  @include mediaQuery(1536px) {
+  @include mediaQuery($screen-size-l) {
     min-width: 576px;
     margin-right: 24px;
   }
 
-  @include mediaQuery(1920px) {
+  @include mediaQuery($screen-size-xl) {
     min-width: 736px;
   }
 }
