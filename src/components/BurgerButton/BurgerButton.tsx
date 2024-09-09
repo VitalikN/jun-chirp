@@ -1,21 +1,14 @@
 import s from "./burger.module.scss";
-import { useEffect, useState } from "react";
 
-const BurgerButton = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+interface BurgerButtonProps {
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add("body-no-scroll");
-    } else {
-      document.body.classList.remove("body-no-scroll");
-    }
-
-    return () => {
-      document.body.classList.remove("body-no-scroll");
-    };
-  }, [menuOpen]);
-
+const BurgerButton: React.FC<BurgerButtonProps> = ({
+  menuOpen,
+  setMenuOpen,
+}) => {
   return (
     <div
       className={`${s.burger__button} ${menuOpen ? s.spin : ""}`}

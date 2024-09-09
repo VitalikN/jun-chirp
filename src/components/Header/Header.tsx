@@ -10,6 +10,7 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import useRouterPush from "@/hooks/useRouter";
 import s from "./header.module.scss";
 import { AppRouteEnum } from "@/libs/enums/enums";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const pathname = usePathname();
@@ -29,11 +30,31 @@ const Header = () => {
     }
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add("body-no-scroll");
+      document.documentElement.classList.add("body-no-scroll");
+    } else {
+      document.body.classList.remove("body-no-scroll");
+      document.documentElement.classList.remove("body-no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("body-no-scroll");
+      document.documentElement.classList.remove("body-no-scroll");
+    };
+  }, [menuOpen]);
+
   return (
     <header className={s.header}>
       <div className={`${s.container} `}>
         <div className={` ${s.container__header} `}>
-          <Link href={AppRouteEnum.ROOT} className={s.logo__link}>
+          <Link
+            href={AppRouteEnum.ROOT}
+            className={s.logo__link}
+            onClick={() => setMenuOpen(false)}
+          >
             <Logo />
           </Link>
           <Link href={AppRouteEnum.ROOT} className={s.text__link}>
@@ -60,7 +81,7 @@ const Header = () => {
                 >
                   {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
                 </Link>
-                <BurgerButton />
+                <BurgerButton menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 {token && (
                   <button
                     className={s.btn__exit}
@@ -78,6 +99,39 @@ const Header = () => {
               </nav>
             )}
         </div>
+      </div>
+      <div className={`${s.menu_burger} ${menuOpen ? s.open : ""}`}>
+        <ul className={s.nav_burger}>
+          <li>
+            {" "}
+            <Link href="about" onClick={() => setMenuOpen(false)}>
+              Про нас
+            </Link>
+          </li>
+          <li>
+            {" "}
+            <Link href="terms-of-service" onClick={() => setMenuOpen(false)}>
+              Умови використання
+            </Link>
+          </li>
+          <li>
+            <Link href="privacy-policy" onClick={() => setMenuOpen(false)}>
+              Політика конфіденційності
+            </Link>
+          </li>
+        </ul>
+        <Link
+                  className={`${s.link} ${menuOpen ? s.open : ""}`}
+                  href={
+                    token
+                      ? isConfirmed
+                        ? AppRouteEnum.MY_OFFICE
+                        : AppRouteEnum.CONFIRM
+                      : AppRouteEnum.SIGN_IN
+                  }
+                >
+                  {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
+                </Link>
       </div>
     </header>
   );
