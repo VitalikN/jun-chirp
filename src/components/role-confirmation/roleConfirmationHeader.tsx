@@ -3,12 +3,15 @@ import s from "./roleConfirmation.module.scss";
 import { AppRouteEnum } from "@/libs/enums/enums";
 import { roboto } from "@/utils/fonts";
 import cn from "classnames";
+import { roles } from "@/libs/enums/app/Role";
 
 export const RoleConfirmationHeader = () => {
   const pathname = usePathname();
 
   const isFirstStep = pathname === AppRouteEnum.ROLE_CONFIRMATION;
-  const isSecondStep = pathname === AppRouteEnum.ROOT; //змінити на роут 2 кроку
+  const isSecondStep = roles.some(
+    (role) => pathname === `${AppRouteEnum.ACCOUNT_VERIFICATION}/${role}`
+  );
 
   const stepNumber = isFirstStep ? "2 кроки" : "кілька кроків";
   const tipText = isFirstStep

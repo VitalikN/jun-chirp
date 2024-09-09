@@ -13,6 +13,7 @@ const AppRouteEnum = {
   RESET_PASSWORD: "/reset-password",
   USER_DATA: "/user-data",
   //
+  ACCOUNT_VERIFICATION: "/account-verification",
   ROLE_CONFIRMATION: "/account-verification/role-confirmation",
 } as const;
 

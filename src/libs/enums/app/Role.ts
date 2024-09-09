@@ -5,4 +5,6 @@ enum Roles {
   PARTNER = "partner",
 }
 
-export { Roles };
+const roles = [Roles.INVESTOR, Roles.JUNIOR, Roles.MENTOR, Roles.PARTNER];
+
+export { Roles, roles };

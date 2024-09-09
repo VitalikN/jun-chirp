@@ -20,7 +20,7 @@ export const RoleConfirmation = () => {
     try {
       setBackendError(null);
       await setRole({ role: [values.role] }).unwrap();
-      router.push(AppRouteEnum.ROOT); //змінити на роут заповнення профілю
+      router.push(`${AppRouteEnum.ACCOUNT_VERIFICATION}/${values.role}`);
     } catch (e) {
       const customError = e as customError;
       if (customError.status === 404) {
