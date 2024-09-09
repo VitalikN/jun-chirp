@@ -10,7 +10,11 @@
   justify-content: space-between;
   border-bottom: var(--border);
   border-color: var(--border-color);
-  padding: 30px 0;
+  padding: 12px 0;
+
+  @include mediaQuery($screen-size-m) {
+    padding: 16px 0;
+  }
 }
 
 .text__link {
@@ -50,7 +54,13 @@
   @include font(18px, 2vw, 18px, 400, 18px);
   @include mediaMaxQuery(1279px) {
     display: none;
+    &.open{
+      display: flex;
+      width: 343px;
+    }
   }
+
+
 }
 .btn__exit {
   cursor: pointer;
@@ -63,4 +73,61 @@
   width: 30px;
   height: 25px;
   fill: #33cc00;
+}
+
+.menu_burger {
+  @include flexCenter();
+
+  @media screen and (max-width: $screen-size-m) {
+    position: fixed;
+    top: 63px;
+    left: -100%;
+    height: 100%;
+    width: 100vw;
+    background: var(--background-color);
+    z-index: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-top: 30px;
+    transition: left 600ms ease;
+
+    @include mediaQuery($screen-size-s) {
+      top: 83px;
+    }
+
+    &.open {
+      position: fixed;
+      top: 63px;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+      overflow: auto;
+      background-color: var(--background-color);
+      padding-top: 30px;
+      transform: translateX(0);
+
+      @include mediaQuery($screen-size-s) {
+        top: 83px;
+      }
+
+      @include mediaQuery($screen-size-m) {
+        top: 93px;
+      }
+    }
+  }
+}
+
+
+.nav_burger{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  & > li{
+    padding: 10px 0;
+  }
 }
