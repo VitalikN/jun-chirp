@@ -7,6 +7,11 @@ import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
 import Footer from "@/components/Footer/Footer";
 import { Temporary } from "@/components/temporary/temporary";
 import s from '@/sass/layouts/main.module.scss';
+import localFont from "next/font/local";
+
+const angryFont = localFont({
+  src:'../../public/fonts/Angry.otf'
+})
 
 
 
@@ -29,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={`${angryFont.className} ${montserrat.className}`}>
         <ReduxProvider>
           <Header />
           <Temporary />
