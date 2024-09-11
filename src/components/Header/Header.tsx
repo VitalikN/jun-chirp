@@ -121,17 +121,18 @@ const Header = () => {
           </li>
         </ul>
         <Link
-                  className={`${s.link} ${menuOpen ? s.open : ""}`}
-                  href={
-                    token
-                      ? isConfirmed
-                        ? AppRouteEnum.MY_OFFICE
-                        : AppRouteEnum.CONFIRM
-                      : AppRouteEnum.SIGN_IN
-                  }
-                >
-                  {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
-                </Link>
+          className={`${s.link} ${s.open}`}
+          href={
+            token
+              ? isConfirmed
+                ? AppRouteEnum.MY_OFFICE
+                : AppRouteEnum.CONFIRM
+              : AppRouteEnum.SIGN_IN
+          }
+          onClick={() => setMenuOpen(false)}
+        >
+          {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
+        </Link>
       </div>
     </header>
   );
