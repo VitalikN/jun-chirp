@@ -11,6 +11,7 @@ import useRouterPush from "@/hooks/useRouter";
 import s from "./header.module.scss";
 import { AppRouteEnum } from "@/libs/enums/enums";
 import { useEffect, useState } from "react";
+import useWindowWidth from "@/hooks/useWindowWidth";
 
 const Header = () => {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ const Header = () => {
   const isConfirmed = useSelector(authSelector.selectIsConfirmed);
   const [logout] = useLogoutMutation();
   const { pushRouter } = useRouterPush();
+  const windowWidth = useWindowWidth();
 
   const handleLogout = async () => {
     try {
@@ -33,7 +35,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (menuOpen) {
+    if (menuOpen && windowWidth !== undefined && windowWidth < 1280) {
       document.body.classList.add("body-no-scroll");
       document.documentElement.classList.add("body-no-scroll");
     } else {
@@ -44,7 +46,7 @@ const Header = () => {
       document.body.classList.remove("body-no-scroll");
       document.documentElement.classList.remove("body-no-scroll");
     };
-  }, [menuOpen]);
+  }, [menuOpen, windowWidth]);
 
   return (
     <header className={s.header}>
