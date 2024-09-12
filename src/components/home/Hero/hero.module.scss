@@ -217,13 +217,13 @@
   @include mediaQuery($screen-size-s) {
     min-width: 274px;
     margin-right: 16px;
-    align-items: start;
+    align-items: flex-start;
   }
 
   @include mediaQuery($screen-size-m) {
     min-width: 486px;
     margin-right: 12px;
-    align-items: start;
+    align-items: flex-start;
   }
 
   @include mediaQuery($screen-size-l) {
