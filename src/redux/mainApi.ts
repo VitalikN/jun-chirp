@@ -10,10 +10,12 @@ import { clearToken, tokenReceived } from "./auth/authSlice";
 
 type RootState = ReturnType<typeof store.getState>;
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: baseUrl,
+  baseUrl: "/api",
+  credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
     const token = state.auth?.user?.accessToken;
@@ -28,6 +30,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+// Логика обновления токена
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
@@ -36,31 +39,30 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    console.log("Спроба отримати новий токен");
+    // если сервер возвращает 401
 
+    // Запрос на обновление токена
     const refreshResult = await baseQuery(
       {
         url: "auth/refresh-token",
         method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        credentials: "include", // отправляем куки с рефреш токеном
       },
       api,
-      extraOptions
+      extraOptions,
     );
-    console.log(refreshResult);
-    console.log("refreshResult.data 151)", refreshResult.data);
 
     if (refreshResult.data) {
+      // Обновляем токен в хранилище
       api.dispatch(tokenReceived(refreshResult.data));
 
+      // Повторяем оригинальный запрос с новым токеном
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(clearToken());
+      api.dispatch(clearToken()); // очищаем токен и выходим
     }
   }
+
   return result;
 };
 
