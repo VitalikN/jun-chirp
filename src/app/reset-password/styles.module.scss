@@ -24,3 +24,27 @@
 
   @include font(20px, 2vw, 26px, 500, 25px);
 }
+
+.box__btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.resetBtn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0 auto;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: #616161;
+  text-decoration-thickness: 1px;
+  color: #616161;
+  @include font(14px, 2vw, 16px, 400, 19px);
+  transition: all 0.3s;
+  &:hover {
+    color: var(--hover-text-color);
+    text-decoration-color: var(--hover-text-color);
+  }
+}
