@@ -33,9 +33,11 @@
     }
   }
 }
+
 .form__box__checkbox__field {
   @include flex();
 }
+
 .text__chip__checkbox {
   color: #0033ff;
 }

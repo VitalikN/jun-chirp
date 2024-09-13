@@ -180,14 +180,15 @@ const ResetPasswordPage = () => {
 
                 <ErrorFeedback name="newPassword" />
               </div>
-              <Button
-                title="ВІДМІНИТИ"
-                className={s.resetBtn}
-                type="reset"
-                isDisabled={!dirty || isLoading}
-              />
-              <Button
-                className={`${s.styledBtn}
+              <div className={s.box__btn}>
+                <Button
+                  title="ВІДМІНИТИ"
+                  className={s.resetBtn}
+                  type="reset"
+                  isDisabled={!dirty || isLoading}
+                />
+                <Button
+                  className={`${s.styledBtn}
                  
                  ${
                    isLoading
@@ -198,17 +199,18 @@ const ResetPasswordPage = () => {
                      ? s.invalid
                      : s.valid
                  } `}
-                type="submit"
-                isDisabled={!dirty || !isValid || isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    Змінити пароль <Loader />
-                  </>
-                ) : (
-                  "Змінити пароль"
-                )}
-              </Button>
+                  type="submit"
+                  isDisabled={!dirty || !isValid || isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      Змінити пароль <Loader />
+                    </>
+                  ) : (
+                    "Змінити пароль"
+                  )}
+                </Button>
+              </div>
             </Form>
           )}
         </Formik>
