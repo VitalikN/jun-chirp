@@ -40,7 +40,6 @@ const baseQueryWithReauth: BaseQueryFn<
 
   if (result.error && result.error.status === 401) {
     // если сервер возвращает 401
-    console.log("Пытаемся обновить токен...");
 
     // Запрос на обновление токена
     const refreshResult = await baseQuery(
