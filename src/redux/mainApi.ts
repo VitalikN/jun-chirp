@@ -47,7 +47,7 @@ const baseQueryWithReauth: BaseQueryFn<
       {
         url: "auth/refresh-token",
         method: "POST",
-        credentials: "include", // отправляем куки с рефреш токеном
+        // credentials: "include", // отправляем куки с рефреш токеном
       },
       api,
       extraOptions
