@@ -18,14 +18,14 @@ const nextConfig = {
   },
   // використовувати для проксуванням запитів ( робота з CORS кукі)
   // ===
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       destination: process.env.NEXT_PUBLIC_BASE_URL + "/:path*",
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: process.env.NEXT_PUBLIC_BASE_URL + "/:path*",
+      },
+    ];
+  },
   // ===
 };
 
