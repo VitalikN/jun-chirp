@@ -10,9 +10,14 @@ import { clearToken, tokenReceived } from "./auth/authSlice";
 
 type RootState = ReturnType<typeof store.getState>;
 
-const baseUrl = "/api"; // локально працювати з CORS
+// const baseUrl = "/api"; // локально працювати з CORS
 // const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BASE_URL
+    : "/api";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
