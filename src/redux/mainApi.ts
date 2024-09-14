@@ -10,11 +10,11 @@ import { clearToken, tokenReceived } from "./auth/authSlice";
 
 type RootState = ReturnType<typeof store.getState>;
 
-// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "/api",
+  baseUrl: baseUrl,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
@@ -49,7 +49,7 @@ const baseQueryWithReauth: BaseQueryFn<
         credentials: "include", // отправляем куки с рефреш токеном
       },
       api,
-      extraOptions,
+      extraOptions
     );
 
     if (refreshResult.data) {
