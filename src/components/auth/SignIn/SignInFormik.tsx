@@ -65,7 +65,7 @@ const SignInFormik = () => {
               isThisPassword={true}
             />
 
-            <div className={s.form__box__checkbox}>
+            {/* <div className={s.form__box__checkbox}>
               <Field type="checkbox" name="rememberMe" className={s.checkbox} />
               <SvgIcon
                 id="checkbox"
@@ -74,7 +74,7 @@ const SignInFormik = () => {
                 className={s.chip__checkbox}
               />
               <label className={s.checkboxLabel}>Запам`ятати мене</label>{" "}
-            </div>
+            </div> */}
             {backendError && (
               <div className={s.error__backend}>{backendError}</div>
             )}
