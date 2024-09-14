@@ -16,8 +16,7 @@ const nextConfig = {
       { protocol: "https", hostname: "media.licdn.com" },
     ],
   },
-  // використовувати для проксуванням запитів ( робота з CORS кукі)
-  // ===
+
   async rewrites() {
     return [
       {
@@ -26,12 +25,6 @@ const nextConfig = {
       },
     ];
   },
-  // ===
 };
 
 export default nextConfig;
-
-// const nextConfig = {
-//
-
-// module.exports = nextConfig;
