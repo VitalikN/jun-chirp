@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import authSelector from "@/redux/auth/authSelector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "@/redux/auth/authApi";
 import Logo from "../Logo/Logo";
 import BurgerButton from "../BurgerButton/BurgerButton";
@@ -12,6 +12,7 @@ import s from "./header.module.scss";
 import { AppRouteEnum } from "@/libs/enums/enums";
 import { useEffect, useState } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
+import { clearToken } from "@/redux/auth/authSlice";
 
 const Header = () => {
   const pathname = usePathname();
@@ -20,12 +21,14 @@ const Header = () => {
   const [logout] = useLogoutMutation();
   const { pushRouter } = useRouterPush();
   const windowWidth = useWindowWidth();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
       console.log("logout");
 
       await logout({}).unwrap();
+      dispatch(clearToken());
       pushRouter(AppRouteEnum.ROOT);
     } catch (err) {
       console.error("Failed to logout:", err);
