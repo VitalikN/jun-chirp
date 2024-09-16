@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 
 interface UsePasswordStrengthProps {
   password: string;
@@ -16,7 +16,8 @@ const STRENGTH_LEVELS = [
 const commonPasswords = ["123456", "password", "qwerty"];
 
 const calculateStrengthScore = (password: string): number => {
-  if (!password || commonPasswords.includes(password) || password.length === 0) return 0;
+  if (!password || commonPasswords.includes(password) || password.length === 0)
+    return 0;
 
   let score = 0;
   score += password.length >= 8 ? 1 : 0;
@@ -24,7 +25,7 @@ const calculateStrengthScore = (password: string): number => {
   score += /[a-z]/.test(password) ? 1 : 0;
   score += /\d/.test(password) ? 1 : 0;
   score += /[!@#$%^&*(),.?":{}|<>]/.test(password) ? 1 : 0;
-  console.log(score)
+  console.log(score);
   return score;
 };
 

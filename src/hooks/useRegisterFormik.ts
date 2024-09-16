@@ -6,12 +6,11 @@ import { FormValuesRegister } from "@/components/auth/Register/FormValuesRegiste
 import { customError } from "@/utils/types/customError";
 
 const useRegisterFormik = () => {
-  const [register, { isLoading, error, isSuccess }] = useRegisterMutation();
+  const [register, { isLoading, isSuccess }] = useRegisterMutation();
   const { pushRouter } = useRouterPush();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
+  const [showConfirmPassword, _] = useState<boolean>(false);
   const [backendError, setBackendError] = useState<string | null>(null);
 
   const sessionStorage = window.sessionStorage;

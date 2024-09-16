@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from "formik";
 import { validationSchemaRegister } from "@/components/auth/Register/validationRegister";
-import ErrorFeedback from "../ErrorFeedback";
 import ToastContainer from "../../ToastContainer/ToastContainer";
 import Button from "../../Button/Button";
 import SvgIcon from "../../SvgIcon/SvgIcon";
@@ -126,16 +125,16 @@ const RegisterFormik = () => {
                 />
                 <label className={`${s.checkboxLabel} `}>
                   <p className={s.text}>
-                    Я погоджуюсь з
+                    Я погоджуюсь з{" "}
                     <span className={s.text__chip__checkbox}>
                       {" "}
                       Умовами використання{" "}
                     </span>{" "}
-                    та
+                    та{" "}
                     <span className={s.text__chip__checkbox}>
                       {" "}
                       Політикою конфіденційності{" "}
-                    </span>
+                    </span>{" "}
                   </p>
                 </label>
               </div>

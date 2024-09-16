@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { roboto, montserrat } from "@/utils/fonts";
+import { roboto } from "@/utils/fonts";
 
 const NotFoundPage = () => {
   return (

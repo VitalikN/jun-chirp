@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 import { useRequestPasswordResetMutation } from "@/redux/auth/authApi";
 import useRouterPush from "@/hooks/useRouter";

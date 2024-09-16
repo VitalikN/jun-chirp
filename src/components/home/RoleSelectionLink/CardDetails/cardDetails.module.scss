@@ -72,9 +72,6 @@
     flex-direction: column;
     gap: 18px;
     height: 100%;
-
-    @include mediaQuery($screen-size-s) {
-    }
   }
 
   @include mediaQuery($screen-size-s) {
@@ -99,8 +96,6 @@
   @include mediaQuery($screen-size-l) {
     gap: 20px;
   }
-  @include mediaQuery($screen-size-xl) {
-  }
 
   .title {
     text-transform: uppercase;
@@ -117,8 +112,6 @@
     }
     @include mediaQuery($screen-size-l) {
       @include fontSize(48px, 700, 58px);
-    }
-    @include mediaQuery($screen-size-xl) {
     }
   }
 
@@ -145,8 +138,6 @@
     @include fontSize(14px, 400, 17px);
     margin-bottom: auto;
 
-    @include mediaQuery($screen-size-s) {
-    }
     @include mediaQuery($screen-size-m) {
       @include fontSize(16px, 400, 20px);
     }

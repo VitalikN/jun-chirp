@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC } from "react";
 import s from "./roleConfirmation.module.scss";
 import { RoleCard as RoleCardType } from "@/utils/types/RoleCard";
 import { useField } from "formik";

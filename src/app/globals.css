@@ -3,8 +3,6 @@
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
-    
-
   --background-color: #141416;
   --color: #fafafa;
   --black: #000;
@@ -45,17 +43,9 @@
   --swiper-pagination-bottom: -3px;
 }
 
-/* #B3261E */
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-   
-  }
-} */
-
 @font-face {
   font-family: "Angry";
-  src: url(../../public/fonts/Angry.otf) format('truetype');
+  src: url(../../public/fonts/Angry.otf) format("truetype");
   font-weight: normal;
   font-style: normal;
 }

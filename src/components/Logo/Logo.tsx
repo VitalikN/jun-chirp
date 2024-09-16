@@ -46,14 +46,12 @@ const Logo = () => {
   }, []);
 
   return (
-    <>
-      <SvgIcon
-        id="LOGO"
-        width={dynamicWidth}
-        height={dynamicHeight}
-        className={s.logo}
-      />
-    </>
+    <SvgIcon
+      id="LOGO"
+      width={dynamicWidth}
+      height={dynamicHeight}
+      className={s.logo}
+    />
   );
 };
 export default Logo;

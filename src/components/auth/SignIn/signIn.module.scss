@@ -46,8 +46,7 @@
     max-width: 530px;
     gap: 48px;
   }
-  @include mediaQuery(1536px) {
-  }
+
   @include mediaQuery(1920px) {
     max-width: 584px;
   }
@@ -126,7 +125,6 @@
 }
 
 .form__box__checkbox {
-  font-family: Roboto;
   position: relative;
 
   .checkboxLabel {

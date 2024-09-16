@@ -1,6 +1,6 @@
-import SvgIcon from "@/components/SvgIcon/SvgIcon";
 import { Field } from "formik";
 
+import SvgIcon from "@/components/SvgIcon/SvgIcon";
 import styles from "./styles.module.scss";
 
 type FormCheckboxProps = {

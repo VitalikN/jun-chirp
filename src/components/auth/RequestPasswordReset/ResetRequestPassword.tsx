@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 
+import { useState } from "react";
 import { useRequestPasswordResetMutation } from "@/redux/auth/authApi";
 import useRouterPush from "@/hooks/useRouter";
 import { customError } from "@/utils/types/customError";
@@ -11,7 +11,6 @@ import SvgIcon from "../../SvgIcon/SvgIcon";
 import ErrorFeedback from "../ErrorFeedback";
 import Button from "../../Button/Button";
 import ToastContainer from "../../ToastContainer/ToastContainer";
-import { useState } from "react";
 import { validationSchemaRequestPasswordReset } from "./RequestPasswordReset";
 import { FormValuesRequestPasswordReset } from "./FormValuesRequestPasswordReset";
 import s from "./requestPasswordReset.module.scss";

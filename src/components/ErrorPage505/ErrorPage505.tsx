@@ -1,29 +1,9 @@
 "use client";
-import { useEffect } from "react";
 import s from "./ErrorPage505.module.scss";
 import Link from "next/link";
 import { roboto } from "@/utils/fonts";
-import { AppRouteEnum } from "@/libs/enums/enums";
 
-export default function Error505({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
-  const handleClick = () => {
-    if (window.location.pathname === `${AppRouteEnum.ROOT}`) {
-      window.location.reload();
-    } else {
-      <Link href={AppRouteEnum.ROOT} className={s.link}></Link>;
-    }
-  };
-
+export default function Error505() {
   return (
     <section className={s.section}>
       <div className={`${roboto.className} ${s.container}`}>
@@ -37,9 +17,9 @@ export default function Error505({
             над вирішенням проблеми. Поки що, будь ласка, поверніться на головну
             сторінку
           </p>
-          <button type="button" className={s.button} onClick={handleClick}>
+          <Link href="/" className={`${s.link} ${s.button}`}>
             головна сторінка
-          </button>
+          </Link>
         </div>
       </div>
     </section>

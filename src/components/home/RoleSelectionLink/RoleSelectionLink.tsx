@@ -3,8 +3,8 @@ import { roleCards } from "./data/cards";
 import CardDetails from "./CardDetails/CardDetails";
 
 const RoleSelectionLink = () => {
-  const cards = roleCards.map((card, index: number) => (
-    <CardDetails key={index} {...card} />
+  const cards = roleCards.map((card) => (
+    <CardDetails key={card.id} {...card} />
   ));
 
   return (

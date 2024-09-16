@@ -83,8 +83,8 @@ const Testimonials = () => {
           >
             {testimonials &&
               testimonials.length > 0 &&
-              testimonials.map((testimonial: Testimonial, index: number) => (
-                <SwiperSlide key={index} className={s.swiper__box}>
+              testimonials.map((testimonial: Testimonial) => (
+                <SwiperSlide key={testimonial.id} className={s.swiper__box}>
                   <div className={s.container__slide}>
                     <SvgIcon
                       id="vector-1"

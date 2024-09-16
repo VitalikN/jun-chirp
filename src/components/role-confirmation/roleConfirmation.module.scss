@@ -76,8 +76,6 @@
       @include font(16px, 2vw, 16px, 400, 19px);
     }
 
-    @include mediaMaxQuery($screen-size-m) {
-    }
     @include mediaMaxQuery($screen-size-s) {
       @include font(15px, 2vw, 15px, 400, 18px);
     }
@@ -141,14 +139,9 @@
       height: 32px;
     }
 
-    @include mediaMaxQuery($screen-size-m) {
-    }
     @include mediaMaxQuery($screen-size-s) {
       width: 28px;
       height: 28px;
-    }
-
-    @include mediaMaxQuery($screen-size-xs) {
     }
 
     &:hover {

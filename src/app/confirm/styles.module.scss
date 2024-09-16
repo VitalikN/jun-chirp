@@ -23,6 +23,7 @@
 .email__text {
   color: #0033ff;
   margin-left: 10px;
+  white-space: nowrap;
 }
 .timer {
   text-align: center;
@@ -120,7 +121,6 @@
   outline: none;
   width: 192px;
   margin: 0 auto;
-  // margin-top: 24px;
   text-transform: uppercase;
   @include font(14px, 2vw, 16px, 400, 19px);
 
@@ -128,7 +128,6 @@
     background-color: var(--invalid);
     @include flexCenter();
     gap: 8px;
-    // margin-top: 24px;
   }
 
   &.valid {
@@ -138,10 +137,6 @@
       box-shadow: 0px 0px 8px #fff;
     }
   }
-
-  // &.invalid__backendError {
-  //   // margin-top: 24px;
-  // }
 }
 
 .btn__resend {

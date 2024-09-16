@@ -11,8 +11,8 @@ import { AppRouteEnum } from "@/libs/enums/enums";
 const Faqs = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const handleToggle = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
+  const handleToggle = (id: number) => {
+    setActiveIndex(activeIndex === id ? null : id);
   };
 
   return (
@@ -26,7 +26,7 @@ const Faqs = () => {
               <div className={s.faq} key={index}>
                 <div
                   className={s.faq__item}
-                  onClick={() => handleToggle(index)}
+                  onClick={() => handleToggle(faq.id)}
                 >
                   <h2 className={s.faq__question}>{faq.question}</h2>
                   <div className={s.toggleIcon}>+</div>
@@ -34,7 +34,7 @@ const Faqs = () => {
 
                 <h3
                   className={cn(s.faq__answer, {
-                    [s.active]: activeIndex === index,
+                    [s.active]: activeIndex === faq.id,
                   })}
                 >
                   {faq.answer}

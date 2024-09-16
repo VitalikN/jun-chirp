@@ -1,4 +1,3 @@
-import { montserrat } from "@/utils/fonts";
 import s from "./projectStatistics.module.scss";
 
 const ProjectStatistics = () => {
