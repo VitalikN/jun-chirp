@@ -33,8 +33,8 @@ const ConfirPage = () => {
         <ToastContainer />
         <h2 className={styles.title}>Підтвердження електронної пошти</h2>
         <p className={styles.text}>
-          Введіть 6 значний код, який ми надіслали на Вашу електронну пошту
-          <span className={styles.email__text}> {email} </span>
+          Введіть 6 значний код, який ми надіслали на Вашу електронну пошту{" "}
+          <span className={styles.email__text}> {email} </span>{" "}
         </p>
         <p className={styles.timer}>
           {cooldown !== null

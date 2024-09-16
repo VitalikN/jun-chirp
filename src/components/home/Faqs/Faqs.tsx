@@ -22,8 +22,8 @@ const Faqs = () => {
           <div className={s.container__faqs}>
             <h1 className={s.faq__title}>Heading for FAQs</h1>
 
-            {faqs.map((faq, index) => (
-              <div className={s.faq} key={index}>
+            {faqs.map((faq) => (
+              <div className={s.faq} key={faq.id}>
                 <div
                   className={s.faq__item}
                   onClick={() => handleToggle(faq.id)}

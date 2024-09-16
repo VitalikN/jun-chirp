@@ -10,7 +10,8 @@ const useRegisterFormik = () => {
   const { pushRouter } = useRouterPush();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, _] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const [backendError, setBackendError] = useState<string | null>(null);
 
   const sessionStorage = window.sessionStorage;
