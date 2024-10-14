@@ -13,6 +13,7 @@ import { AppRouteEnum } from "@/libs/enums/enums";
 import { useEffect, useState } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { clearToken } from "@/redux/auth/authSlice";
+import DropdownMenu from "../dropdownMenu/DropdownMenu";
 
 const Header = () => {
   const pathname = usePathname();
@@ -139,6 +140,7 @@ const Header = () => {
           {token ? "Мій кабінет" : "Зареєструватись / Увійти"}
         </Link>
       </div>
+      <DropdownMenu/>
     </header>
   );
 };
