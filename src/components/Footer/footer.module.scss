@@ -244,6 +244,7 @@
   font-size: 12px;
   text-align: end;
   margin-left: auto;
+  margin-bottom: 20px;
 
   @include mediaQuery($screen-size-s) {
     font-size: 14px;

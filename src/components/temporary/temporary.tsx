@@ -2,18 +2,22 @@ import { AppRouteEnum } from "@/libs/enums/enums";
 import Link from "next/link";
 import React from "react";
 
-import styles from './styles.module.css';
+import s from "./styles.module.scss";
 
 export const Temporary = () => {
   return (
-    <ul className={styles.list}>
-      {Object.entries(AppRouteEnum).map(([key, value]) => {
-        return (
-          <li key={key}>
-            <Link href={value}>{key}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <section className={s.section}>
+      <div className={s.container}>
+        <ul className={s.list}>
+          {Object.entries(AppRouteEnum).map(([key, value]) => {
+            return (
+              <li key={key}>
+                <Link href={value}>{key}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 };
