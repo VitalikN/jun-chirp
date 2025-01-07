@@ -16,8 +16,6 @@ export default function Home() {
       <WhatWeOffer />
       <Testimonials />
       <Faqs />
-
-      <MagicButton />
     </>
   );
 }
